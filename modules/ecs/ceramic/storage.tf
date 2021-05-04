@@ -8,7 +8,7 @@ module "efs_logs_volume" {
   source = "git::https://github.com/cloudposse/terraform-aws-efs.git?ref=0.22.0"
 
   name      = "logs"
-  namespace = var.ceramic_namespace
+  namespace = var.namespace
 
   region  = var.aws_region
   subnets = var.private_subnet_ids
@@ -29,11 +29,12 @@ data "aws_efs_file_system" "by_id" {
 
 module "s3_alb" {
   source = "terraform-aws-modules/s3-bucket/aws"
+  version = "~> 1.25.0"
 
   create_bucket = var.create_ceramic_alb_access_logs_bucket
 
   # only lowercase alphanumeric characters and hyphens allowed
-  bucket = "${var.ceramic_namespace}-alb.logs"
+  bucket = "${var.namespace}-alb.logs"
   acl    = "private"
 
   attach_elb_log_delivery_policy = true
@@ -42,7 +43,7 @@ module "s3_alb" {
     enabled = true
   }
 
-  lifecyle_rule = [
+  lifecycle_rule = [
     {
       enabled = true
 

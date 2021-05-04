@@ -15,7 +15,7 @@ variable "ceramic_image_tag" {
   default     = "latest"
 }
 
-variable "ceramic_cors_allowed_origins" {
+variable "cors_allowed_origins" {
   type        = string
   description = "Web browser CORS allowed origins"
 }
@@ -32,7 +32,7 @@ variable "ceramic_memory" {
   default     = 2048 # 2048 MiB = 2 GB
 }
 
-variable "ceramic_network" {
+variable "network" {
   type        = string
   description = "Ceramic network"
 }
@@ -43,7 +43,7 @@ variable "ceramic_task_count" {
   default     = 1
 }
 
-variable "ceramic_namespace" {
+variable "namespace" {
   type        = string
   description = "Namespace for Ceramic resources"
   # default = "ceramic-elp-1"
@@ -139,7 +139,7 @@ variable "run_as_gateway" {
   default     = false
 }
 
-variable "ceramic_service_name" {
+variable "service_name" {
   type        = string
   description = "When create_ceramic_service is true, name of ECS service"
   default     = "ceramic-daemon"
@@ -157,7 +157,7 @@ variable "ceramic_service_security_group_ids" {
   default     = []
 }
 
-variable "ceramic_service_subnet_ids" {
+variable "service_subnet_ids" {
   type        = any
   description = "When create_ceramic_service is true, list of subnet ids for the ECS service tasks. Generally the service will use private subnets and tasks will be access via a load balancer."
 }
@@ -176,3 +176,19 @@ variable "vpc_id" {
   type        = string
   description = "Id of VPC"
 }
+
+variable "vpc_cidr_block" {
+  type        = string
+  description = "Default CIDR block of the VPC"
+}
+
+variable "env" {
+  type        = string
+  description = "Environment name"
+}
+
+variable "image_tag" {
+  type        = string
+  description = "Image tag"
+}
+

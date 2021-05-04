@@ -3,7 +3,7 @@ locals {
     Terraform = true
     Ceramic   = var.env
   }
-  namespace = var.ceramic_namespace
+  namespace = var.namespace
   dynamic_load_balancers = var.create_ceramic_alb ? concat(
     [
       {

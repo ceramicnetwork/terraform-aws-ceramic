@@ -4,7 +4,7 @@ module "alb" {
 
   count = var.create_ceramic_alb ? 1 : 0
 
-  name = var.ceramic_namespace
+  name = var.namespace
 
   load_balancer_type = "application"
 

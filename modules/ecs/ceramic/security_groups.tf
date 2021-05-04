@@ -28,7 +28,7 @@ module "ecs_security_group" {
 
   count = var.create_ceramic_service_security_groups ? 1 : 0
 
-  name        = "${var.ceramic_namespace}-ecs"
+  name        = "${var.namespace}-ecs"
   description = "Load balancer access to ECS for remote inspection"
   vpc_id      = var.vpc_id
 
@@ -86,7 +86,7 @@ module "load_balancer_security_group" {
 
   count = var.create_ceramic_service_security_groups ? 1 : 0
 
-  name        = "${var.ceramic_namespace}-load_balancer"
+  name        = "${var.namespace}-load_balancer"
   description = "All access to http/s"
   vpc_id      = var.vpc_id
 
