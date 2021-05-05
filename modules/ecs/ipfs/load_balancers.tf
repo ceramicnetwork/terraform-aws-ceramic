@@ -174,7 +174,7 @@ resource "aws_lb_target_group" "swarm_ws" {
 
 module "alb_internal" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   count = 1
 
@@ -280,7 +280,7 @@ module "alb_internal" {
 
 module "nlb_external" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name = "${local.namespace}-nlb-ex"
 

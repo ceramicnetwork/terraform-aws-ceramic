@@ -67,24 +67,6 @@ variable "cluster_name" {
   default     = "ceramic"
 }
 
-variable "create_ceramic_alb" {
-  type        = bool
-  description = "True to create application load balancer for Ceramic instances"
-  default     = true
-}
-
-variable "create_ceramic_alb_access_logs_bucket" {
-  type        = bool
-  description = "When create_ceramic_alb is true, true to create access logs S3 bucket for it"
-  default     = true
-}
-
-variable "ceramic_alb_access_logs_bucket_id" {
-  type        = string
-  description = "When create_ceramic_alb_access_logs_bucket is false, id of S3 bucket for alb access logs"
-  default     = ""
-}
-
 variable "create_ceramic_efs_volume" {
   type        = bool
   description = "True to create EFS volume for Ceramic logs"
@@ -109,6 +91,24 @@ variable "create_ceramic_service" {
   default     = true
 }
 
+variable "ceramic_enable_debug" {
+  type        = bool
+  description = "True to enable Ceramic debug"
+  default     = true
+}
+
+variable "enable_verbose" {
+  type        = bool
+  description = "True to enable verbose logging"
+  default     = true
+}
+
+variable "directory_namespace" {
+  type        = string
+  description = "Directory for logs and state"
+  default     = ""
+}
+
 variable "default_tags" {
   type        = map(string)
   description = "Default tags"
@@ -120,12 +120,6 @@ variable "default_tags" {
 variable "eth_rpc_url" {
   type        = string
   description = "Ethereum RPC URL. Must match anchor service ETH network"
-}
-
-variable "load_balancer_arn" {
-  type        = string
-  description = "If create_ceramic_alb is false, ARN of load balancer for Ceramic instances"
-  default     = ""
 }
 
 variable "private_subnet_ids" {
@@ -145,10 +139,9 @@ variable "service_name" {
   default     = "ceramic-daemon"
 }
 
-variable "create_ceramic_service_security_groups" {
-  type        = bool
-  description = "When create_ceramic_service is true, true to create security groups for Ceramic ECS service"
-  default     = true
+variable "anchor_service_api_url" {
+  type        = string
+  description = "URL for Ceramic Anchor Service API"
 }
 
 variable "ceramic_service_security_group_ids" {

@@ -3,15 +3,9 @@ provider "aws" {
 }
 
 resource "aws_ecs_cluster" "main" {
-  count = var.create_cluster ? 1 : 0
-
   name = var.cluster_name
 
   tags = var.default_tags
-}
-
-data "aws_ecs_cluster" "main" {
-  cluster_name = var.cluster_name
 }
 
 resource "aws_ecs_service" "main" {
@@ -19,18 +13,18 @@ resource "aws_ecs_service" "main" {
 
   platform_version = "1.4.0"
   name             = var.service_name
-  cluster          = data.aws_ecs_cluster.main.arn
+  cluster          = var.cluster_name
   task_definition  = aws_ecs_task_definition.main.arn
   desired_count    = var.ceramic_task_count
   launch_type      = "FARGATE"
 
   network_configuration {
-    security_groups = var.create_ceramic_service_security_groups ? [
+    security_groups = [
       var.vpc_security_group_id,
-      aws_security_group.efs[0].id,
-      module.ecs_security_group[0].this_security_group_id,
-      module.ceramic_security_group[0].this_security_group_id
-    ] : var.ceramic_service_security_group_ids
+      aws_security_group.efs.id,
+      module.ecs_security_group.security_group_id,
+      module.ceramic_security_group.security_group_id
+    ]
     subnets = var.service_subnet_ids
   }
   dynamic "load_balancer" {
@@ -66,20 +60,20 @@ resource "aws_ecs_task_definition" "main" {
     ceramic_port               = var.ceramic_port
     cors_allowed_origins       = var.cors_allowed_origins
     debug                      = var.ceramic_enable_debug
-    directory_namespace        = var.ceramic_directory_namespace
+    directory_namespace        = var.directory_namespace
     eth_rpc_url                = var.eth_rpc_url
-    gateway                    = var.ceramic_run_as_gateway
-    ipfs_api_url               = module.ipfs_node.api_url_internal
+    gateway                    = var.run_as_gateway
+    # ipfs_api_url             = module.ipfs_node.api_url_internal
     s3_state_store_bucket_name = module.s3.this_s3_bucket_id
     s3_access_key_id           = module.s3_ceramic_state_store_task_user.this_iam_access_key_id
     s3_secret_access_key       = module.s3_ceramic_state_store_task_user.this_iam_access_key_secret
-    verbose                    = var.ceramic_enable_verbose
+    verbose                    = var.enable_verbose
 
     logs_volume_source = "${var.namespace}-logs"
   })
 
-  execution_role_arn = var.ecs_task_execution_role_arn
-  task_role_arn      = var.ecs_efs_task_role_arn
+  execution_role_arn = module.ecs_task_execution_role.iam_role_arn
+  task_role_arn      = module.ecs_efs_task_role.iam_role_arn
   network_mode       = "awsvpc"
 
   requires_compatibilities = ["FARGATE"]
@@ -89,7 +83,7 @@ resource "aws_ecs_task_definition" "main" {
   volume {
     name = "${var.namespace}-logs"
     efs_volume_configuration {
-      file_system_id = data.efs_logs_volume.id
+      file_system_id = module.efs_logs_volume.id
     }
   }
 

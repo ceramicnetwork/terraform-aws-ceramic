@@ -1,6 +1,4 @@
 resource "aws_security_group" "efs" {
-  count = var.create_ceramic_service_security_groups ? 1 : 0
-
   name        = "EFS"
   description = "Controls access to EFS"
   vpc_id      = var.vpc_id
@@ -24,9 +22,7 @@ resource "aws_security_group" "efs" {
 
 module "ecs_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
-
-  count = var.create_ceramic_service_security_groups ? 1 : 0
+  version = "~> 4.0"
 
   name        = "${var.namespace}-ecs"
   description = "Load balancer access to ECS for remote inspection"
@@ -48,9 +44,7 @@ module "ecs_security_group" {
 
 module "ceramic_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
-
-  count = var.create_ceramic_service_security_groups ? 1 : 0
+  version = "~> 4.0"
 
   name        = "${local.namespace}-ceramic"
   description = "VPC access to Ceramic ports"
@@ -83,8 +77,6 @@ module "ceramic_security_group" {
 module "load_balancer_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 3.0"
-
-  count = var.create_ceramic_service_security_groups ? 1 : 0
 
   name        = "${var.namespace}-load_balancer"
   description = "All access to http/s"

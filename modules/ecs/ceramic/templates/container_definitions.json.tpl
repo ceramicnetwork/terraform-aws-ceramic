@@ -20,7 +20,6 @@
         "command": [
             "--port", "${ceramic_port}",
             "--network", "${network}",
-            "--ipfs-api", "${ipfs_api_url}",
             "--anchor-service-api", "${anchor_service_api_url}",
             "--ethereum-rpc", "${eth_rpc_url}",
             "--gateway", "${gateway}",

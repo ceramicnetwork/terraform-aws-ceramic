@@ -80,7 +80,7 @@
             },
             {
                 "name": "IPFS_PATH",
-                "value": "ipfs"
+                "value": "${directory_namespace}/ipfs"
             },
             {
                 "name": "IPFS_S3_REPO_ENABLED",

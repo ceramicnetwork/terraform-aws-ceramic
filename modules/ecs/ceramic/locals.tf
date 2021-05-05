@@ -4,14 +4,14 @@ locals {
     Ceramic   = var.env
   }
   namespace = var.namespace
-  dynamic_load_balancers = var.create_ceramic_alb ? concat(
+  dynamic_load_balancers = concat(
     [
       {
-        target_group_arn = module.alb[0].target_group_arns[0]
+        target_group_arn = module.alb.target_group_arns[0]
         container_name   = var.run_as_gateway ? "ceramic-gateway" : "ceramic-node"
         container_port   = var.ceramic_port
       }
     ],
     var.ceramic_load_balancer_contents
-  ) : var.ceramic_load_balancer_contents
+  )
 }

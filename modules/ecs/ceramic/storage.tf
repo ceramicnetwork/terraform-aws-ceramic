@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 module "efs_logs_volume" {
-  source = "git::https://github.com/cloudposse/terraform-aws-efs.git?ref=0.22.0"
+  source = "cloudposse/efs/aws"
 
   name      = "logs"
   namespace = var.namespace
@@ -13,10 +13,10 @@ module "efs_logs_volume" {
   region  = var.aws_region
   subnets = var.private_subnet_ids
   security_groups = [
-    var.efs_security_group_id,
+    aws_security_group.efs.id,
     var.vpc_security_group_id,
-    module.ceramic_security_group.this_security_group_id,
-    module.ecs_security_group.this_security_group_id
+    module.ceramic_security_group.security_group_id,
+    module.ecs_security_group.security_group_id
   ]
   vpc_id = var.vpc_id
 
@@ -31,7 +31,7 @@ module "s3_alb" {
   source = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 1.25.0"
 
-  create_bucket = var.create_ceramic_alb_access_logs_bucket
+  create_bucket = true
 
   # only lowercase alphanumeric characters and hyphens allowed
   bucket = "${var.namespace}-alb.logs"
@@ -56,6 +56,48 @@ module "s3_alb" {
   tags = var.default_tags
 }
 
+module "s3" {
+  source = "terraform-aws-modules/s3-bucket/aws"
+  version = "~> 1.25.0"
+
+  create_bucket = true
+
+  bucket = "${local.namespace}"
+  acl    = "private"
+
+  versioning = {
+    enabled = true
+  }
+
+  lifecycle_rule = [
+    {
+      enabled = true
+
+      noncurrent_version_expiration = {
+        days = 30
+      }
+    }
+  ]
+
+  # replication_configuration = {
+  #   role = module.s3_replication_role.this_iam_role_arn
+
+  #   rules = [
+  #     {
+  #       id       = "0"
+  #       status   = "Enabled"
+  #       priority = 0
+  #       destination = {
+  #         bucket        = module.s3_node_replica.this_s3_bucket_arn
+  #         storage_class = "STANDARD_IA"
+  #       }
+  #     }
+  #   ]
+  # }
+
+  tags = local.default_tags
+}
+
 data "aws_s3_bucket" "alb" {
-  bucket = var.create_ceramic_alb_access_logs_bucket ? module.s3_alb.this_s3_bucket_id : var.ceramic_alb_access_logs_bucket_id
+  bucket = module.s3_alb.this_s3_bucket_id
 }

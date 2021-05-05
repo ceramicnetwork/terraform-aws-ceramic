@@ -1,8 +1,6 @@
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.0"
-
-  count = var.create_ceramic_alb ? 1 : 0
+  version = "~> 6.0"
 
   name = var.namespace
 
@@ -61,5 +59,5 @@ module "alb" {
 }
 
 data "aws_lb" "main" {
-  arn = var.create_ceramic_alb ? module.alb.this_load_balancer_arn : var.load_balancer_arn
+  arn = module.alb.lb_arn
 }
