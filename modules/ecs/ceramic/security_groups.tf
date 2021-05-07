@@ -1,5 +1,5 @@
 resource "aws_security_group" "efs" {
-  name        = "EFS"
+  name        = "${var.namespace}-efs"
   description = "Controls access to EFS"
   vpc_id      = var.vpc_id
 

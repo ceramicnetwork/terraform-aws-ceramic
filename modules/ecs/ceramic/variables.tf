@@ -1,7 +1,6 @@
 variable "alb_subnet_ids" {
   type        = any
-  description = "When create_ceramic_alb is true, list of public subnet ids for internet-facing ALB."
-  default     = []
+  description = "List of public subnet ids for internet-facing ALB."
 }
 
 variable "aws_region" {
@@ -46,7 +45,6 @@ variable "ceramic_task_count" {
 variable "namespace" {
   type        = string
   description = "Namespace for Ceramic resources"
-  # default = "ceramic-elp-1"
 }
 
 variable "ceramic_load_balancer_contents" {

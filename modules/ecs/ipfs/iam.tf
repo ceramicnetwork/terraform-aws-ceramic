@@ -23,7 +23,7 @@ module "ecs_ipfs_task_user" {
 
 module "ecs_ipfs_task_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 2.22.0"
+  version = "~> 3.0"
 
   trusted_role_services = [
     "ecs-tasks.amazonaws.com"

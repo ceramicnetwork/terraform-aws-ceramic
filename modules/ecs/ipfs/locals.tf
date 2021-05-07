@@ -1,5 +1,5 @@
 locals {
-  namespace = var.additional_namespace != "" ? "${var.base_namespace}-ipfs-${var.additional_namespace}" : "${var.base_namespace}-ipfs"
+  namespace = var.additional_namespace != "" ? "${var.base_namespace}-elp-ipfs-${var.additional_namespace}" : "${var.base_namespace}-elp-ipfs"
   default_tags = merge(var.base_tags, {
     IPFS = true
   })
