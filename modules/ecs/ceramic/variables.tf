@@ -19,7 +19,7 @@ variable "cors_allowed_origins" {
   description = "Web browser CORS allowed origins"
 }
 
-variable "ceramic_cpu" {
+variable "ecs_cpu" {
   type        = number
   description = "vCPU units to allocate to the Ceramic daemon ECS task"
   default     = 1024 # 1024 = 1 vCPU
@@ -36,7 +36,7 @@ variable "network" {
   description = "Ceramic network"
 }
 
-variable "ceramic_task_count" {
+variable "task_count" {
   type        = number
   description = "Number of Ceramic ECS tasks to run in the ECS service"
   default     = 1
@@ -80,12 +80,6 @@ variable "ceramic_efs_logs_volume_id" {
 variable "create_cluster" {
   type        = bool
   description = "True to create a new ECS cluster for Ceramic and IPFS"
-  default     = true
-}
-
-variable "create_ceramic_service" {
-  type        = bool
-  description = "True to create a new ECS service"
   default     = true
 }
 
@@ -146,11 +140,6 @@ variable "ceramic_service_security_group_ids" {
   type        = list(string)
   description = "When create_ceramic_service_security_groups is false, list of security group ids for ECS service tasks"
   default     = []
-}
-
-variable "service_subnet_ids" {
-  type        = any
-  description = "When create_ceramic_service is true, list of subnet ids for the ECS service tasks. Generally the service will use private subnets and tasks will be access via a load balancer."
 }
 
 variable "ssl_certificate_arn" {

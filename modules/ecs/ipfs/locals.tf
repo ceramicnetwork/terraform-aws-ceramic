@@ -1,5 +1,5 @@
 locals {
-  namespace = var.additional_namespace != "" ? "${var.base_namespace}-elp-ipfs-${var.additional_namespace}" : "${var.base_namespace}-elp-ipfs"
+  namespace = "${var.base_namespace}-elp-ipfs"
   default_tags = merge(var.base_tags, {
     IPFS = true
   })
@@ -10,8 +10,8 @@ locals {
   swarm_ws_port    = 4012
 
   announce_address_list = var.use_ssl ? "/dns4/${local.domain_name_external}/tcp/${local.swarm_ws_port}/wss" : "/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_ws_port}/ws"
-  domain_name_external  = var.subdomain_namespace != "" ? "ipfs-${var.subdomain_namespace}-${var.env}-external.${var.domain}" : "ipfs-${var.env}-external.${var.domain}"
-  domain_name_internal  = var.subdomain_namespace != "" ? "ipfs-${var.subdomain_namespace}-${var.env}-internal.${var.domain}" : "ipfs-${var.env}-internal.${var.domain}"
+  domain_name_external  = "ipfs-${var.env}-external.${var.domain}"
+  domain_name_internal  = "ipfs-${var.env}-internal.${var.domain}"
 
   api_lb_external = var.enable_external_api ? [
     {

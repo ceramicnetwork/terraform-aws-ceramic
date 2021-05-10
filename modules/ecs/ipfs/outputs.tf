@@ -11,7 +11,7 @@ output "gateway_port" {
 }
 
 output "alb_internal_dns_name" {
-  value = module.alb_internal[0].this_lb_dns_name
+  value = module.alb_internal[0].lb_dns_name
 }
 
 output "alb_external_dns_name" {
@@ -43,7 +43,7 @@ output "swarm_ws_url_internal" {
 }
 
 output "hostname_internal" {
-  value       = module.alb_internal[0].this_lb_dns_name
+  value       = module.alb_internal[0].lb_dns_name
   description = "Hostname of internal ALB"
 }
 

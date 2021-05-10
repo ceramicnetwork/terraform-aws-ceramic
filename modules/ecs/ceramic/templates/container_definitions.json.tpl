@@ -2,7 +2,7 @@
     {
         "name": "${name}",
         "image": "${ceramic_image}",
-        "cpu": ${ceramic_cpu},
+        "cpu": ${ecs_cpu},
         "memory": ${ceramic_memory},
         "ulimits": [
             {

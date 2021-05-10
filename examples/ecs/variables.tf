@@ -31,9 +31,34 @@ variable "private_subnet_ids" {
   description = "List of private subnet ids for the VPC"
 }
 
+variable "public_subnet_ids" {
+  type        = list(string)
+  description = "List of ALB subnet ids"
+}
+
 variable "base_namespace" {
   type        = string
   description = "Base namespace"
+}
+
+variable "ssl_certificate_arn" {
+  type        = string
+  description = "ARN of SSL certificate"
+}
+
+variable "default_tags" {
+  type        = map(any)
+  description = "Tags"
+}
+
+variable "env" {
+  type        = string
+  description = "Environment name"
+}
+
+variable "cluster_name" {
+  type        = string
+  description = "Name of ECS cluster"
 }
 
 
@@ -43,16 +68,6 @@ variable "base_namespace" {
 variable "ceramic_cors_allowed_origins" {
   type        = string
   description = "Web browser CORS allowed origins"
-}
-
-variable "ceramic_cluster_name" {
-  type        = string
-  description = "Name of ECS cluster"
-}
-
-variable "ceramic_certificate_arn" {
-  type        = string
-  description = "ARN of Ceramic SSL certificate"
 }
 
 variable "ceramic_network" {
@@ -75,27 +90,45 @@ variable "ceramic_service_name" {
   description = "Name of Ceramic ECS service"
 }
 
-variable "ceramic_service_subnet_ids" {
-  type        = any
-  description = "List of subnet ids for the Ceramic ECS service tasks"
+variable "ceramic_task_count" {
+  type        = number
+  description = "Number of Ceramic ECS tasks to run in the ECS service"
+  default     = 1
 }
 
-variable "ceramic_alb_subnet_ids" {
-  type        = any
-  description = "List of public subnet ids for internet-facing ALB."
+variable "ceramic_cpu" {
+  type        = number
+  description = "vCPU units to allocate to the Ceramic daemon ECS task"
+  default     = 1024 # 1024 = 1 vCPU
 }
 
 
 /***** IPFS *****/
 
-
-variable "ipfs_certificate_arn" {
-  type        = string
-  description = "ARN of IPFS SSL certificate"
-}
-
 variable "ipfs_ecs_memory" {
   type        = number
   description = "Memory allocation per IPFS API instance"
   default     = 8192
+}
+
+variable "ipfs_log_stream_prefix" {
+  type        = string
+  description = ""
+}
+
+variable "ipfs_task_count" {
+  type        = number
+  description = "Number of IPFS ECS tasks to run in the ECS service"
+  default     = 1
+}
+
+variable "ipfs_cpu" {
+  type        = number
+  description = "vCPU units to allocate to the IPFS ECS task"
+  default     = 1024 # 1024 = 1 vCPU
+}
+
+variable "ipfs_log_group_name" {
+  type        = string
+  description = ""
 }

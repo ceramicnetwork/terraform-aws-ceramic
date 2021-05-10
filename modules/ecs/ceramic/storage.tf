@@ -78,24 +78,6 @@ module "s3" {
       }
     }
   ]
-
-  # replication_configuration = {
-  #   role = module.s3_replication_role.this_iam_role_arn
-
-  #   rules = [
-  #     {
-  #       id       = "0"
-  #       status   = "Enabled"
-  #       priority = 0
-  #       destination = {
-  #         bucket        = module.s3_node_replica.this_s3_bucket_arn
-  #         storage_class = "STANDARD_IA"
-  #       }
-  #     }
-  #   ]
-  # }
-
-  tags = local.default_tags
 }
 
 data "aws_s3_bucket" "alb" {

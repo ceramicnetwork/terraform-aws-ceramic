@@ -35,9 +35,9 @@ variable "ecs_count" {
   description = "Number of instances to run"
 }
 
-variable "ecs_cluster_arn" {
+variable "ecs_cluster_name" {
   type        = string
-  description = "ARN of cluster to place IPFS ECS service inside"
+  description = "Name of IPFS cluster"
 }
 
 variable "ecs_cpu" {
@@ -60,11 +60,6 @@ variable "ecs_memory" {
   description = "Fargate memory allocated to the Ceramic gateway instance"
 }
 
-variable "ecs_task_execution_role_arn" {
-  type        = string
-  description = "ARN for ecsTaskExecutionRole"
-}
-
 variable "env" {
   type        = string
   description = "Environment name"
@@ -78,16 +73,6 @@ variable "private_subnet_ids" {
 variable "public_subnet_ids" {
   type        = list(string)
   description = "Ids for the VPC public subnets"
-}
-
-variable "s3_replica_arn" {
-  type        = string
-  description = "ARN of S3 replica bucket. Required if create_s3_backend is true."
-}
-
-variable "s3_replication_role_arn" {
-  type        = string
-  description = "ARN of S3 replication IAM role. Required if create_s3_backend is true."
 }
 
 variable "use_ssl" {
@@ -112,21 +97,11 @@ variable "vpc_security_group_id" {
 
 /* Specified */
 
-variable "additional_namespace" {
-  type        = string
-  description = "Additional namespace string to differentiate deployments"
-}
-
 # TODO: Handle this
 # variable "create_cluster" {
 #   type        = string
 #   description = "True if IPFS should run in its own cluster"
 # }
-
-variable "create_s3_backend" {
-  type        = bool
-  description = "False to pass an s3 bucket created elsewhere"
-}
 
 variable "enable_external_api" {
   type        = bool
@@ -168,17 +143,8 @@ variable "debug" {
   description = "IPFS debug env var"
 }
 
-variable "s3_bucket_arn" {
+variable "directory_namespace" {
   type        = string
-  description = "ARN of S3 bucket to use as a backend"
-}
-
-variable "s3_bucket_id" {
-  type        = string
-  description = "Id of S3 bucket to use as a backend"
-}
-
-variable "subdomain_namespace" {
-  type        = string
-  description = "Namespace to add to subdomain. E.g. ipfs-<subdomain_namespace>-dev.3boxlabs.com"
+  description = "Directory for logs and state"
+  default     = ""
 }

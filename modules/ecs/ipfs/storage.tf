@@ -2,7 +2,7 @@ module "s3_ipfs" {
   source = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 1.25.0"
 
-  create_bucket = var.create_s3_backend
+  create_bucket = true
 
   bucket = "${local.namespace}-module"
   acl    = "private"
@@ -12,22 +12,6 @@ module "s3_ipfs" {
   }
 
   lifecycle_rule = local.s3_lifecycle_rules
-
-  replication_configuration = {
-    role = var.s3_replication_role_arn
-
-    rules = [
-      {
-        id       = "0"
-        status   = "Enabled"
-        priority = 0
-        destination = {
-          bucket        = var.s3_replica_arn
-          storage_class = "STANDARD_IA"
-        }
-      }
-    ]
-  }
 
   tags = local.default_tags
 }

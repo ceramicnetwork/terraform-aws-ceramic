@@ -9,13 +9,13 @@ resource "aws_ecs_cluster" "main" {
 }
 
 resource "aws_ecs_service" "main" {
-  count = var.create_ceramic_service ? 1 : 0
+  count = 1
 
   platform_version = "1.4.0"
   name             = var.service_name
   cluster          = var.cluster_name
   task_definition  = aws_ecs_task_definition.main.arn
-  desired_count    = var.ceramic_task_count
+  desired_count    = var.task_count
   launch_type      = "FARGATE"
 
   network_configuration {
@@ -25,7 +25,7 @@ resource "aws_ecs_service" "main" {
       module.ecs_security_group.security_group_id,
       module.ceramic_security_group.security_group_id
     ]
-    subnets = var.service_subnet_ids
+    subnets = var.private_subnet_ids
   }
   dynamic "load_balancer" {
     for_each = local.dynamic_load_balancers
@@ -53,7 +53,7 @@ resource "aws_ecs_task_definition" "main" {
     log_stream_prefix = var.run_as_gateway ? "ceramic-gateway" : "ceramic-node"
 
     anchor_service_api_url     = var.anchor_service_api_url
-    ceramic_cpu                = var.ceramic_cpu
+    ecs_cpu                = var.ecs_cpu
     ceramic_image              = data.docker_registry_image.ceramic.name
     ceramic_memory             = var.ceramic_memory
     network            = var.network
@@ -77,7 +77,7 @@ resource "aws_ecs_task_definition" "main" {
   network_mode       = "awsvpc"
 
   requires_compatibilities = ["FARGATE"]
-  cpu                      = var.ceramic_cpu
+  cpu                      = var.ecs_cpu
   memory                   = var.ceramic_memory
 
   volume {

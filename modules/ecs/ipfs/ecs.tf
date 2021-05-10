@@ -1,7 +1,7 @@
 resource "aws_ecs_service" "main" {
   platform_version = "1.4.0"
   name             = local.namespace
-  cluster          = var.ecs_cluster_arn
+  cluster          = var.ecs_cluster_name
   task_definition  = aws_ecs_task_definition.main.arn
   desired_count    = var.ecs_count
   launch_type      = "FARGATE"
@@ -50,6 +50,7 @@ resource "aws_ecs_task_definition" "main" {
       memory            = var.ecs_memory
       region            = var.aws_region
       enable_api        = true
+      directory_namespace        = var.directory_namespace
       # NOTE: Gateway has no writable option and doesn't allow POST with js-ipfs
       # enable_api        = var.enable_external_api || var.enable_internal_api
       enable_gateway = true
@@ -65,14 +66,14 @@ resource "aws_ecs_task_definition" "main" {
       dht_server_mode       = var.dht_server_mode
       debug                 = var.debug
 
-      s3_bucket_name       = var.s3_bucket_id != "" ? var.s3_bucket_id : module.s3_ipfs.this_s3_bucket_id
+      s3_bucket_name       = module.s3_ipfs.this_s3_bucket_id
       s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
       s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
     }
   )
 
-  execution_role_arn = var.ecs_task_execution_role_arn
-  task_role_arn      = module.ecs_ipfs_task_role.this_iam_role_arn
+  execution_role_arn = module.ecs_task_execution_role.iam_role_arn
+  task_role_arn      = module.ecs_ipfs_task_role.iam_role_arn
   network_mode       = "awsvpc"
 
   requires_compatibilities = ["FARGATE"]
