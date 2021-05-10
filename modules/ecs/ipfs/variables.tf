@@ -15,9 +15,9 @@ variable "az_count" {
   description = "Number of availability zones to use"
 }
 
-variable "base_namespace" {
+variable "namespace" {
   type        = string
-  description = "Base namespace"
+  description = "Namespace for IPFS resources"
 }
 
 variable "base_tags" {
@@ -58,6 +58,11 @@ variable "ecs_log_stream_prefix" {
 variable "ecs_memory" {
   type        = number
   description = "Fargate memory allocated to the Ceramic gateway instance"
+}
+
+variable "ecs_service_name" {
+  type        = string
+  description = "Name of ECS service"
 }
 
 variable "env" {
@@ -147,4 +152,9 @@ variable "directory_namespace" {
   type        = string
   description = "Directory for logs and state"
   default     = ""
+}
+
+variable "image_tag" {
+  type        = string
+  description = "Image tag"
 }

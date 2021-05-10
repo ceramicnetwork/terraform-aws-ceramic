@@ -8,12 +8,6 @@ variable "aws_region" {
   description = "AWS region. Must match region of vpc_id and alb_subnet_ids."
 }
 
-variable "ceramic_image_tag" {
-  type        = string
-  description = "Image tag for Ceramic Docker Hub image"
-  default     = "latest"
-}
-
 variable "cors_allowed_origins" {
   type        = string
   description = "Web browser CORS allowed origins"
@@ -128,7 +122,6 @@ variable "run_as_gateway" {
 variable "service_name" {
   type        = string
   description = "When create_ceramic_service is true, name of ECS service"
-  default     = "ceramic-daemon"
 }
 
 variable "anchor_service_api_url" {

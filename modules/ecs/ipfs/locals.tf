@@ -1,5 +1,5 @@
 locals {
-  namespace = "${var.base_namespace}-elp-ipfs"
+  namespace = var.namespace
   default_tags = merge(var.base_tags, {
     IPFS = true
   })
@@ -10,8 +10,8 @@ locals {
   swarm_ws_port    = 4012
 
   announce_address_list = var.use_ssl ? "/dns4/${local.domain_name_external}/tcp/${local.swarm_ws_port}/wss" : "/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_ws_port}/ws"
-  domain_name_external  = "ipfs-${var.env}-external.${var.domain}"
-  domain_name_internal  = "ipfs-${var.env}-internal.${var.domain}"
+  domain_name_external  = "${var.namespace}-external.${var.domain}"
+  domain_name_internal  = "${var.namespace}-internal.${var.domain}"
 
   api_lb_external = var.enable_external_api ? [
     {
@@ -65,14 +65,7 @@ locals {
         container_port   = local.swarm_ws_port
       }
     ],
-    local.swarm_lb_internal,
-    [
-      {
-        target_group_arn = module.nlb_external.target_group_arns[0]
-        container_name   = "ipfs"
-        container_port   = local.swarm_port
-      }
-    ]
+    local.swarm_lb_internal
   )
 
   s3_lifecycle_rules = [

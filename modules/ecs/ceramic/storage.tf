@@ -34,7 +34,7 @@ module "s3_alb" {
   create_bucket = true
 
   # only lowercase alphanumeric characters and hyphens allowed
-  bucket = "${var.namespace}-alb.logs"
+  bucket = "${var.namespace}-alb"
   acl    = "private"
 
   attach_elb_log_delivery_policy = true
@@ -62,7 +62,7 @@ module "s3" {
 
   create_bucket = true
 
-  bucket = "${local.namespace}"
+  bucket = "${local.namespace}-module"
   acl    = "private"
 
   versioning = {

@@ -56,11 +56,10 @@ variable "env" {
   description = "Environment name"
 }
 
-variable "cluster_name" {
+variable "image_tag" {
   type        = string
-  description = "Name of ECS cluster"
+  description = "Image tag"
 }
-
 
 /***** Ceramic *****/
 
@@ -68,11 +67,6 @@ variable "cluster_name" {
 variable "ceramic_cors_allowed_origins" {
   type        = string
   description = "Web browser CORS allowed origins"
-}
-
-variable "ceramic_network" {
-  type        = string
-  description = "Ceramic network"
 }
 
 variable "ceramic_anchor_service_api_url" {
@@ -83,11 +77,6 @@ variable "ceramic_anchor_service_api_url" {
 variable "ceramic_eth_rpc_url" {
   type        = string
   description = "Ethereum RPC URL. Must match anchor service ETH network"
-}
-
-variable "ceramic_service_name" {
-  type        = string
-  description = "Name of Ceramic ECS service"
 }
 
 variable "ceramic_task_count" {
@@ -101,7 +90,6 @@ variable "ceramic_cpu" {
   description = "vCPU units to allocate to the Ceramic daemon ECS task"
   default     = 1024 # 1024 = 1 vCPU
 }
-
 
 /***** IPFS *****/
 

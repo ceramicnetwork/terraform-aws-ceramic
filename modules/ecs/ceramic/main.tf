@@ -56,7 +56,7 @@ resource "aws_ecs_task_definition" "main" {
     ecs_cpu                = var.ecs_cpu
     ceramic_image              = data.docker_registry_image.ceramic.name
     ceramic_memory             = var.ceramic_memory
-    network            = var.network
+    network                    = var.network
     ceramic_port               = var.ceramic_port
     cors_allowed_origins       = var.cors_allowed_origins
     debug                      = var.ceramic_enable_debug

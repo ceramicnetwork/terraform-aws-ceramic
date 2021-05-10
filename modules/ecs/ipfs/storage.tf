@@ -22,7 +22,7 @@ module "s3_alb" {
 
   create_bucket = true
 
-  bucket = "${local.namespace}-alb.logs"
+  bucket = "${local.namespace}-alb"
   acl    = "private"
 
   attach_elb_log_delivery_policy = true
