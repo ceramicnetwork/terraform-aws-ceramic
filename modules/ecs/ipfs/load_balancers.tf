@@ -1,6 +1,6 @@
 # Only alphanumeric characters and hyphens allowed in names and prefixes
 resource "aws_lb" "external" {
-  name = "${local.namespace}-alb-ex"
+  name = "${local.namespace}-ex"
 
   load_balancer_type = "application"
 
@@ -178,7 +178,7 @@ module "alb_internal" {
 
   count = 1
 
-  name = "${local.namespace}-alb-in"
+  name = "${local.namespace}-in"
 
   load_balancer_type = "application"
   internal           = true
