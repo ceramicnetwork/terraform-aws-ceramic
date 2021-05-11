@@ -96,7 +96,11 @@ variable "default_tags" {
 
 variable "ecs_log_group_name" {
   type        = string
-  description = ""
+}
+
+variable "ecs_log_prefix" {
+  type    = string
+  default = "ceramic"
 }
 
 variable "eth_rpc_url" {

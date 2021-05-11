@@ -48,6 +48,7 @@ resource "aws_ecs_task_definition" "main" {
     env                        = var.env
     region                     = var.aws_region
     log_group                  = var.ecs_log_group_name
+    log_stream_prefix          = var.ecs_log_prefix
     anchor_service_api_url     = var.anchor_service_api_url
     ecs_cpu                    = var.ecs_cpu
     ceramic_image              = data.docker_registry_image.ceramic.name
@@ -59,7 +60,6 @@ resource "aws_ecs_task_definition" "main" {
     directory_namespace        = var.directory_namespace
     eth_rpc_url                = var.eth_rpc_url
     gateway                    = false
-    # ipfs_api_url             = module.ipfs_node.api_url_internal
     s3_state_store_bucket_name = module.s3.this_s3_bucket_id
     s3_access_key_id           = module.s3_ceramic_state_store_task_user.this_iam_access_key_id
     s3_secret_access_key       = module.s3_ceramic_state_store_task_user.this_iam_access_key_secret

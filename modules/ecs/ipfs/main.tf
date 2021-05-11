@@ -55,6 +55,7 @@ resource "aws_ecs_task_definition" "main" {
       env                  = var.env
       image                = data.docker_registry_image.ipfs.name
       log_group            = var.ecs_log_group_name
+      log_stream_prefix    = var.ecs_log_prefix
       memory               = var.ecs_memory
       region               = var.aws_region
       enable_api           = true

@@ -47,7 +47,11 @@ variable "ecs_cpu" {
 
 variable "ecs_log_group_name" {
   type        = string
-  description = ""
+}
+
+variable "ecs_log_prefix" {
+  type    = string
+  default = "ipfs"
 }
 
 variable "ecs_memory" {
