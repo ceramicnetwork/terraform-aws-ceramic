@@ -5,7 +5,7 @@ locals {
     [
       {
         target_group_arn = module.alb.target_group_arns[0]
-        container_name   = var.run_as_gateway ? "ceramic-gateway" : "ceramic-node"
+        container_name   = "ceramic-node"
         container_port   = var.ceramic_port
       }
     ],

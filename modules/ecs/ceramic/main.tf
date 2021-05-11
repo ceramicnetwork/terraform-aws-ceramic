@@ -2,10 +2,8 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "aws_ecs_cluster" "main" {
-  name = var.cluster_name
-
-  tags = var.default_tags
+data "aws_ecs_cluster" "main" {
+  cluster_name = var.ecs_cluster_name
 }
 
 resource "aws_ecs_service" "main" {
@@ -13,7 +11,7 @@ resource "aws_ecs_service" "main" {
 
   platform_version = "1.4.0"
   name             = var.service_name
-  cluster          = var.cluster_name
+  cluster          = var.ecs_cluster_name
   task_definition  = aws_ecs_task_definition.main.arn
   desired_count    = var.task_count
   launch_type      = "FARGATE"
@@ -45,15 +43,13 @@ resource "aws_ecs_service" "main" {
 
 resource "aws_ecs_task_definition" "main" {
   family = var.namespace
-  container_definitions = templatefile("${path.module}/templates/container_definitions.json.tpl", {
-    name              = var.run_as_gateway ? "ceramic-gateway" : "ceramic-node"
-    env               = var.env
-    region            = var.aws_region
-    log_group         = aws_cloudwatch_log_group.ceramic.name
-    log_stream_prefix = var.run_as_gateway ? "ceramic-gateway" : "ceramic-node"
-
+  container_definitions        = templatefile("${path.module}/templates/container_definitions.json.tpl", {
+    name                       = "ceramic-node"
+    env                        = var.env
+    region                     = var.aws_region
+    log_group                  = var.ecs_log_group_name
     anchor_service_api_url     = var.anchor_service_api_url
-    ecs_cpu                = var.ecs_cpu
+    ecs_cpu                    = var.ecs_cpu
     ceramic_image              = data.docker_registry_image.ceramic.name
     ceramic_memory             = var.ceramic_memory
     network                    = var.network
@@ -62,14 +58,13 @@ resource "aws_ecs_task_definition" "main" {
     debug                      = var.ceramic_enable_debug
     directory_namespace        = var.directory_namespace
     eth_rpc_url                = var.eth_rpc_url
-    gateway                    = var.run_as_gateway
+    gateway                    = false
     # ipfs_api_url             = module.ipfs_node.api_url_internal
     s3_state_store_bucket_name = module.s3.this_s3_bucket_id
     s3_access_key_id           = module.s3_ceramic_state_store_task_user.this_iam_access_key_id
     s3_secret_access_key       = module.s3_ceramic_state_store_task_user.this_iam_access_key_secret
     verbose                    = var.enable_verbose
-
-    logs_volume_source = "${var.namespace}-logs"
+    logs_volume_source         = var.efs_logs_volume_name
   })
 
   execution_role_arn = module.ecs_task_execution_role.iam_role_arn
@@ -81,9 +76,9 @@ resource "aws_ecs_task_definition" "main" {
   memory                   = var.ceramic_memory
 
   volume {
-    name = "${var.namespace}-logs"
+    name = var.efs_logs_volume_name
     efs_volume_configuration {
-      file_system_id = module.efs_logs_volume.id
+      file_system_id = var.efs_logs_fs_id
     }
   }
 

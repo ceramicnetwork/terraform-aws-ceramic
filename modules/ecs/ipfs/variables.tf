@@ -50,11 +50,6 @@ variable "ecs_log_group_name" {
   description = ""
 }
 
-variable "ecs_log_stream_prefix" {
-  type        = string
-  description = ""
-}
-
 variable "ecs_memory" {
   type        = number
   description = "Fargate memory allocated to the Ceramic gateway instance"
@@ -109,12 +104,6 @@ variable "vpc_security_group_id" {
 }
 
 /* Specified */
-
-# TODO: Handle this
-# variable "create_cluster" {
-#   type        = string
-#   description = "True if IPFS should run in its own cluster"
-# }
 
 variable "enable_external_api" {
   type        = bool

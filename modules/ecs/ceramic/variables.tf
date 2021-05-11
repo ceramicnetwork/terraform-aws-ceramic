@@ -1,11 +1,11 @@
-variable "alb_subnet_ids" {
+variable "public_subnet_ids" {
   type        = any
   description = "List of public subnet ids for internet-facing ALB."
 }
 
 variable "aws_region" {
   type        = string
-  description = "AWS region. Must match region of vpc_id and alb_subnet_ids."
+  description = "AWS region. Must match region of vpc_id and public_subnet_ids."
 }
 
 variable "cors_allowed_origins" {
@@ -53,28 +53,19 @@ variable "ceramic_port" {
   default     = 7007
 }
 
-variable "cluster_name" {
+variable "ecs_cluster_name" {
   type        = string
-  description = "When create_cluster is true, name of ECS cluster"
-  default     = "ceramic"
+  description = "Name of ECS cluster"
 }
 
-variable "create_ceramic_efs_volume" {
-  type        = bool
-  description = "True to create EFS volume for Ceramic logs"
-  default     = true
-}
-
-variable "ceramic_efs_logs_volume_id" {
+variable "efs_logs_fs_id" {
   type        = string
-  description = "When create_cermic_efs_volume is false, id of EFS volume for Ceramic logs"
-  default     = ""
+  description = "ID of EFS volume for Ceramic logs"
 }
 
-variable "create_cluster" {
-  type        = bool
-  description = "True to create a new ECS cluster for Ceramic and IPFS"
-  default     = true
+variable "efs_logs_volume_name" {
+  type        = string
+  description = "Name of EFS volume for Ceramic logs"
 }
 
 variable "ceramic_enable_debug" {
@@ -103,6 +94,11 @@ variable "default_tags" {
   }
 }
 
+variable "ecs_log_group_name" {
+  type        = string
+  description = ""
+}
+
 variable "eth_rpc_url" {
   type        = string
   description = "Ethereum RPC URL. Must match anchor service ETH network"
@@ -111,12 +107,6 @@ variable "eth_rpc_url" {
 variable "private_subnet_ids" {
   type        = list(string)
   description = "List of private subnet ids for the VPC"
-}
-
-variable "run_as_gateway" {
-  type        = bool
-  description = "Run Ceramic as a gateway"
-  default     = false
 }
 
 variable "service_name" {

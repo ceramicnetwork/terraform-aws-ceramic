@@ -2,9 +2,8 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "aws_ecs_cluster" "main" {
-  name = var.ecs_cluster_name
-  tags = local.default_tags
+data "aws_ecs_cluster" "main" {
+  cluster_name = var.ecs_cluster_name
 }
 
 resource "aws_ecs_service" "main" {
@@ -52,20 +51,17 @@ resource "aws_ecs_task_definition" "main" {
   container_definitions = templatefile(
     "${path.module}/templates/container_definitions.json.tpl",
     {
-      cpu               = var.ecs_cpu
-      env               = var.env
-      image             = data.docker_registry_image.ipfs.name
-      log_group         = var.ecs_log_group_name
-      log_stream_prefix = var.ecs_log_stream_prefix
-      memory            = var.ecs_memory
-      region            = var.aws_region
-      enable_api        = true
-      directory_namespace        = var.directory_namespace
-      # NOTE: Gateway has no writable option and doesn't allow POST with js-ipfs
-      # enable_api        = var.enable_external_api || var.enable_internal_api
-      enable_gateway = true
-      # enable_gateway    = var.enable_external_gateway || var.enable_internal_gateway
-      enable_pubsub = var.enable_pubsub
+      cpu                  = var.ecs_cpu
+      env                  = var.env
+      image                = data.docker_registry_image.ipfs.name
+      log_group            = var.ecs_log_group_name
+      memory               = var.ecs_memory
+      region               = var.aws_region
+      enable_api           = true
+      directory_namespace  = var.directory_namespace
+      enable_gateway       = true
+      # enable_gateway     = var.enable_external_gateway || var.enable_internal_gateway
+      enable_pubsub        = var.enable_pubsub
 
       api_port              = local.api_port
       gateway_port          = local.gateway_port
@@ -76,9 +72,9 @@ resource "aws_ecs_task_definition" "main" {
       dht_server_mode       = var.dht_server_mode
       debug                 = var.debug
 
-      s3_bucket_name       = module.s3_ipfs.this_s3_bucket_id
-      s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
-      s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
+      s3_bucket_name        = module.s3_ipfs.this_s3_bucket_id
+      s3_access_key_id      = module.ecs_ipfs_task_user.this_iam_access_key_id
+      s3_secret_access_key  = module.ecs_ipfs_task_user.this_iam_access_key_secret
     }
   )
 
