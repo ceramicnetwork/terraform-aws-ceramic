@@ -2,9 +2,16 @@ provider "aws" {
   region = var.aws_region
 }
 
+resource "aws_ecs_cluster" "main" {
+  name = var.ecs_cluster_name
+  tags = local.default_tags
+}
+
 resource "aws_ecs_service" "main" {
+  count = 1
+
   platform_version = "1.4.0"
-  name             = var.service_name
+  name             = var.ecs_service_name
   cluster          = var.ecs_cluster_name
   task_definition  = aws_ecs_task_definition.main.arn
   desired_count    = var.ecs_count

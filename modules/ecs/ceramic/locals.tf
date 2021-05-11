@@ -1,8 +1,5 @@
 locals {
-  default_tags = {
-    Terraform = true
-    Ceramic   = var.env
-  }
+  default_tags = var.default_tags
   namespace = var.namespace
   dynamic_load_balancers = concat(
     [

@@ -70,6 +70,14 @@ variable "env" {
   description = "Environment name"
 }
 
+variable "default_tags" {
+  type        = map(string)
+  description = "Default tags"
+  default = {
+    Terraform = "true"
+  }
+}
+
 variable "private_subnet_ids" {
   type        = list(string)
   description = "Ids for the VPC private subnets"
