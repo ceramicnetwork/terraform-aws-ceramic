@@ -95,7 +95,7 @@ variable "default_tags" {
 }
 
 variable "ecs_log_group_name" {
-  type        = string
+  type = string
 }
 
 variable "ecs_log_prefix" {

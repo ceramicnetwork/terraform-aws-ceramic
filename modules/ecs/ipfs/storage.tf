@@ -1,5 +1,5 @@
 module "s3_ipfs" {
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source  = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 1.25.0"
 
   create_bucket = true
@@ -17,7 +17,7 @@ module "s3_ipfs" {
 }
 
 module "s3_alb" {
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source  = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 1.25.0"
 
   create_bucket = true

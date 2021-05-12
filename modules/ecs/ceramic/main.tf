@@ -43,7 +43,7 @@ resource "aws_ecs_service" "main" {
 
 resource "aws_ecs_task_definition" "main" {
   family = var.namespace
-  container_definitions        = templatefile("${path.module}/templates/container_definitions.json.tpl", {
+  container_definitions = templatefile("${path.module}/templates/container_definitions.json.tpl", {
     name                       = "ceramic-node"
     env                        = var.env
     region                     = var.aws_region

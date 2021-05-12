@@ -46,7 +46,7 @@ variable "ecs_cpu" {
 }
 
 variable "ecs_log_group_name" {
-  type        = string
+  type = string
 }
 
 variable "ecs_log_prefix" {

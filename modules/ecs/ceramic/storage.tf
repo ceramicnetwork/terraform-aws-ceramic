@@ -1,10 +1,10 @@
 provider "aws" {
   region = "eu-west-1" # eu-west-1 (Ireland) has same prices as us-east-2
-  alias = "replica"
+  alias  = "replica"
 }
 
 module "s3_alb" {
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source  = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 1.25.0"
 
   create_bucket = true
@@ -33,7 +33,7 @@ module "s3_alb" {
 }
 
 module "s3" {
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source  = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 1.25.0"
 
   create_bucket = true

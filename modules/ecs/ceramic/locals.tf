@@ -1,6 +1,6 @@
 locals {
   default_tags = var.default_tags
-  namespace = var.namespace
+  namespace    = var.namespace
   dynamic_load_balancers = concat(
     [
       {
