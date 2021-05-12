@@ -1,4 +1,4 @@
-module "partner-1" {
+module "ceramic-ecs" {
   source = "../../modules/ecs"
 
   env                            = var.env

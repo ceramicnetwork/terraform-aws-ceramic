@@ -1,5 +1,3 @@
-Fargate hosted ECS task
+# Fargate-hosted Ceramic and IPFS Nodes
 
-Can be run as a read-write node or a read-only gateway
-
-Port 9229 can be used for remote inspection
+This is still a work-in-progress.
