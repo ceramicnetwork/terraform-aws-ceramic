@@ -31,3 +31,6 @@ override.tf.json
 
 # Terraform variables file
 *.tfvars.json
+
+# Terraform state
+state.tf
