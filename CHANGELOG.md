@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.2](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.0.1...1.0.2) (2021-05-20)
+
+- chore: release v1.0.2 [`acdfec7`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/acdfec7dc57ef08ba3d5a46d225679dcdc90f51d)
+- feat: remove allow empty from release-it [`5e50ce3`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/5e50ce368207100ff3a6444d2c7974287ac5d5dc)
+- fix: add flag to release-it hook [`9f92675`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/9f926754240f6d8f3c3f83c31b1a7b2a77d38394)
+
 ## [1.0.1](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.0.0...1.0.1) (2021-05-20)
 
 - chore: release v1.0.1 [`e07a8c2`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/e07a8c201a354c20ee984b5807767ecf30a63a28)
