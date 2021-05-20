@@ -1,3 +1,5 @@
+/* Given */
+
 variable "public_subnet_ids" {
   type        = any
   description = "List of public subnet ids for internet-facing ALB."

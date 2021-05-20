@@ -112,7 +112,7 @@ resource "aws_security_group" "alb_internal" {
 
 module "api_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+  version = "3.0"
 
   name        = "${local.namespace}-api"
   description = "VPC access to IPFS API ports"

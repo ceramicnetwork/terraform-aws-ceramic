@@ -22,7 +22,7 @@ resource "aws_security_group" "efs" {
 
 module "ecs_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "3.0"
 
   name        = "${var.namespace}-ecs"
   description = "Load balancer access to ECS for remote inspection"
@@ -44,7 +44,7 @@ module "ecs_security_group" {
 
 module "ceramic_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "3.0"
 
   name        = var.namespace
   description = "VPC access to Ceramic ports"
