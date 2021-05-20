@@ -15,3 +15,24 @@ module "ceramic" {
   # insert variables here
 }
 ```
+
+## Development
+
+Start by installing [pre-commit](https://pre-commit.com/)
+
+```shell
+pre-commit install
+```
+
+### Releases
+
+We are using [release-it](https://github.com/release-it/release-it) to do releases and following [semver](https://semver.org/) versioning.
+
+Releases must be merged into the main branch.
+
+```shell
+npm install --global release-it
+release-it --dry-run
+release-it
+```
+
