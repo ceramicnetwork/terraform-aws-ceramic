@@ -1,46 +1,34 @@
 /* Given */
 
-variable "public_subnet_ids" {
-  type        = any
-  description = "List of public subnet ids for internet-facing ALB."
-}
-
 variable "aws_region" {
   type        = string
   description = "AWS region. Must match region of vpc_id and public_subnet_ids."
 }
 
-variable "cors_allowed_origins" {
+variable "anchor_service_api_url" {
   type        = string
-  description = "Web browser CORS allowed origins"
+  description = "URL for Ceramic Anchor Service API"
 }
 
-variable "ecs_cpu" {
-  type        = number
-  description = "vCPU units to allocate to the Ceramic daemon ECS task"
-  default     = 1024 # 1024 = 1 vCPU
+variable "acm_certificate_arn" {
+  type        = string
+  description = "ARN of SSL certificate"
 }
 
-variable "ceramic_memory" {
-  type        = number
-  description = "Memory to allocate to the Ceramic daemon ECS task"
-  default     = 2048 # 2048 MiB = 2 GB
+variable "base_tags" {
+  type        = any
+  description = "Tags to merge with local defaults"
 }
 
-variable "network" {
+variable "ceramic_enable_debug" {
+  type        = bool
+  description = "True to enable Ceramic debug"
+  default     = true
+}
+
+variable "ceramic_network" {
   type        = string
   description = "Ceramic network"
-}
-
-variable "task_count" {
-  type        = number
-  description = "Number of Ceramic ECS tasks to run in the ECS service"
-  default     = 1
-}
-
-variable "namespace" {
-  type        = string
-  description = "Namespace for Ceramic resources"
 }
 
 variable "ceramic_load_balancer_contents" {
@@ -55,6 +43,46 @@ variable "ceramic_port" {
   default     = 7007
 }
 
+variable "ceramic_service_security_group_ids" {
+  type        = list(string)
+  description = "When create_ceramic_service_security_groups is false, list of security group ids for ECS service tasks"
+  default     = []
+}
+
+variable "cors_allowed_origins" {
+  type        = string
+  description = "Web browser CORS allowed origins"
+}
+
+variable "directory_namespace" {
+  type        = string
+  description = "Directory for logs and state"
+  default     = ""
+}
+
+variable "ecs_count" {
+  type        = number
+  description = "Number of Ceramic ECS tasks to run in the ECS service"
+  default     = 1
+}
+
+variable "ecs_cpu" {
+  type        = number
+  description = "vCPU units to allocate to the Ceramic daemon ECS task"
+  default     = 1024 # 1024 = 1 vCPU
+}
+
+variable "ecs_memory" {
+  type        = number
+  description = "Memory to allocate to the Ceramic daemon ECS task"
+  default     = 2048 # 2048 MiB = 2 GB
+}
+
+variable "ecs_service_name" {
+  type        = string
+  description = "Name of ECS service"
+}
+
 variable "ecs_cluster_name" {
   type        = string
   description = "Name of ECS cluster"
@@ -65,15 +93,9 @@ variable "efs_logs_fs_id" {
   description = "ID of EFS volume for Ceramic logs"
 }
 
-variable "efs_logs_volume_name" {
+variable "efs_logs_fs_name" {
   type        = string
   description = "Name of EFS volume for Ceramic logs"
-}
-
-variable "ceramic_enable_debug" {
-  type        = bool
-  description = "True to enable Ceramic debug"
-  default     = true
 }
 
 variable "enable_verbose" {
@@ -82,18 +104,9 @@ variable "enable_verbose" {
   default     = true
 }
 
-variable "directory_namespace" {
+variable "env" {
   type        = string
-  description = "Directory for logs and state"
-  default     = ""
-}
-
-variable "default_tags" {
-  type        = map(string)
-  description = "Default tags"
-  default = {
-    Terraform = "true"
-  }
+  description = "Environment name"
 }
 
 variable "ecs_log_group_name" {
@@ -110,32 +123,40 @@ variable "eth_rpc_url" {
   description = "Ethereum RPC URL. Must match anchor service ETH network"
 }
 
+variable "image_tag" {
+  type        = string
+  description = "Image tag"
+}
+
+variable "ipfs_api_url" {
+  type        = string
+  description = "API URL for IPFS"
+}
+
+variable "namespace" {
+  type        = string
+  description = "Namespace for Ceramic resources"
+}
+
 variable "private_subnet_ids" {
   type        = list(string)
   description = "List of private subnet ids for the VPC"
 }
 
-variable "service_name" {
-  type        = string
-  description = "When create_ceramic_service is true, name of ECS service"
-}
-
-variable "anchor_service_api_url" {
-  type        = string
-  description = "URL for Ceramic Anchor Service API"
-}
-
-variable "ceramic_service_security_group_ids" {
+variable "public_subnet_ids" {
   type        = list(string)
-  description = "When create_ceramic_service_security_groups is false, list of security group ids for ECS service tasks"
-  default     = []
+  description = "List of public subnet ids for internet-facing ALB."
 }
 
-variable "ssl_certificate_arn" {
+variable "s3_bucket_arn" {
   type        = string
-  description = "ARN of SSL certificate"
+  description = "ARN of S3 bucket to use as a backend"
 }
 
+variable "s3_bucket_name" {
+  type        = string
+  description = "Name (aka id) of S3 bucket to use as a backend"
+}
 variable "vpc_security_group_id" {
   type        = string
   description = "VPC security group id"
@@ -151,13 +172,4 @@ variable "vpc_cidr_block" {
   description = "Default CIDR block of the VPC"
 }
 
-variable "env" {
-  type        = string
-  description = "Environment name"
-}
-
-variable "image_tag" {
-  type        = string
-  description = "Image tag"
-}
-
+/* Chosen */

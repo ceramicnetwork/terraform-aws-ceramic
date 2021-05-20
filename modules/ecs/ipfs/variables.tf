@@ -10,16 +10,6 @@ variable "aws_region" {
   description = "AWS region"
 }
 
-variable "az_count" {
-  type        = number
-  description = "Number of availability zones to use"
-}
-
-variable "namespace" {
-  type        = string
-  description = "Namespace for IPFS resources"
-}
-
 variable "base_tags" {
   type        = any
   description = "Tags to merge with local defaults"
@@ -69,12 +59,9 @@ variable "env" {
   description = "Environment name"
 }
 
-variable "default_tags" {
-  type        = map(string)
-  description = "Default tags"
-  default = {
-    Terraform = "true"
-  }
+variable "namespace" {
+  type        = string
+  description = "Namespace for IPFS resources"
 }
 
 variable "private_subnet_ids" {
@@ -85,6 +72,16 @@ variable "private_subnet_ids" {
 variable "public_subnet_ids" {
   type        = list(string)
   description = "Ids for the VPC public subnets"
+}
+
+variable "s3_bucket_arn" {
+  type        = string
+  description = "ARN of S3 bucket to use as a backend"
+}
+
+variable "s3_bucket_name" {
+  type        = string
+  description = "Name (aka id) of S3 bucket to use as a backend"
 }
 
 variable "use_ssl" {
