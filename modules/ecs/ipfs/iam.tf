@@ -1,12 +1,12 @@
-# module "ecs_ipfs_task_group" {
-#   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
-#   version = "~> 2.23"
+module "ecs_ipfs_task_group" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
+  version = "~> 2.23"
 
-#   name = "ecsIpfsTask-${local.namespace}"
+  name = "ecsIpfsTask-${local.namespace}"
 
-#   custom_group_policy_arns = [aws_iam_policy.main.arn]
-#   group_users              = [module.ecs_ipfs_task_user.this_iam_user_name]
-# }
+  custom_group_policy_arns = [aws_iam_policy.main.arn]
+  group_users              = [module.ecs_ipfs_task_user.this_iam_user_name]
+}
 
 module "ecs_ipfs_task_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
