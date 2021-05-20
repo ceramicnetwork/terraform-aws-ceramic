@@ -1,3 +1,8 @@
+output "ceramic_alb_dns_name_external" {
+  value       = module.ceramic.alb_dns_name_external
+  description = "DNS name of external (internet-facing) load balancer for Ceramic"
+}
+
 output "ipfs_alb_dns_name_external" {
   value       = module.ipfs.alb_dns_name_external
   description = "DNS name of external (internet-facing) load balancer for IPFS"
