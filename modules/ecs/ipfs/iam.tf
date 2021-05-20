@@ -37,15 +37,10 @@ resource "aws_iam_policy" "main" {
   path        = "/"
   description = "Allows get, list, and put access for IPFS S3 repo storage"
 
-  policy = data.template_file.s3_policy.rendered
-}
-
-data "template_file" "s3_policy" {
-  template = file("${path.module}/templates/s3_policy.json.tpl")
-
-  vars = {
-    resource = module.s3_ipfs.this_s3_bucket_arn
-  }
+  policy = templatefile("${path.module}/templates/s3_policy.json.tpl", {
+    resource  = var.s3_bucket_arn
+    directory = var.directory_namespace
+  })
 }
 
 module "ecs_task_execution_role" {

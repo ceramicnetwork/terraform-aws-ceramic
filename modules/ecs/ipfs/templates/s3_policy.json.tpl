@@ -10,8 +10,8 @@
       ],
       "Effect": "Allow",
       "Resource": [
-          "${resource}",
-          "${resource}/*"
+          "${resource}/${directory}",
+          "${resource}/${directory}/*"
       ]
     }
   ]
