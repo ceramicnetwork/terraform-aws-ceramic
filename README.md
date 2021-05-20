@@ -24,6 +24,19 @@ Start by installing [pre-commit](https://pre-commit.com/)
 pre-commit install
 ```
 
+### Known Issues
+
+**Region is required**
+When validating submodules you may see error messages like this:
+> Error: Missing required argument
+>
+> The argument "region" is required, but was not set.
+
+To suppress these, set an environment variable for `AWS_DEFAULT_REGION`
+```shell
+export AWS_DEFAULT_REGION=us-east-1
+```
+
 ### Releases
 
 We are using [release-it](https://github.com/release-it/release-it) to do releases and following [semver](https://semver.org/) versioning.
@@ -35,4 +48,3 @@ npm install --global release-it
 release-it --dry-run
 release-it
 ```
-

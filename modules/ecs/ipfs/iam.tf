@@ -1,3 +1,13 @@
+# module "ecs_ipfs_task_group" {
+#   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
+#   version = "~> 2.23"
+
+#   name = "ecsIpfsTask-${local.namespace}"
+
+#   custom_group_policy_arns = [aws_iam_policy.main.arn]
+#   group_users              = [module.ecs_ipfs_task_user.this_iam_user_name]
+# }
+
 module "ecs_ipfs_task_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
   version = "3.0"
@@ -9,6 +19,17 @@ module "ecs_ipfs_task_user" {
   force_destroy                 = false
 
   tags = local.default_tags
+}
+
+resource "aws_iam_policy" "main" {
+  name        = "IPFSS3-${local.namespace}"
+  path        = "/"
+  description = "Allows get, list, and put access for IPFS S3 repo storage"
+
+  policy = templatefile("${path.module}/templates/s3_policy.json.tpl", {
+    resource  = var.s3_bucket_arn
+    directory = var.directory_namespace
+  })
 }
 
 module "ecs_ipfs_task_role" {
@@ -30,17 +51,6 @@ module "ecs_ipfs_task_role" {
   ]
 
   tags = local.default_tags
-}
-
-resource "aws_iam_policy" "main" {
-  name        = "IPFSS3-${local.namespace}"
-  path        = "/"
-  description = "Allows get, list, and put access for IPFS S3 repo storage"
-
-  policy = templatefile("${path.module}/templates/s3_policy.json.tpl", {
-    resource  = var.s3_bucket_arn
-    directory = var.directory_namespace
-  })
 }
 
 module "ecs_task_execution_role" {
