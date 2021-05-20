@@ -65,7 +65,7 @@ resource "aws_ecs_task_definition" "main" {
       dht_server_mode       = var.dht_server_mode
       debug                 = var.debug
 
-      s3_bucket_name       = module.s3_ipfs.this_s3_bucket_id
+      s3_bucket_name       = var.s3_bucket_name
       s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
       s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
     }
@@ -80,4 +80,8 @@ resource "aws_ecs_task_definition" "main" {
   memory                   = var.ecs_memory
 
   tags = local.default_tags
+}
+
+data "aws_ecs_cluster" "main" {
+  cluster_name = var.ecs_cluster_name
 }

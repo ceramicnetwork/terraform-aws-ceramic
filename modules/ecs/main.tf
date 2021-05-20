@@ -1,41 +1,49 @@
 module "ceramic" {
   source = "./ceramic"
 
-  aws_region             = var.aws_region
-  cors_allowed_origins   = var.ceramic_cors_allowed_origins
-  namespace              = "ceramic-${var.env}-${var.base_namespace}"
-  network                = var.env
-  eth_rpc_url            = var.ceramic_eth_rpc_url
+  acm_certificate_arn    = var.acm_certificate_arn
   anchor_service_api_url = var.ceramic_anchor_service_api_url
-  private_subnet_ids     = var.private_subnet_ids
-  ssl_certificate_arn    = var.ssl_certificate_arn
-  vpc_security_group_id  = var.vpc_security_group_id
-  vpc_id                 = var.vpc_id
-  env                    = var.env
-  vpc_cidr_block         = var.vpc_cidr_block
-  efs_logs_fs_id         = var.ceramic_efs_logs_fs_id
-  efs_logs_volume_name   = var.ceramic_efs_logs_volume_name
-  ecs_log_group_name     = aws_cloudwatch_log_group.ceramic.name
-  public_subnet_ids      = var.public_subnet_ids
-  ecs_cpu                = var.ceramic_cpu
-  image_tag              = var.image_tag
+  aws_region             = var.aws_region
+  base_tags              = var.default_tags
+  ceramic_network        = var.ceramic_network
+  cors_allowed_origins   = var.ceramic_cors_allowed_origins
   ecs_cluster_name       = var.ecs_cluster_name
-  service_name           = "ceramic-${var.env}-${var.base_namespace}-node"
-  task_count             = var.ceramic_task_count
-  default_tags           = var.default_tags
+  ecs_service_name       = "${local.namespace}-node"
+  ecs_count              = var.ceramic_task_count
+  ecs_cpu                = var.ceramic_cpu
+  efs_logs_fs_id         = var.ceramic_efs_logs_fs_id
+  efs_logs_fs_name       = var.ceramic_efs_logs_fs_name
+  ecs_log_group_name     = aws_cloudwatch_log_group.ceramic.name
+  ecs_memory             = var.ceramic_memory
+  env                    = var.env
+  eth_rpc_url            = var.ceramic_eth_rpc_url
+  image_tag              = var.image_tag
+  ipfs_api_url           = module.ipfs.api_url_internal
+  namespace              = "${local.namespace}-node"
+  private_subnet_ids     = var.private_subnet_ids
+  public_subnet_ids      = var.public_subnet_ids
+  s3_bucket_arn          = data.aws_s3_bucket.main.arn
+  s3_bucket_name         = data.aws_s3_bucket.main.id
+  vpc_cidr_block         = var.vpc_cidr_block
+  vpc_id                 = var.vpc_id
+  vpc_security_group_id  = var.vpc_security_group_id
 }
 
 module "ipfs" {
   source = "./ipfs"
 
-  acm_certificate_arn     = var.ssl_certificate_arn
+  acm_certificate_arn     = var.acm_certificate_arn
   aws_region              = var.aws_region
-  az_count                = var.az_count
-  namespace               = "ceramic-${var.env}-${var.base_namespace}-ipfs"
   base_tags               = var.default_tags
-  debug                   = true
+  debug                   = var.ipfs_debug_env_var
   dht_server_mode         = false
-  domain                  = ""
+  domain                  = var.ipfs_domain_name
+  ecs_cluster_name        = var.ecs_cluster_name
+  ecs_service_name        = "${local.namespace}-ipfs-nd"
+  ecs_count               = var.ipfs_task_count
+  ecs_cpu                 = var.ipfs_cpu
+  ecs_log_group_name      = aws_cloudwatch_log_group.ceramic.name
+  ecs_memory              = var.ipfs_memory
   enable_external_api     = false
   enable_internal_api     = true
   enable_external_gateway = false
@@ -43,15 +51,12 @@ module "ipfs" {
   enable_internal_swarm   = true
   enable_pubsub           = true
   env                     = var.env
-  ecs_cluster_name        = var.ecs_cluster_name
-  ecs_service_name        = "ceramic-${var.env}-${var.base_namespace}-ipfs"
-  ecs_count               = var.ipfs_task_count
-  ecs_cpu                 = var.ipfs_cpu
-  ecs_memory              = var.ipfs_ecs_memory
-  ecs_log_group_name      = aws_cloudwatch_log_group.ceramic.name
   image_tag               = var.image_tag
+  namespace               = "${local.namespace}-ipfs-nd"
   private_subnet_ids      = var.private_subnet_ids
   public_subnet_ids       = var.public_subnet_ids
+  s3_bucket_arn           = data.aws_s3_bucket.main.arn
+  s3_bucket_name          = data.aws_s3_bucket.main.id
   use_ssl                 = true
   vpc_cidr_block          = var.vpc_cidr_block
   vpc_id                  = var.vpc_id
@@ -59,7 +64,11 @@ module "ipfs" {
 }
 
 resource "aws_cloudwatch_log_group" "ceramic" {
-  name              = "/ecs/ceramic-${var.env}-${var.base_namespace}"
+  name              = "/ecs/${local.namespace}"
   retention_in_days = 400
   tags              = var.default_tags
+}
+
+data "aws_s3_bucket" "main" {
+  bucket = var.s3_bucket_name
 }
