@@ -7,6 +7,7 @@ module "ceramic" {
   base_tags              = var.default_tags
   ceramic_network        = var.ceramic_network
   cors_allowed_origins   = var.ceramic_cors_allowed_origins
+  directory_namespace    = local.namespace
   ecs_cluster_name       = var.ecs_cluster_name
   ecs_service_name       = "${local.namespace}-node"
   ecs_count              = var.ceramic_task_count
@@ -37,6 +38,7 @@ module "ipfs" {
   base_tags               = var.default_tags
   debug                   = var.ipfs_debug_env_var
   dht_server_mode         = false
+  directory_namespace     = local.namespace
   domain                  = var.ipfs_domain_name
   ecs_cluster_name        = var.ecs_cluster_name
   ecs_service_name        = "${local.namespace}-ipfs-nd"
