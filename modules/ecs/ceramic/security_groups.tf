@@ -17,7 +17,7 @@ resource "aws_security_group" "efs" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = var.default_tags
+  tags = local.default_tags
 }
 
 module "ecs_security_group" {
