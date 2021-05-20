@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.5](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.0.4...1.0.5) (2021-05-20)
+
+- fix: use resource for s3 list bucket [`569b8ad`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/569b8ad97660fe85ec554719ac8acd39f0873dec)
+- chore: release v1.0.5 [`c1a98f3`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/c1a98f39137448c610315cf22c1f0bacfeaaea4c)
+
 ## [1.0.4](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.0.3...1.0.4) (2021-05-20)
 
 - fix: uncomment iam groups [`5cca912`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/5cca9126d139c517d3129971fd7f9c12783152e1)
