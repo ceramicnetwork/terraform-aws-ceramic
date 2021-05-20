@@ -28,7 +28,7 @@ pre-commit install
 
 We are using [release-it](https://github.com/release-it/release-it) to do releases and following [semver](https://semver.org/) versioning.
 
-Releases must be merged into the main branch.
+Note: Release commits must be merged into the main branch.
 
 ```shell
 npm install --global release-it
