@@ -2,8 +2,7 @@
     "git": {
         "commitMessage": "chore: release v${version}",
         "commitArgs": [
-            "--no-verify",
-            "--allow-empty"
+            "--no-verify"
         ],
         "changelog": "npx auto-changelog --stdout --commit-limit false --unreleased --template https://raw.githubusercontent.com/release-it/release-it/master/templates/changelog-compact.hbs"
     },
