@@ -1,11 +1,3 @@
-provider "aws" {
-  region = var.aws_region
-}
-
-data "aws_ecs_cluster" "main" {
-  cluster_name = var.ecs_cluster_name
-}
-
 resource "aws_ecs_service" "main" {
   count = 1
 

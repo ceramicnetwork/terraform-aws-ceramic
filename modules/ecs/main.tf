@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.aws_region
-}
-
 module "ceramic" {
   source = "./ceramic"
 
