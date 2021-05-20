@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.3](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.0.2...1.0.3) (2021-05-20)
+
+- fix: add iam groups [`f7dcb85`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/f7dcb85ee6964d664eacc39188ca6aedfe07a10b)
+- chore: release v1.0.3 [`c19da10`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/c19da10beac7a665863bfa4d3dfc2de7f92fc99e)
+- docs: add note about release dir [`4063698`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/4063698cd790d1cc6230c39e0f2e4075313de037)
+
 ## [1.0.2](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.0.1...1.0.2) (2021-05-20)
 
 - chore: release v1.0.2 [`acdfec7`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/acdfec7dc57ef08ba3d5a46d225679dcdc90f51d)
