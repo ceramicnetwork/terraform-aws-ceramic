@@ -1,9 +1,9 @@
 [
     {
-        "name": "${name}",
+        "name": "${container_name}",
         "image": "${ceramic_image}",
-        "cpu": ${ecs_cpu},
-        "memory": ${ceramic_memory},
+        "cpu": ${cpu},
+        "memory": ${memory},
         "ulimits": [
             {
                 "name": "nofile",
@@ -19,16 +19,18 @@
         ],
         "command": [
             "--port", "${ceramic_port}",
-            "--network", "${network}",
+            "--hostname",  "0.0.0.0",
+            "--network", "${ceramic_network}",
+            "--ipfs-api", "${ipfs_api_url}",
             "--anchor-service-api", "${anchor_service_api_url}",
-            "--ethereum-rpc", "${eth_rpc_url}",
-            "--gateway", "${gateway}",
             "--debug", "${debug}",
-            "--verbose", "${verbose}",
             "--log-to-files", "true",
             "--log-directory", "/usr/local/var/log/${directory_namespace}",
             "--cors-allowed-origins", "${cors_allowed_origins}",
-            "--state-store-s3-bucket", "${s3_state_store_bucket_name}/${directory_namespace}"
+            "--ethereum-rpc", "${eth_rpc_url}",
+            "--state-store-s3-bucket", "${s3_state_store_bucket_name}/${directory_namespace}",
+            "--verbose", "${verbose}",
+            "--gateway", "${gateway}"
         ],
         "portMappings": [
             {

@@ -1,6 +1,4 @@
 resource "aws_ecs_service" "main" {
-  count = 1
-
   platform_version = "1.4.0"
   name             = var.ecs_service_name
   cluster          = var.ecs_cluster_name
