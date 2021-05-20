@@ -174,7 +174,7 @@ resource "aws_lb_target_group" "swarm_ws" {
 
 module "alb_internal" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 6.0"
+  version = "~> 5.0"
 
   count = 1
 

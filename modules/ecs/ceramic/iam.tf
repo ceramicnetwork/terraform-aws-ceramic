@@ -1,6 +1,6 @@
 module "s3_ceramic_state_store_task_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
-  version = "~> 3.0"
+  version = "3.0"
 
   name = "${local.namespace}-s3CeramicStateStoreTask"
 
@@ -13,7 +13,7 @@ module "s3_ceramic_state_store_task_user" {
 
 module "ecs_efs_task_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 4.1.0"
+  version = "2.22.0"
 
   trusted_role_services = [
     "ecs-tasks.amazonaws.com"
@@ -33,7 +33,7 @@ module "ecs_efs_task_role" {
 
 module "ecs_task_execution_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 4.1.0"
+  version = "2.22.0"
 
   trusted_role_services = [
     "ecs-tasks.amazonaws.com"
@@ -48,7 +48,6 @@ module "ecs_task_execution_role" {
     "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
     "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
   ]
-  number_of_custom_role_policy_arns = 2
 
   tags = local.default_tags
 }

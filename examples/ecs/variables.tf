@@ -5,34 +5,9 @@ variable "aws_region" {
   description = "AWS region. Must match region of vpc_id and public_subnet_ids."
 }
 
-variable "az_count" {
-  type        = number
-  description = "Number of availability zones to use"
-}
-
-variable "vpc_security_group_id" {
+variable "acm_certificate_arn" {
   type        = string
-  description = "VPC security group id"
-}
-
-variable "vpc_id" {
-  type        = string
-  description = "Id of VPC"
-}
-
-variable "vpc_cidr_block" {
-  type        = string
-  description = "Default CIDR block of the VPC"
-}
-
-variable "private_subnet_ids" {
-  type        = list(string)
-  description = "List of private subnet ids for the VPC"
-}
-
-variable "public_subnet_ids" {
-  type        = list(string)
-  description = "List of ALB subnet ids"
+  description = "ARN of ACM SSL certificate"
 }
 
 variable "base_namespace" {
@@ -40,14 +15,39 @@ variable "base_namespace" {
   description = "Base namespace"
 }
 
-variable "ssl_certificate_arn" {
-  type        = string
-  description = "ARN of SSL certificate"
+variable "cohort" {
+  type        = number
+  description = "Cohort number used for namespacing"
 }
 
 variable "default_tags" {
   type        = map(any)
   description = "Tags"
+}
+
+variable "deployments" {
+  type        = number
+  description = "Number of deployments of the module"
+}
+
+variable "domain_name" {
+  type        = string
+  description = "Domain name for ACM SSL certificate. Including TLD."
+}
+
+variable "ecs_cluster_name" {
+  type        = string
+  description = "Name of ECS cluster"
+}
+
+variable "eth_network" {
+  type        = map(string)
+  description = "Ethereum network"
+  default = {
+    dev  = "ropsten"
+    tnet = "ropsten"
+    prod = "mainnet"
+  }
 }
 
 variable "env" {
@@ -60,32 +60,46 @@ variable "image_tag" {
   description = "Image tag"
 }
 
-variable "ecs_cluster_name" {
+variable "private_subnet_ids" {
+  type        = list(string)
+  description = "List of private subnet ids for the VPC"
+}
+
+variable "public_subnet_ids" {
+  type        = list(string)
+  description = "List of ALB subnet ids"
+}
+
+variable "s3_bucket_name" {
   type        = string
-  description = "Name of ECS cluster"
+  description = "Name of S3 bucket to use as a backend for Ceramic and IPFS"
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "Id of VPC"
+}
+
+variable "vpc_cidr_block" {
+  type        = string
+  description = "Default CIDR block of the VPC"
+}
+
+variable "vpc_security_group_id" {
+  type        = string
+  description = "VPC security group id"
 }
 
 /***** Ceramic *****/
-
-variable "ceramic_cors_allowed_origins" {
-  type        = string
-  description = "Web browser CORS allowed origins"
-}
 
 variable "ceramic_anchor_service_api_url" {
   type        = string
   description = "URL for Ceramic Anchor Service API"
 }
 
-variable "ceramic_eth_rpc_url" {
+variable "ceramic_cors_allowed_origins" {
   type        = string
-  description = "Ethereum RPC URL. Must match anchor service ETH network"
-}
-
-variable "ceramic_task_count" {
-  type        = number
-  description = "Number of Ceramic ECS tasks to run in the ECS service"
-  default     = 1
+  description = "Web browser CORS allowed origins"
 }
 
 variable "ceramic_cpu" {
@@ -94,19 +108,58 @@ variable "ceramic_cpu" {
   default     = 1024 # 1024 = 1 vCPU
 }
 
+variable "ceramic_env" {
+  type        = string
+  description = "Optional. Environment namespace for Ceramic"
+  default     = ""
+}
+
+variable "ceramic_eth_rpc_url" {
+  type        = string
+  description = "Ethereum RPC URL. Must match anchor service ETH network"
+}
+
 variable "ceramic_efs_logs_fs_id" {
   type        = string
   description = "ID of EFS volume for Ceramic logs"
 }
 
-variable "ceramic_efs_logs_volume_name" {
+variable "ceramic_efs_logs_fs_name" {
   type        = string
   description = "Name of EFS volume for Ceramic logs"
 }
 
+variable "ceramic_memory" {
+  type        = number
+  description = "Memory allocation per Ceramic daemon ECS task"
+  default     = 2048 # 2048 = 2 GB
+}
+
+variable "ceramic_network" {
+  type        = string
+  description = "Ceramic network"
+}
+
+variable "ceramic_task_count" {
+  type        = number
+  description = "Number of Ceramic ECS tasks to run in the ECS service"
+  default     = 1
+}
+
 /***** IPFS *****/
 
-variable "ipfs_ecs_memory" {
+variable "ipfs_cpu" {
+  type        = number
+  description = "vCPU units to allocate to the IPFS ECS task"
+  default     = 1024 # 1024 = 1 vCPU
+}
+
+variable "ipfs_debug_env_var" {
+  type        = string
+  description = "Value of DEBUG env var"
+}
+
+variable "ipfs_memory" {
   type        = number
   description = "Memory allocation per IPFS API instance"
   default     = 8192
@@ -116,10 +169,4 @@ variable "ipfs_task_count" {
   type        = number
   description = "Number of IPFS ECS tasks to run in the ECS service"
   default     = 1
-}
-
-variable "ipfs_cpu" {
-  type        = number
-  description = "vCPU units to allocate to the IPFS ECS task"
-  default     = 1024 # 1024 = 1 vCPU
 }

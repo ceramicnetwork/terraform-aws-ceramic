@@ -1,14 +1,4 @@
-provider "aws" {
-  region = var.aws_region
-}
-
-data "aws_ecs_cluster" "main" {
-  cluster_name = var.ecs_cluster_name
-}
-
 resource "aws_ecs_service" "main" {
-  count = 1
-
   platform_version = "1.4.0"
   name             = var.ecs_service_name
   cluster          = var.ecs_cluster_name
@@ -73,14 +63,14 @@ resource "aws_ecs_task_definition" "main" {
       dht_server_mode       = var.dht_server_mode
       debug                 = var.debug
 
-      s3_bucket_name       = module.s3_ipfs.this_s3_bucket_id
+      s3_bucket_name       = var.s3_bucket_name
       s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
       s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
     }
   )
 
-  execution_role_arn = module.ecs_task_execution_role.iam_role_arn
-  task_role_arn      = module.ecs_ipfs_task_role.iam_role_arn
+  execution_role_arn = module.ecs_task_execution_role.this_iam_role_arn
+  task_role_arn      = module.ecs_ipfs_task_role.this_iam_role_arn
   network_mode       = "awsvpc"
 
   requires_compatibilities = ["FARGATE"]
@@ -88,4 +78,8 @@ resource "aws_ecs_task_definition" "main" {
   memory                   = var.ecs_memory
 
   tags = local.default_tags
+}
+
+data "aws_ecs_cluster" "main" {
+  cluster_name = var.ecs_cluster_name
 }

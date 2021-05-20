@@ -1,8 +1,8 @@
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 6.0"
+  version = "~> 5.0"
 
-  name = var.namespace
+  name = local.namespace
 
   load_balancer_type = "application"
 
@@ -12,7 +12,7 @@ module "alb" {
   idle_timeout    = 3600
 
   access_logs = {
-    bucket = data.aws_s3_bucket.alb.id
+    bucket = module.s3_alb.this_s3_bucket_id
   }
 
   target_groups = [
@@ -50,14 +50,10 @@ module "alb" {
     {
       port               = 443
       protocol           = "HTTPS"
-      certificate_arn    = var.ssl_certificate_arn
+      certificate_arn    = var.acm_certificate_arn
       target_group_index = 0
     }
   ]
 
-  tags = var.default_tags
-}
-
-data "aws_lb" "main" {
-  arn = module.alb.lb_arn
+  tags = local.default_tags
 }

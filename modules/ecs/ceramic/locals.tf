@@ -1,11 +1,12 @@
 locals {
-  default_tags = var.default_tags
-  namespace    = var.namespace
+  default_tags   = var.base_tags
+  namespace      = var.namespace
+  container_name = "ceramic_node"
   dynamic_load_balancers = concat(
     [
       {
         target_group_arn = module.alb.target_group_arns[0]
-        container_name   = "ceramic-node"
+        container_name   = local.container_name
         container_port   = var.ceramic_port
       }
     ],

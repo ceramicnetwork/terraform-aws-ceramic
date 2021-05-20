@@ -1,6 +1,6 @@
 module "ecs_ipfs_task_user" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-user"
-  version = "~> 3.0"
+  version = "3.0"
 
   name = "ecsIpfsTask-${local.namespace}"
 
@@ -13,7 +13,7 @@ module "ecs_ipfs_task_user" {
 
 module "ecs_ipfs_task_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 4.1.0"
+  version = "2.22.0"
 
   trusted_role_services = [
     "ecs-tasks.amazonaws.com"
@@ -37,20 +37,15 @@ resource "aws_iam_policy" "main" {
   path        = "/"
   description = "Allows get, list, and put access for IPFS S3 repo storage"
 
-  policy = data.template_file.s3_policy.rendered
-}
-
-data "template_file" "s3_policy" {
-  template = file("${path.module}/templates/s3_policy.json.tpl")
-
-  vars = {
-    resource = module.s3_ipfs.this_s3_bucket_arn
-  }
+  policy = templatefile("${path.module}/templates/s3_policy.json.tpl", {
+    resource  = var.s3_bucket_arn
+    directory = var.directory_namespace
+  })
 }
 
 module "ecs_task_execution_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version = "~> 4.1.0"
+  version = "2.22.0"
 
   trusted_role_services = [
     "ecs-tasks.amazonaws.com"
@@ -65,7 +60,6 @@ module "ecs_task_execution_role" {
     "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy",
     "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
   ]
-  number_of_custom_role_policy_arns = 2
 
   tags = local.default_tags
 }
