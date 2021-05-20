@@ -41,10 +41,14 @@ export AWS_DEFAULT_REGION=us-east-1
 
 We are using [release-it](https://github.com/release-it/release-it) to do releases and following [semver](https://semver.org/) versioning.
 
-Note: Release commits must be merged into the main branch.
+**Notes:**
+- Releases must be made from the repository root directory to properly update CHANGELOG.md
+- Release commits must be merged into the main branch
 
 ```shell
 npm install --global release-it
+cd terraform-aws-ceramic
 release-it --dry-run
 release-it
 ```
+
