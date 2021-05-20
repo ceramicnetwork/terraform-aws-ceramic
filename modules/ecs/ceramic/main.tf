@@ -12,8 +12,8 @@ resource "aws_ecs_service" "main" {
     security_groups = [
       var.vpc_security_group_id,
       aws_security_group.efs.id,
-      module.ecs_security_group.security_group_id,
-      module.ceramic_security_group.security_group_id
+      module.ecs_security_group.this_security_group_id,
+      module.ceramic_security_group.this_security_group_id
     ]
     subnets = var.private_subnet_ids
   }
@@ -60,8 +60,8 @@ resource "aws_ecs_task_definition" "main" {
     verbose                    = var.enable_verbose
   })
 
-  execution_role_arn = module.ecs_task_execution_role.iam_role_arn
-  task_role_arn      = module.ecs_efs_task_role.iam_role_arn
+  execution_role_arn = module.ecs_task_execution_role.this_iam_role_arn
+  task_role_arn      = module.ecs_efs_task_role.this_iam_role_arn
   network_mode       = "awsvpc"
 
   requires_compatibilities = ["FARGATE"]
