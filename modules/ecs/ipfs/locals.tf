@@ -10,8 +10,8 @@ locals {
   swarm_ws_port    = 4012
 
   announce_address_list = var.use_ssl ? "/dns4/${local.domain_name_external}/tcp/${local.swarm_ws_port}/wss" : "/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_ws_port}/ws"
-  domain_name_external  = "${local.namespace}-external.${var.domain}"
-  domain_name_internal  = "${local.namespace}-internal.${var.domain}"
+  domain_name_external  = "ipfs-${var.base_namespace}-external.${var.domain}"
+  domain_name_internal  = "ipfs-${var.base_namespace}-internal.${var.domain}"
 
   api_lb_external = var.enable_external_api ? [
     {

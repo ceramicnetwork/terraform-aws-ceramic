@@ -10,6 +10,11 @@ variable "aws_region" {
   description = "AWS region"
 }
 
+variable "base_namespace" {
+  type        = string
+  description = "Base namespace"
+}
+
 variable "base_tags" {
   type        = any
   description = "Tags to merge with local defaults"

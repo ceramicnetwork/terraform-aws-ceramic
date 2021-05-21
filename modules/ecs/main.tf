@@ -36,6 +36,7 @@ module "ipfs" {
   acm_certificate_arn     = var.acm_certificate_arn
   aws_region              = var.aws_region
   base_tags               = var.default_tags
+  base_namespace          = local.namespace
   debug                   = var.ipfs_debug_env_var
   dht_server_mode         = false
   directory_namespace     = local.namespace
