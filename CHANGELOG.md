@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.0.1](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.0...2.0.1) (2021-05-21)
+
+- chore: release v2.0.1 [`e4f7c17`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/e4f7c170991606a6773172a5dc2fc99c5727d50f)
+- fix: remove gateway flag from ceramic [`2bcbe06`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/2bcbe061278ab05761681b2155f7507fcc6175c9)
+
+## [2.0.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.1.0...2.0.0) (2021-05-21)
+
+- feat: update ipfs subdomains [`66743d0`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/66743d052bcd8f0b0c171aeaed48c72923ebf7a9)
+- chore: release v2.0.0 [`205726e`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/205726efe3c415832c8bffc15d4dd65887badbc9)
+
 ## [1.1.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.0.5...1.1.0) (2021-05-20)
 
 - feat: output ceramic dns name [`205a0a4`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/205a0a4aad41df21264cc048e456e597bcc71be0)
