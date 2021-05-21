@@ -41,18 +41,19 @@ resource "aws_ecs_task_definition" "main" {
   container_definitions = templatefile(
     "${path.module}/templates/container_definitions.json.tpl",
     {
-      cpu                 = var.ecs_cpu
-      env                 = var.env
-      image               = data.docker_registry_image.ipfs.name
-      log_group           = var.ecs_log_group_name
-      log_stream_prefix   = var.ecs_log_prefix
-      memory              = var.ecs_memory
-      region              = var.aws_region
-      enable_api          = true
+      cpu               = var.ecs_cpu
+      env               = var.env
+      image             = data.docker_registry_image.ipfs.name
+      log_group         = var.ecs_log_group_name
+      log_stream_prefix = var.ecs_log_prefix
+      memory            = var.ecs_memory
+      region            = var.aws_region
+
+      ceramic_network     = var.ceramic_network
       directory_namespace = var.directory_namespace
+      enable_api          = true
       enable_gateway      = true
-      # enable_gateway     = var.enable_external_gateway || var.enable_internal_gateway
-      enable_pubsub = var.enable_pubsub
+      enable_pubsub       = var.enable_pubsub
 
       api_port              = local.api_port
       gateway_port          = local.gateway_port

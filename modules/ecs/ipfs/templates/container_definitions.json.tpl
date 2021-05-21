@@ -39,6 +39,10 @@
                 "value": "${s3_secret_access_key}"
             },
             {
+                "name": "CERAMIC_NETWORK",
+                "value": "${ceramic_network}"
+            },
+            {
                 "name": "DEBUG",
                 "value": "${debug}"
             },
@@ -57,6 +61,26 @@
             {
                 "name": "IPFS_API_TIMEOUT",
                 "value": "120000"
+            },
+            {
+                "name": "IPFS_BACKEND_ROOT",
+                "value": "s3"
+            },
+            {
+                "name": "IPFS_BACKEND_BLOCKS",
+                "value": "s3"
+            },
+            {
+                "name": "IPFS_BACKEND_KEYS",
+                "value": "s3"
+            },
+            {
+                "name": "IPFS_BACKEND_PINS",
+                "value": "s3"
+            },
+            {
+                "name": "IPFS_BACKEND_DATASTORE",
+                "value": "s3"
             },
             {
                 "name": "IPFS_ENABLE_API",

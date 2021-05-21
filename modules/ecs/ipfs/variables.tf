@@ -20,6 +20,11 @@ variable "base_tags" {
   description = "Tags to merge with local defaults"
 }
 
+variable "ceramic_network" {
+  type        = string
+  description = "Ceramic network for IPFS pubsub"
+}
+
 variable "domain" {
   type        = string
   description = "Domain for certificate"
