@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.2](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.1...2.0.2) (2021-05-21)
+
+- chore: release v2.0.2 [`1425bfc`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/1425bfcb30aee8e26029ab2952492c256c37168a)
+- fix: remove gateway flag from ceramic [`a70cce2`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/a70cce23e72a8564631c2a58538c48c17bbb0514)
+- docs: update example version number [`3cc786a`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/3cc786a553fc5bc51d27f0c0e924d541ac6c664a)
+
 ## [2.0.1](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.0...2.0.1) (2021-05-21)
 
 - chore: release v2.0.1 [`e4f7c17`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/e4f7c170991606a6773172a5dc2fc99c5727d50f)
