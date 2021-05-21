@@ -11,7 +11,7 @@ There is no root module available for use. Instead use one of the submodules lik
 ```
 module "ceramic" {
   source  = "ceramicnetwork/ceramic/aws//modules/ecs"
-  version = "0.0.1"
+  version = "2.0.0"
   # insert variables here
 }
 ```
