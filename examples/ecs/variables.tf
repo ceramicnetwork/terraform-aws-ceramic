@@ -148,6 +148,12 @@ variable "ceramic_task_count" {
 
 /***** IPFS *****/
 
+variable "ipfs_ceramic_network" {
+  type        = string
+  description = "Ceramic network to pass to IPFS"
+  default     = ""
+}
+
 variable "ipfs_cpu" {
   type        = number
   description = "vCPU units to allocate to the IPFS ECS task"

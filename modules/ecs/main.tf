@@ -37,7 +37,7 @@ module "ipfs" {
   aws_region              = var.aws_region
   base_tags               = var.default_tags
   base_namespace          = local.namespace
-  ceramic_network         = var.ceramic_network # not strictly necessary when used with js-ceramic
+  ceramic_network         = var.ipfs_ceramic_network
   debug                   = var.ipfs_debug_env_var
   dht_server_mode         = false
   directory_namespace     = local.namespace
