@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.0.3](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.2...2.0.3) (2021-05-21)
+
+- fix: use s3 for ipfs backends [`9f280bc`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/9f280bc748d4d89e758dc5ad16e9cc8a5d1e6b41)
+- chore: release v2.0.3 [`37f013e`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/37f013e47a460e23cdca2c058af5a51516decd7e)
+
 ## [2.0.2](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.1...2.0.2) (2021-05-21)
 
 - chore: release v2.0.2 [`1425bfc`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/1425bfcb30aee8e26029ab2952492c256c37168a)
