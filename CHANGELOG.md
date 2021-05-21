@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.0.5...1.1.0) (2021-05-20)
+
+- feat: output ceramic dns name [`205a0a4`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/205a0a4aad41df21264cc048e456e597bcc71be0)
+- chore: release v1.1.0 [`6fab5c2`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/6fab5c219e0c249ab88ee07e0c40348709218d2c)
+
 ## [1.0.5](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/1.0.4...1.0.5) (2021-05-20)
 
 - fix: use resource for s3 list bucket [`569b8ad`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/569b8ad97660fe85ec554719ac8acd39f0873dec)
