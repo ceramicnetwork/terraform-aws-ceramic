@@ -29,8 +29,7 @@
             "--cors-allowed-origins", "${cors_allowed_origins}",
             "--ethereum-rpc", "${eth_rpc_url}",
             "--state-store-s3-bucket", "${s3_state_store_bucket_name}/${directory_namespace}",
-            "--verbose", "${verbose}",
-            "--gateway", "${gateway}"
+            "--verbose", "${verbose}"
         ],
         "portMappings": [
             {
