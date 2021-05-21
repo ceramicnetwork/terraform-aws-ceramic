@@ -45,7 +45,6 @@ resource "aws_ecs_task_definition" "main" {
     directory_namespace        = var.directory_namespace
     env                        = var.env
     eth_rpc_url                = var.eth_rpc_url
-    gateway                    = false
     ipfs_api_url               = var.ipfs_api_url
     log_group                  = var.ecs_log_group_name
     log_stream_prefix          = var.ecs_log_prefix
