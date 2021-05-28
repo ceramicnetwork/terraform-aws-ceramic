@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.0.4](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.3...2.0.4) (2021-05-21)
+
+- feat: optionally pass ceramic network to ipfs [`7576971`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/7576971933c1dfb987542112c12a31e7436a86ac)
+- chore: release v2.0.4 [`c8051cf`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/c8051cf81e0c24d40688ff69dce3f4ede3b7bb6b)
+
 ## [2.0.3](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.2...2.0.3) (2021-05-21)
 
 - fix: use s3 for ipfs backends [`9f280bc`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/9f280bc748d4d89e758dc5ad16e9cc8a5d1e6b41)
