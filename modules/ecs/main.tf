@@ -39,7 +39,7 @@ module "ipfs" {
   base_namespace          = local.namespace
   ceramic_network         = var.ipfs_ceramic_network
   debug                   = var.ipfs_debug_env_var
-  dht_server_mode         = false
+  dht_server_mode         = true
   directory_namespace     = local.namespace
   domain                  = var.ipfs_domain_name
   ecs_cluster_name        = var.ecs_cluster_name
@@ -51,7 +51,7 @@ module "ipfs" {
   enable_external_api     = false
   enable_internal_api     = true
   enable_external_gateway = false
-  enable_internal_gateway = true
+  enable_internal_gateway = false
   enable_internal_swarm   = true
   enable_pubsub           = true
   env                     = var.env
