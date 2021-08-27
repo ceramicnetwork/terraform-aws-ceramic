@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.1.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.4...2.1.0) (2021-05-28)
+
+- chore: release v2.1.0 [`c75291a`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/c75291a8aef8253440a3724a2d86d7c56278bdf4)
+- feat: disable ipfs gateway and enable dht server mode [`dc89005`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/dc89005baa45d15beb68b0297f7301466df376d4)
+
 ## [2.0.4](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.3...2.0.4) (2021-05-21)
 
 - feat: optionally pass ceramic network to ipfs [`7576971`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/7576971933c1dfb987542112c12a31e7436a86ac)
