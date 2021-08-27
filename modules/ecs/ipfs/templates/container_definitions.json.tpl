@@ -107,10 +107,6 @@
                 "value": "${directory_namespace}/ipfs"
             },
             {
-                "name": "IPFS_S3_REPO_ENABLED",
-                "value": "true"
-            },
-            {
                 "name": "IPFS_SWARM_TCP_PORT",
                 "value": "${swarm_port}"
             },
