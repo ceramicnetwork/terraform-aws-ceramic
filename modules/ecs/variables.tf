@@ -74,7 +74,8 @@ variable "ceramic_anchor_service_api_url" {
 
 variable "ceramic_cors_allowed_origins" {
   type        = string
-  description = "Web browser CORS allowed origins"
+  description = "Web browser CORS allowed origins as stringified regex"
+  default = ".*"
 }
 
 variable "ceramic_cpu" {
