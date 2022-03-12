@@ -116,6 +116,11 @@ variable "vpc_security_group_id" {
 
 /* Specified */
 
+variable "enable_alb_logging" {
+  type        = bool
+  description = "True to create an S3 bucket to store ALB logs"
+}
+
 variable "enable_external_api" {
   type        = bool
   description = "True to enable IPFS API on external ALB"
