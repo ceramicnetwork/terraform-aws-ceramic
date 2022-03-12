@@ -144,7 +144,7 @@ variable "ipfs_domain_name" {
 variable "ipfs_enable_alb_logging" {
   type        = bool
   description = "True to enable ALB logs (stored in a new S3 bucket)"
-  default     = false
+  default     = true
 }
 
 variable "ipfs_memory" {
