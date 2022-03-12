@@ -141,6 +141,12 @@ variable "ipfs_domain_name" {
   description = "Domain name, including TLD"
 }
 
+variable "ipfs_enable_alb_logging" {
+  type        = bool
+  description = "True to create an S3 bucket to store ALB logs"
+  default     = false
+}
+
 variable "ipfs_memory" {
   type        = number
   description = "Memory allocation per IPFS API instance"
