@@ -2,7 +2,7 @@ module "s3_alb" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "1.25.0"
 
-  create_bucket = true
+  create_bucket = var.enable_alb_logging
 
   bucket = "${local.namespace}-alb.logs"
   acl    = "private"
