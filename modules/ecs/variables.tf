@@ -75,7 +75,7 @@ variable "ceramic_anchor_service_api_url" {
 variable "ceramic_cors_allowed_origins" {
   type        = string
   description = "Web browser CORS allowed origins as stringified regex"
-  default = ".*"
+  default     = ".*"
 }
 
 variable "ceramic_cpu" {
@@ -143,7 +143,7 @@ variable "ipfs_domain_name" {
 
 variable "ipfs_enable_alb_logging" {
   type        = bool
-  description = "True to create an S3 bucket to store ALB logs"
+  description = "True to enable ALB logs (stored in a new S3 bucket)"
   default     = false
 }
 

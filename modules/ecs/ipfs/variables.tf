@@ -118,7 +118,7 @@ variable "vpc_security_group_id" {
 
 variable "enable_alb_logging" {
   type        = bool
-  description = "True to create an S3 bucket to store ALB logs"
+  description = "True to enable ALB logs (stored in a new S3 bucket)"
 }
 
 variable "enable_external_api" {
