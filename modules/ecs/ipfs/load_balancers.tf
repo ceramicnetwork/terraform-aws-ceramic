@@ -12,7 +12,7 @@ resource "aws_lb" "external" {
   access_logs {
     bucket  = module.s3_alb.this_s3_bucket_id
     prefix  = "external"
-    enabled = true
+    enabled = var.enable_alb_logging
   }
 
   tags = local.default_tags

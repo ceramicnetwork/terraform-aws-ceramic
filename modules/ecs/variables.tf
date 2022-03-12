@@ -1,4 +1,4 @@
-/***** Common *****/
+/* Common */
 
 variable "acm_certificate_arn" {
   type        = string
@@ -65,7 +65,7 @@ variable "vpc_cidr_block" {
   description = "Default CIDR block of the VPC"
 }
 
-/***** Ceramic *****/
+/* Ceramic */
 
 variable "ceramic_anchor_service_api_url" {
   type        = string
@@ -75,7 +75,7 @@ variable "ceramic_anchor_service_api_url" {
 variable "ceramic_cors_allowed_origins" {
   type        = string
   description = "Web browser CORS allowed origins as stringified regex"
-  default = ".*"
+  default     = ".*"
 }
 
 variable "ceramic_cpu" {
@@ -139,6 +139,12 @@ variable "ipfs_debug_env_var" {
 variable "ipfs_domain_name" {
   type        = string
   description = "Domain name, including TLD"
+}
+
+variable "ipfs_enable_alb_logging" {
+  type        = bool
+  description = "True to enable ALB logs (stored in a new S3 bucket)"
+  default     = true
 }
 
 variable "ipfs_memory" {
