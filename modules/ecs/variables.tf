@@ -1,4 +1,4 @@
-/***** Common *****/
+/* Common */
 
 variable "acm_certificate_arn" {
   type        = string
@@ -65,7 +65,7 @@ variable "vpc_cidr_block" {
   description = "Default CIDR block of the VPC"
 }
 
-/***** Ceramic *****/
+/* Ceramic */
 
 variable "ceramic_anchor_service_api_url" {
   type        = string
