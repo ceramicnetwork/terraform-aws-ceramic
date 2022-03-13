@@ -62,6 +62,11 @@ module "ipfs" {
   public_subnet_ids       = var.public_subnet_ids
   s3_bucket_arn           = data.aws_s3_bucket.main.arn
   s3_bucket_name          = data.aws_s3_bucket.main.id
+  root_backend            = var.ipfs_root_backend
+  blocks_backend          = var.ipfs_blocks_backend
+  datstore_backend        = var.ipfs_datastore_backend
+  keys_backend            = var.ipfs_keys_backend
+  pins_backend            = var.ipfs_pins_backend
   use_ssl                 = true
   vpc_cidr_block          = var.vpc_cidr_block
   vpc_id                  = var.vpc_id

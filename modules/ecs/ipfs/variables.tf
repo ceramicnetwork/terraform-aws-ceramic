@@ -171,3 +171,28 @@ variable "image_tag" {
   type        = string
   description = "Image tag"
 }
+
+variable "root_backend" {
+  type        = string
+  description = "Location to store IPFS repo. Use 's3' for persistence, or 'default' for advanced use cases."
+}
+
+variable "blocks_backend" {
+  type        = string
+  description = "Location to store IPFS blocks. Use 's3' for persistence, or 'default' for advanced use cases."
+}
+
+variable "keys_backend" {
+  type        = string
+  description = "Location to store IPFS keys. Use 's3' for persistence, or 'default' for advanced use cases."
+}
+
+variable "pins_backend" {
+  type        = string
+  description = "Location to store IPFS pins. Use 's3' for persistence, or 'default' for advanced use cases."
+}
+
+variable "datastore_backend" {
+  type        = string
+  description = "Location to store IPFS datastore. Use 's3' for persistence, or 'default' for advanced use cases."
+}

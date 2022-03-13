@@ -64,23 +64,23 @@
             },
             {
                 "name": "IPFS_BACKEND_ROOT",
-                "value": "s3"
+                "value": "${root_backend}"
             },
             {
                 "name": "IPFS_BACKEND_BLOCKS",
-                "value": "s3"
+                "value": "${blocks_backend}"
             },
             {
                 "name": "IPFS_BACKEND_KEYS",
-                "value": "s3"
+                "value": "${keys_backend}"
             },
             {
                 "name": "IPFS_BACKEND_PINS",
-                "value": "s3"
+                "value": "${pins_backend}"
             },
             {
                 "name": "IPFS_BACKEND_DATASTORE",
-                "value": "s3"
+                "value": "${datastore_backend}"
             },
             {
                 "name": "IPFS_ENABLE_API",
@@ -104,7 +104,7 @@
             },
             {
                 "name": "IPFS_PATH",
-                "value": "${directory_namespace}/ipfs"
+                "value": "${ipfs_path}"
             },
             {
                 "name": "IPFS_SWARM_TCP_PORT",

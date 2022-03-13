@@ -50,7 +50,6 @@ resource "aws_ecs_task_definition" "main" {
       region            = var.aws_region
 
       ceramic_network     = var.ceramic_network
-      directory_namespace = var.directory_namespace
       enable_api          = true
       enable_gateway      = true
       enable_pubsub       = var.enable_pubsub
@@ -67,6 +66,12 @@ resource "aws_ecs_task_definition" "main" {
       s3_bucket_name       = var.s3_bucket_name
       s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
       s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
+      ipfs_path            = var.directory_namespace != "" ? "${var.directory_namespace}/ipfs" : "ipfs" 
+      root_backend         = var.root_backend
+      blocks_backend       = var.blocks_backend
+      keys_backend         = var.keys_backend
+      pins_backend         = var.pins_backend
+      datastore_backend    = var.datastore_backend
     }
   )
 
