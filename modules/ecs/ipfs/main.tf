@@ -67,6 +67,12 @@ resource "aws_ecs_task_definition" "main" {
       s3_bucket_name       = var.s3_bucket_name
       s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
       s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
+      ipfs_path            = var.ipfs_path
+      root_backend         = var.root_backend
+      blocks_backend       = var.blocks_backend
+      keys_backend         = var.keys_backend
+      pins_backend         = var.pins_backend
+      datastore_backend    = var.datastore_backend
     }
   )
 
