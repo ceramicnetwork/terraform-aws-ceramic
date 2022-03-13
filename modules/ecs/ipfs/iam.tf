@@ -28,7 +28,7 @@ resource "aws_iam_policy" "main" {
 
   policy = templatefile("${path.module}/templates/s3_policy.json.tpl", {
     resource  = var.s3_bucket_arn
-    directory = var.directory_namespace
+    directory = var.directory_namespace != "" ? var.directory_namespace : "ipfs"
   })
 }
 
