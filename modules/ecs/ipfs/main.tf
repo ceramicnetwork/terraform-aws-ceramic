@@ -57,7 +57,6 @@ resource "aws_ecs_task_definition" "main" {
       api_port              = local.api_port
       gateway_port          = local.gateway_port
       healthcheck_port      = local.healthcheck_port
-      swarm_port            = local.swarm_port
       swarm_ws_port         = local.swarm_ws_port
       announce_address_list = local.announce_address_list
       dht_server_mode       = var.dht_server_mode
