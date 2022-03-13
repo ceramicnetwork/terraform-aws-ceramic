@@ -6,10 +6,10 @@ locals {
   api_port         = 5011
   gateway_port     = 9011
   healthcheck_port = 8011
-  swarm_port       = 4011
-  swarm_ws_port    = 4012
+  swarm_ws_port    = 4011
+  swarm_wss_port   = 4012
 
-  announce_address_list = var.use_ssl ? "/dns4/${local.domain_name_external}/tcp/${local.swarm_ws_port}/wss" : "/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_ws_port}/ws"
+  announce_address_list = var.use_ssl ? "/dns4/${local.domain_name_external}/tcp/${local.swarm_wss_port}/wss,/dns4/${local.domain_name_external}/tcp/${local.swarm_ws_port}/ws" : "/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_ws_port}/ws"
   domain_name_external  = "ipfs-${var.base_namespace}-external.${var.domain}"
   domain_name_internal  = "ipfs-${var.base_namespace}-internal.${var.domain}"
 
