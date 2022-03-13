@@ -15,10 +15,10 @@
                 "containerPort": ${healthcheck_port}
             },
             {
-                "containerPort": ${swarm_port}
+                "containerPort": ${swarm_ws_port}
             },
             {
-                "containerPort": ${swarm_ws_port}
+                "containerPort": ${swarm_wss_port}
             }
         ],
         "environment": [
@@ -108,7 +108,7 @@
             },
             {
                 "name": "IPFS_SWARM_TCP_PORT",
-                "value": "${swarm_port}"
+                "value": "${swarm_ws_port}"
             },
             {
                 "name": "IPFS_SWARM_WS_PORT",
