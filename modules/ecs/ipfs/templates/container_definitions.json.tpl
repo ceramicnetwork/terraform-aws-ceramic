@@ -108,7 +108,7 @@
             },
             {
                 "name": "IPFS_SWARM_TCP_PORT",
-                "value": "${swarm_ws_port}"
+                "value": "${swarm_tcp_port}"
             },
             {
                 "name": "IPFS_SWARM_WS_PORT",
