@@ -49,17 +49,19 @@ resource "aws_ecs_task_definition" "main" {
       memory            = var.ecs_memory
       region            = var.aws_region
 
-      ceramic_network     = var.ceramic_network
-      enable_api          = true
-      enable_gateway      = true
-      enable_pubsub       = var.enable_pubsub
+      ceramic_network = var.ceramic_network
+      enable_api      = true
+      enable_gateway  = true
+      enable_pubsub   = var.enable_pubsub
 
       api_port              = local.api_port
       gateway_port          = local.gateway_port
       healthcheck_port      = local.healthcheck_port
-      swarm_tcp_port        = local.swarm_ws_port
-      swarm_ws_port         = var.use_ssl ? local.swarm_wss_port : local.swarm_ws_port
+      swarm_tcp_port        = local.swarm_tcp_port
+      swarm_ws_port         = local.swarm_ws_port
       swarm_wss_port        = local.swarm_wss_port
+      swarm_config_tcp_port = local.swarm_tcp_port
+      swarm_config_ws_port  = var.use_ssl ? local.swarm_wss_port : local.swarm_ws_port
       announce_address_list = local.announce_address_list
       dht_server_mode       = var.dht_server_mode
       debug                 = var.debug
@@ -67,7 +69,7 @@ resource "aws_ecs_task_definition" "main" {
       s3_bucket_name       = var.s3_bucket_name
       s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
       s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
-      ipfs_path            = var.directory_namespace != "" ? "${var.directory_namespace}/ipfs" : "ipfs" 
+      ipfs_path            = var.directory_namespace != "" ? "${var.directory_namespace}/ipfs" : "ipfs"
       root_backend         = var.root_backend
       blocks_backend       = var.blocks_backend
       keys_backend         = var.keys_backend
