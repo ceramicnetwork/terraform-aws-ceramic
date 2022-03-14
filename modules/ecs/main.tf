@@ -64,7 +64,7 @@ module "ipfs" {
   s3_bucket_name          = data.aws_s3_bucket.main.id
   root_backend            = var.ipfs_root_backend
   blocks_backend          = var.ipfs_blocks_backend
-  datstore_backend        = var.ipfs_datastore_backend
+  datastore_backend       = var.ipfs_datastore_backend
   keys_backend            = var.ipfs_keys_backend
   pins_backend            = var.ipfs_pins_backend
   use_ssl                 = true
