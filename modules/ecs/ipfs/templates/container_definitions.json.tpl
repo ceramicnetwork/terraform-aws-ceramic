@@ -15,7 +15,7 @@
                 "containerPort": ${healthcheck_port}
             },
             {
-                "containerPort": ${swarm_ws_port}
+                "containerPort": ${swarm_tcp_port}
             },
             {
                 "containerPort": ${swarm_wss_port}
