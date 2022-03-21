@@ -32,8 +32,8 @@ resource "aws_security_group" "alb_external" {
   }
 
   ingress {
-    from_port   = var.use_ssl ? local.swarm_wss_port : local.swarm_ws_port
-    to_port     = var.use_ssl ? local.swarm_wss_port : local.swarm_ws_port
+    from_port   = local.swarm_ws_port
+    to_port     = local.swarm_ws_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -96,8 +96,8 @@ resource "aws_security_group" "alb_internal" {
   }
 
   ingress {
-    from_port   = var.use_ssl ? local.swarm_wss_port : local.swarm_ws_port
-    to_port     = var.use_ssl ? local.swarm_wss_port : local.swarm_ws_port
+    from_port   = local.swarm_ws_port
+    to_port     = local.swarm_ws_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }

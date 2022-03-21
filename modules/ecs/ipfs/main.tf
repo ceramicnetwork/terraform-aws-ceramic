@@ -59,9 +59,6 @@ resource "aws_ecs_task_definition" "main" {
       healthcheck_port      = local.healthcheck_port
       swarm_tcp_port        = local.swarm_tcp_port
       swarm_ws_port         = local.swarm_ws_port
-      swarm_wss_port        = local.swarm_wss_port
-      swarm_config_tcp_port = local.swarm_tcp_port
-      swarm_config_ws_port  = var.use_ssl ? local.swarm_wss_port : local.swarm_ws_port
       announce_address_list = local.announce_address_list
       dht_server_mode       = var.dht_server_mode
       debug                 = var.debug

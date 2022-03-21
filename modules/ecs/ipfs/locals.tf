@@ -7,10 +7,9 @@ locals {
   gateway_port     = 9011
   healthcheck_port = 8011
   swarm_tcp_port   = 4010
-  swarm_ws_port    = 4011
-  swarm_wss_port   = 4012
+  swarm_ws_port    = var.use_ssl ? 4012 : 4011
 
-  announce_address_list = var.use_ssl ? "/dns4/${local.domain_name_external}/tcp/${local.swarm_wss_port}/wss,/dns4/${local.domain_name_external}/tcp/${local.swarm_tcp_port}" : "/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_ws_port}/ws,/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_tcp_port}"
+  announce_address_list = var.use_ssl ? "/dns4/${local.domain_name_external}/tcp/${local.swarm_ws_port}/wss,/dns4/${local.domain_name_external}/tcp/${local.swarm_tcp_port}" : "/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_ws_port}/ws,/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_tcp_port}"
   domain_name_external  = "ipfs-${var.base_namespace}-external.${var.domain}"
   domain_name_internal  = "ipfs-${var.base_namespace}-internal.${var.domain}"
 
@@ -46,13 +45,7 @@ locals {
     }
   ] : []
 
-  swarm_lb_external = var.use_ssl ? [
-    {
-      target_group_arn = aws_lb_target_group.swarm_wss.arn
-      container_name   = "ipfs"
-      container_port   = local.swarm_wss_port
-    }
-    ] : [
+  swarm_lb_external = [
     {
       target_group_arn = aws_lb_target_group.swarm_ws.arn
       container_name   = "ipfs"
@@ -67,9 +60,9 @@ locals {
       container_port   = local.swarm_tcp_port
     },
     {
-      target_group_arn = var.use_ssl ? module.alb_internal[0].target_group_arns[4] : module.alb_internal[0].target_group_arns[3]
+      target_group_arn = module.alb_internal[0].target_group_arns[3]
       container_name   = "ipfs"
-      container_port   = var.use_ssl ? local.swarm_wss_port : local.swarm_ws_port
+      container_port   = local.swarm_ws_port
     }
   ] : []
 

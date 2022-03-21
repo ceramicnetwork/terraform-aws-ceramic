@@ -19,9 +19,6 @@
             },
             {
                 "containerPort": ${swarm_ws_port}
-            },
-            {
-                "containerPort": ${swarm_wss_port}
             }
         ],
         "environment": [
@@ -111,11 +108,11 @@
             },
             {
                 "name": "IPFS_SWARM_TCP_PORT",
-                "value": "${swarm_config_tcp_port}"
+                "value": "${swarm_tcp_port}"
             },
             {
                 "name": "IPFS_SWARM_WS_PORT",
-                "value": "${swarm_config_ws_port}"
+                "value": "${swarm_ws_port}"
             },
             {
                 "name": "NODE_TLS_REJECT_UNAUTHORIZED",
