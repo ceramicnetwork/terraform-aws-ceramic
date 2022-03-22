@@ -122,10 +122,46 @@ resource "aws_lb_target_group" "gateway" {
   depends_on = [aws_lb.external]
 }
 
+/* Swarm TCP */
+
+resource "aws_lb_listener" "swarm_tcp_http" {
+  count = 1
+
+  load_balancer_arn = aws_lb.external.arn
+  port              = local.swarm_tcp_port
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.swarm_tcp.arn
+  }
+}
+
+resource "aws_lb_target_group" "swarm_tcp" {
+  vpc_id      = var.vpc_id
+  name_prefix = "sw-"
+  protocol    = "HTTP"
+  port        = local.swarm_tcp_port
+  target_type = "ip"
+  health_check {
+    interval            = 60
+    timeout             = 30
+    path                = "/"
+    port                = local.healthcheck_port
+    matcher             = "200"
+    healthy_threshold   = 2
+    unhealthy_threshold = 3
+  }
+
+  tags = local.default_tags
+
+  depends_on = [aws_lb.external]
+}
+
 /* Swarm Websocket */
 
 resource "aws_lb_listener" "swarm_ws_http" {
-  count = ! var.use_ssl ? 1 : 0
+  count = var.use_ssl ? 0 : 1
 
   load_balancer_arn = aws_lb.external.arn
   port              = local.swarm_ws_port
@@ -218,6 +254,20 @@ module "alb_internal" {
       }
     },
     {
+      name_prefix      = "sw-"
+      backend_protocol = "HTTP"
+      backend_port     = local.swarm_tcp_port
+      target_type      = "ip"
+      health_check = {
+        interval            = 30
+        path                = "/"
+        port                = local.healthcheck_port
+        matcher             = "200"
+        healthy_threshold   = 2
+        unhealthy_threshold = 3
+      }
+    },
+    {
       name_prefix      = "swws-"
       backend_protocol = "HTTP"
       backend_port     = local.swarm_ws_port
@@ -247,12 +297,25 @@ module "alb_internal" {
       action_type        = "forward"
     },
     {
+      port               = local.swarm_tcp_port
+      protocol           = "HTTP"
+      target_group_index = 2
+      action_type        = "forward"
+    },
+    {
       port               = local.swarm_ws_port
+      protocol           = "HTTP"
+      target_group_index = 3
+      action_type        = "forward"
+    }
+    ] : [
+    {
+      port               = local.swarm_tcp_port
       protocol           = "HTTP"
       target_group_index = 2
       action_type        = "forward"
     }
-  ] : []
+  ]
 
   https_listeners = var.use_ssl ? [
     {
@@ -271,7 +334,7 @@ module "alb_internal" {
       port               = local.swarm_ws_port
       protocol           = "HTTPS"
       certificate_arn    = var.acm_certificate_arn
-      target_group_index = 2
+      target_group_index = 3
     }
   ] : []
 
