@@ -62,7 +62,6 @@ resource "aws_ecs_task_definition" "main" {
       use_s3_blockstore = var.use_s3_blockstore
       s3_key_transform  = "next-to-last/2"
       s3_root_directory = "ipfs/blocks"
-      ipfs_path         = var.directory_namespace != "" ? "${var.directory_namespace}/ipfs" : "ipfs"
 
       api_port              = local.api_port
       gateway_port          = local.gateway_port

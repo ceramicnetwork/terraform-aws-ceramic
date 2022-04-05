@@ -84,6 +84,11 @@ variable "ceramic_cpu" {
   default     = 1024 # 1024 = 1 vCPU
 }
 
+variable "ceramic_env" {
+  type        = string
+  description = "Optional. Environment namespace for Ceramic"
+}
+
 variable "ceramic_efs_logs_fs_id" {
   type        = string
   description = "ID of EFS volume for Ceramic logs"
@@ -132,7 +137,7 @@ variable "ipfs_domain_name" {
 variable "ipfs_enable_alb_logging" {
   type        = bool
   description = "True to enable ALB logs (stored in a new S3 bucket)"
-  default     = true
+  default     = false
 }
 
 variable "ipfs_memory" {

@@ -20,31 +20,9 @@ resource "aws_security_group" "efs" {
   tags = local.default_tags
 }
 
-module "ecs_security_group" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "3.0"
-
-  name        = "${local.namespace}-ecs"
-  description = "Load balancer access to ECS for remote inspection"
-  vpc_id      = var.vpc_id
-
-  ingress_cidr_blocks = ["127.0.0.1/32"] # hack to restrict to vpc
-  ingress_with_source_security_group_id = [
-    {
-      from_port                = 9229
-      to_port                  = 9229
-      protocol                 = "tcp"
-      description              = "Remote inspection"
-      source_security_group_id = module.load_balancer_security_group.this_security_group_id
-    }
-  ]
-
-  tags = local.default_tags
-}
-
 module "ceramic_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "3.0"
+  version = "~> 3.0"
 
   name        = "${local.namespace}-ceramic"
   description = "VPC access to Ceramic ports"

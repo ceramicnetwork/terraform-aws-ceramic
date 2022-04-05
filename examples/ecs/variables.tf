@@ -10,11 +10,6 @@ variable "acm_certificate_arn" {
   description = "ARN of ACM SSL certificate"
 }
 
-variable "base_namespace" {
-  type        = string
-  description = "Base namespace"
-}
-
 variable "cohort" {
   type        = number
   description = "Cohort number used for namespacing"
