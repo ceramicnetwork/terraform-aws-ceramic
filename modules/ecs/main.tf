@@ -5,6 +5,7 @@ module "ceramic" {
   anchor_service_api_url = var.ceramic_anchor_service_api_url
   aws_region             = var.aws_region
   base_tags              = var.default_tags
+  ceramic_network        = var.ceramic_network
   cors_allowed_origins   = var.ceramic_cors_allowed_origins
   directory_namespace    = local.namespace
   ecs_cluster_name       = var.ecs_cluster_name
@@ -36,8 +37,6 @@ module "ipfs" {
   aws_region              = var.aws_region
   base_tags               = var.default_tags
   base_namespace          = local.namespace
-  debug                   = var.ipfs_debug_env_var
-  dht_server_mode         = true
   directory_namespace     = local.namespace
   domain                  = var.ipfs_domain_name
   ecs_cluster_name        = var.ecs_cluster_name
@@ -51,7 +50,6 @@ module "ipfs" {
   enable_internal_api     = true
   enable_external_gateway = false
   enable_internal_gateway = false
-  enable_internal_swarm   = true
   enable_pubsub           = true
   env                     = var.env
   image_tag               = var.image_tag
@@ -60,15 +58,12 @@ module "ipfs" {
   public_subnet_ids       = var.public_subnet_ids
   s3_bucket_arn           = data.aws_s3_bucket.main.arn
   s3_bucket_name          = data.aws_s3_bucket.main.id
-  root_backend            = var.ipfs_root_backend
-  blocks_backend          = var.ipfs_blocks_backend
-  datastore_backend       = var.ipfs_datastore_backend
-  keys_backend            = var.ipfs_keys_backend
-  pins_backend            = var.ipfs_pins_backend
+  use_s3_blockstore       = true
   use_ssl                 = true
   vpc_cidr_block          = var.vpc_cidr_block
   vpc_id                  = var.vpc_id
   vpc_security_group_id   = var.vpc_security_group_id
+  efs_security_group_id   = module.ceramic.efs_security_group_id
 }
 
 resource "aws_cloudwatch_log_group" "ceramic" {

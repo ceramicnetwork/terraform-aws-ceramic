@@ -105,6 +105,11 @@ variable "ceramic_memory" {
   default     = 2048
 }
 
+variable "ceramic_network" {
+  type        = string
+  description = "Ceramic network (e.g. testnet-clay)"
+}
+
 variable "ceramic_task_count" {
   type        = number
   description = "Number of Ceramic ECS tasks to run in the ECS service"
@@ -146,34 +151,4 @@ variable "ipfs_task_count" {
   type        = number
   description = "Number of IPFS ECS tasks to run in the ECS service"
   default     = 1
-}
-
-variable "ipfs_root_backend" {
-  type        = string
-  description = "Location to store IPFS repo. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
-}
-
-variable "ipfs_blocks_backend" {
-  type        = string
-  description = "Location to store IPFS blocks. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
-}
-
-variable "ipfs_datastore_backend" {
-  type        = string
-  description = "Location to store IPFS datastore. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
-}
-
-variable "ipfs_keys_backend" {
-  type        = string
-  description = "Location to store IPFS keys. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
-}
-
-variable "ipfs_pins_backend" {
-  type        = string
-  description = "Location to store IPFS pins. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
 }

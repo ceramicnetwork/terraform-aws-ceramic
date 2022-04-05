@@ -60,19 +60,6 @@ locals {
     }
   ]
 
-  swarm_lb_internal = var.enable_internal_swarm ? [
-    {
-      target_group_arn = module.alb_internal[0].target_group_arns[2]
-      container_name   = "ipfs"
-      container_port   = local.swarm_tcp_port
-    },
-    {
-      target_group_arn = module.alb_internal[0].target_group_arns[3]
-      container_name   = "ipfs"
-      container_port   = local.swarm_ws_port
-    }
-  ] : []
-
   dynamic_load_balancers = concat(
     local.api_lb_external,
     local.api_lb_internal,
@@ -80,6 +67,8 @@ locals {
     local.gateway_lb_internal,
     local.swarm_lb_external
   )
+
+  log_level = "info"
 
   s3_lifecycle_rules = [
     {

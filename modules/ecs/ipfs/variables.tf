@@ -141,11 +141,6 @@ variable "enable_internal_gateway" {
   description = "True to enable IPFS Gateway on internal ALB"
 }
 
-variable "enable_internal_swarm" {
-  type        = bool
-  description = "True to enable IPFS Swarm on internal ALB. Note: Swarm is always enabled for the external ALB."
-}
-
 variable "enable_pubsub" {
   type        = bool
   description = "True to enable IPFS PubSub"

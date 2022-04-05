@@ -36,6 +36,7 @@ resource "aws_ecs_task_definition" "main" {
   container_definitions = templatefile("${path.module}/templates/container_definitions.json.tpl", {
     anchor_service_api_url     = var.anchor_service_api_url
     ceramic_image              = data.docker_registry_image.ceramic.name
+    ceramic_network            = var.ceramic_network
     ceramic_port               = var.ceramic_port
     container_name             = local.container_name
     cors_allowed_origins       = var.cors_allowed_origins

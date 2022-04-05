@@ -25,6 +25,7 @@ module "ceramic_ecs" {
   ceramic_efs_logs_fs_id         = var.ceramic_efs_logs_fs_id
   ceramic_efs_logs_fs_name       = var.ceramic_efs_logs_fs_name
   ceramic_memory                 = var.ceramic_memory
+  ceramic_network                = var.ceramic_network
   ceramic_task_count             = var.ceramic_task_count
   ecs_cluster_name               = var.ecs_cluster_name
   env                            = var.env

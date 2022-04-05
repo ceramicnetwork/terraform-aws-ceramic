@@ -59,10 +59,10 @@ resource "aws_ecs_task_definition" "main" {
       enable_gateway    = true
       enable_pubsub     = var.enable_pubsub
 
-      use_s3_blockstore      = var.use_s3_blockstore
-      ipfs_s3_key_transform  = "next-to-last/2"
-      ipfs_s3_root_directory = "ipfs/blocks"
-      ipfs_path              = var.directory_namespace != "" ? "${var.directory_namespace}/ipfs" : "ipfs"
+      use_s3_blockstore = var.use_s3_blockstore
+      s3_key_transform  = "next-to-last/2"
+      s3_root_directory = "ipfs/blocks"
+      ipfs_path         = var.directory_namespace != "" ? "${var.directory_namespace}/ipfs" : "ipfs"
 
       api_port              = local.api_port
       gateway_port          = local.gateway_port
@@ -70,6 +70,7 @@ resource "aws_ecs_task_definition" "main" {
       swarm_tcp_port        = local.swarm_tcp_port
       swarm_ws_port         = local.swarm_ws_port
       announce_address_list = local.announce_address_list
+      log_level             = local.log_level
 
       peer_id              = data.aws_ssm_parameter.peer_id.value
       private_key_arn      = data.aws_ssm_parameter.private_key.arn

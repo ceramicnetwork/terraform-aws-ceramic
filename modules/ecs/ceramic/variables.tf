@@ -26,6 +26,11 @@ variable "ceramic_enable_debug" {
   default     = true
 }
 
+variable "ceramic_network" {
+  type        = string
+  description = "Ceramic network"
+}
+
 variable "ceramic_load_balancer_contents" {
   type        = list(any)
   description = "If create_ceramic_service is true, list of load balancer contents to add to ECS service"
@@ -152,6 +157,7 @@ variable "s3_bucket_name" {
   type        = string
   description = "Name (aka id) of S3 bucket to use as a backend"
 }
+
 variable "vpc_security_group_id" {
   type        = string
   description = "VPC security group id"

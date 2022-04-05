@@ -136,6 +136,11 @@ variable "ceramic_memory" {
   default     = 2048 # 2048 = 2 GB
 }
 
+variable "ceramic_network" {
+  type        = string
+  description = "Ceramic network"
+}
+
 variable "ceramic_task_count" {
   type        = number
   description = "Number of Ceramic ECS tasks to run in the ECS service"
