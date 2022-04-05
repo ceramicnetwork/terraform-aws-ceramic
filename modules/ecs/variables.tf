@@ -124,12 +124,6 @@ variable "ipfs_cpu" {
   default     = 1024 # 1024 = 1 vCPU
 }
 
-variable "ipfs_debug_env_var" {
-  type        = string
-  description = "Value of DEBUG env var"
-  default     = "*error"
-}
-
 variable "ipfs_domain_name" {
   type        = string
   description = "Domain name, including TLD"

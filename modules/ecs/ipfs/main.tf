@@ -75,10 +75,10 @@ resource "aws_ecs_task_definition" "main" {
       peer_id              = data.aws_ssm_parameter.peer_id.value
       private_key_arn      = data.aws_ssm_parameter.private_key.arn
       repo_volume_source   = "${local.namespace}-repo"
-      s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
-      s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
       s3_bucket_name       = var.s3_bucket_name
       s3_region            = var.aws_region
+      s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
+      s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
     }
   )
 
