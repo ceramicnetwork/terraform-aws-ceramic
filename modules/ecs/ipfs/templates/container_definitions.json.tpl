@@ -4,6 +4,12 @@
         "image": "${image}",
         "cpu": ${cpu},
         "memory": ${memory},
+        "mountPoints": [
+            {
+                "sourceVolume": "${repo_volume_source}",
+                "containerPath": "/data/ipfs"
+            }
+        ],
         "portMappings": [
             {
                 "containerPort": ${api_port}
@@ -23,35 +29,47 @@
         ],
         "environment": [
             {
-                "name": "ANNOUNCE_ADDRESS_LIST",
+                "name": "IPFS_LOGGING",
+                "value": "${log_level}"
+            },
+            {
+                "name": "IPFS_ANNOUNCE_ADDRESS_LIST",
                 "value": "${announce_address_list}"
             },
             {
-                "name": "AWS_BUCKET_NAME",
+                "name": "IPFS_ENABLE_S3",
+                "value": "${enable_s3}"
+            },
+            {
+                "name": "IPFS_S3_BUCKET_NAME",
                 "value": "${s3_bucket_name}"
             },
             {
-                "name": "AWS_ACCESS_KEY_ID",
+                "name": "IPFS_S3_ACCESS_KEY_ID",
                 "value": "${s3_access_key_id}"
             },
             {
-                "name": "AWS_SECRET_ACCESS_KEY",
+                "name": "IPFS_S3_SECRET_ACCESS_KEY",
                 "value": "${s3_secret_access_key}"
             },
             {
-                "name": "CERAMIC_NETWORK",
-                "value": "${ceramic_network}"
+                "name": "IPFS_S3_KEY_TRANSFORM",
+                "value": "${s3_key_transform}"
             },
             {
-                "name": "DEBUG",
-                "value": "${debug}"
+                "name": "IPFS_S3_REGION",
+                "value": "${s3_region}"
             },
             {
-                "name": "HEALTHCHECK_ENABLED",
+                "name": "IPFS_S3_ROOT_DIRECTORY",
+                "value": "${s3_root_directory}"
+            },
+            {
+                "name": "IPFS_ENABLE_HEALTHCHECK",
                 "value": "true"
             },
             {
-                "name": "HEALTHCHECK_PORT",
+                "name": "IPFS_HEALTHCHECK_PORT",
                 "value": "${healthcheck_port}"
             },
             {
@@ -59,52 +77,20 @@
                 "value": "${api_port}"
             },
             {
-                "name": "IPFS_API_TIMEOUT",
-                "value": "120000"
-            },
-            {
-                "name": "IPFS_BACKEND_ROOT",
-                "value": "${root_backend}"
-            },
-            {
-                "name": "IPFS_BACKEND_BLOCKS",
-                "value": "${blocks_backend}"
-            },
-            {
-                "name": "IPFS_BACKEND_KEYS",
-                "value": "${keys_backend}"
-            },
-            {
-                "name": "IPFS_BACKEND_PINS",
-                "value": "${pins_backend}"
-            },
-            {
-                "name": "IPFS_BACKEND_DATASTORE",
-                "value": "${datastore_backend}"
-            },
-            {
                 "name": "IPFS_ENABLE_API",
                 "value": "${enable_api}"
-            },
-            {
-                "name": "IPFS_ENABLE_PUBSUB",
-                "value": "${enable_pubsub}"
             },
             {
                 "name": "IPFS_ENABLE_GATEWAY",
                 "value": "${enable_gateway}"
             },
             {
+                "name": "IPFS_PEER_ID",
+                "value": "${peer_id}"
+            },
+            {
                 "name": "IPFS_GATEWAY_PORT",
                 "value": "${gateway_port}"
-            },
-            {
-                "name": "IPFS_DHT_SERVER_MODE",
-                "value": "${dht_server_mode}"
-            },
-            {
-                "name": "IPFS_PATH",
-                "value": "${ipfs_path}"
             },
             {
                 "name": "IPFS_SWARM_TCP_PORT",
@@ -113,10 +99,12 @@
             {
                 "name": "IPFS_SWARM_WS_PORT",
                 "value": "${swarm_ws_port}"
-            },
+            }
+        ],
+        "secrets": [
             {
-                "name": "NODE_TLS_REJECT_UNAUTHORIZED",
-                "value": "0"
+                "name": "IPFS_PRIVATE_KEY",
+                "valueFrom": "${private_key_arn}"
             }
         ],
         "logConfiguration": {

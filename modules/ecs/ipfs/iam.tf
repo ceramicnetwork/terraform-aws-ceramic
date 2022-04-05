@@ -24,7 +24,7 @@ module "ecs_ipfs_task_user" {
 resource "aws_iam_policy" "main" {
   name        = "IPFSS3-${local.namespace}"
   path        = "/"
-  description = "Allows get, list, and put access for IPFS S3 repo storage"
+  description = "Allows get, list, and put access for IPFS S3 block storage"
 
   policy = templatefile("${path.module}/templates/s3_policy.json.tpl", {
     resource  = var.s3_bucket_arn
