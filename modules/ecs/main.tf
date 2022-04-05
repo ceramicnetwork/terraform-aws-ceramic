@@ -5,7 +5,6 @@ module "ceramic" {
   anchor_service_api_url = var.ceramic_anchor_service_api_url
   aws_region             = var.aws_region
   base_tags              = var.default_tags
-  ceramic_network        = var.ceramic_network
   cors_allowed_origins   = var.ceramic_cors_allowed_origins
   directory_namespace    = local.namespace
   ecs_cluster_name       = var.ecs_cluster_name
@@ -37,7 +36,6 @@ module "ipfs" {
   aws_region              = var.aws_region
   base_tags               = var.default_tags
   base_namespace          = local.namespace
-  ceramic_network         = var.ipfs_ceramic_network
   debug                   = var.ipfs_debug_env_var
   dht_server_mode         = true
   directory_namespace     = local.namespace

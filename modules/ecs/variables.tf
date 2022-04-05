@@ -105,11 +105,6 @@ variable "ceramic_memory" {
   default     = 2048
 }
 
-variable "ceramic_network" {
-  type        = string
-  description = "Ceramic network (e.g. testnet-clay)"
-}
-
 variable "ceramic_task_count" {
   type        = number
   description = "Number of Ceramic ECS tasks to run in the ECS service"
@@ -117,12 +112,6 @@ variable "ceramic_task_count" {
 }
 
 /* IPFS */
-
-variable "ipfs_ceramic_network" {
-  type        = string
-  description = "Ceramic network passed to IPFS. Must match `ceramic_network` or be an empty string."
-  default     = ""
-}
 
 variable "ipfs_cpu" {
   type        = number

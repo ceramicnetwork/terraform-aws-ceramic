@@ -25,14 +25,12 @@ module "ceramic_ecs" {
   ceramic_efs_logs_fs_id         = var.ceramic_efs_logs_fs_id
   ceramic_efs_logs_fs_name       = var.ceramic_efs_logs_fs_name
   ceramic_memory                 = var.ceramic_memory
-  ceramic_network                = var.ceramic_network
   ceramic_task_count             = var.ceramic_task_count
   ecs_cluster_name               = var.ecs_cluster_name
   env                            = var.env
   default_tags                   = var.default_tags
   image_tag                      = var.image_tag
   ipfs_cpu                       = var.ipfs_cpu
-  ipfs_debug_env_var             = var.ipfs_debug_env_var
   ipfs_domain_name               = var.domain_name
   ipfs_enable_alb_logging        = true
   ipfs_memory                    = var.ipfs_memory

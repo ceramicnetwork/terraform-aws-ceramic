@@ -136,11 +136,6 @@ variable "ceramic_memory" {
   default     = 2048 # 2048 = 2 GB
 }
 
-variable "ceramic_network" {
-  type        = string
-  description = "Ceramic network"
-}
-
 variable "ceramic_task_count" {
   type        = number
   description = "Number of Ceramic ECS tasks to run in the ECS service"
@@ -149,21 +144,10 @@ variable "ceramic_task_count" {
 
 /***** IPFS *****/
 
-variable "ipfs_ceramic_network" {
-  type        = string
-  description = "Ceramic network to pass to IPFS"
-  default     = ""
-}
-
 variable "ipfs_cpu" {
   type        = number
   description = "vCPU units to allocate to the IPFS ECS task"
   default     = 1024 # 1024 = 1 vCPU
-}
-
-variable "ipfs_debug_env_var" {
-  type        = string
-  description = "Value of DEBUG env var"
 }
 
 variable "ipfs_memory" {

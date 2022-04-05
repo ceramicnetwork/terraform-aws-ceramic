@@ -26,11 +26,6 @@ variable "ceramic_enable_debug" {
   default     = true
 }
 
-variable "ceramic_network" {
-  type        = string
-  description = "Ceramic network"
-}
-
 variable "ceramic_load_balancer_contents" {
   type        = list(any)
   description = "If create_ceramic_service is true, list of load balancer contents to add to ECS service"
