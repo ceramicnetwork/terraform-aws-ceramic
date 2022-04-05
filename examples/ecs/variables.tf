@@ -161,3 +161,9 @@ variable "ipfs_task_count" {
   description = "Number of IPFS ECS tasks to run in the ECS service"
   default     = 1
 }
+
+variable "ipfs_enable_alb_logging" {
+  type        = bool
+  description = "True to enable ALB logs (stored in a new S3 bucket)"
+  default     = false
+}
