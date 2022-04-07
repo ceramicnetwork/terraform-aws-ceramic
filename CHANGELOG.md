@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.1.1...2.2.0) (2022-04-07)
+
+- Ceramic v2 compatibility [`#12`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/12)
+- Configure IPFS storage backends for ECS [`#10`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/10)
+- Make ALB logs for IPFS optional [`#9`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/9)
+- CORS default [`#4`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/4)
+- Create pull_request_template.md [`b9c640c`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/b9c640c458c2d6eb7584b723e7b1470cce726c6d)
+- Update issue templates [`a71a7a4`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/a71a7a45a46e31485d737418d9c41939c8af0321)
+- chore: release v2.2.0 [`b5e3677`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/b5e3677acf3d8190878a11b6d0115df013933db4)
+- fix(ecs-ipfs): update iam for s3 access [`b008317`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/b008317b2d2da2d1e32a1c6dd7034ed8443934e9)
+- Rename .github/ISSUE_TEMPLATE/pull_request_template.md to .github/pull_request_template.md [`2b1dcf2`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/2b1dcf2ca8399e80a9cd5b06090495cd4e65b7b5)
+
 ## [2.1.1](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.1.0...2.1.1) (2021-08-27)
 
 - chore: release v2.1.1 [`738639f`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/738639f8020b8d80def0d0e19f30d8e21d46ca95)
