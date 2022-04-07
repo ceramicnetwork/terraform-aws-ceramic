@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.1.1](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.1.0...2.1.1) (2021-08-27)
+
+- chore: release v2.1.1 [`738639f`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/738639f8020b8d80def0d0e19f30d8e21d46ca95)
+- feat: remove noop ipfs env var [`99a6248`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/99a6248efeb629642a20fcddb3acf31b204f3332)
+
 ## [2.1.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.0.4...2.1.0) (2021-05-28)
 
 - chore: release v2.1.0 [`c75291a`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/c75291a8aef8253440a3724a2d86d7c56278bdf4)
