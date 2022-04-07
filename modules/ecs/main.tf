@@ -35,8 +35,8 @@ module "ipfs" {
 
   acm_certificate_arn     = var.acm_certificate_arn
   aws_region              = var.aws_region
-  base_tags               = var.default_tags
   base_namespace          = local.namespace
+  base_tags               = var.default_tags
   ceramic_network         = var.ipfs_ceramic_network
   debug                   = var.ipfs_debug_env_var
   dht_server_mode         = true
@@ -67,7 +67,7 @@ module "ipfs" {
   datastore_backend       = var.ipfs_datastore_backend
   keys_backend            = var.ipfs_keys_backend
   pins_backend            = var.ipfs_pins_backend
-  use_ssl                 = true
+  use_ssl                 = var.ipfs_use_ssl
   vpc_cidr_block          = var.vpc_cidr_block
   vpc_id                  = var.vpc_id
   vpc_security_group_id   = var.vpc_security_group_id

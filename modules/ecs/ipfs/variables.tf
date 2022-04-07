@@ -151,14 +151,14 @@ variable "enable_pubsub" {
   description = "True to enable IPFS PubSub"
 }
 
-variable "dht_server_mode" {
-  type        = bool
-  description = "True to enable DHT server mode to query and respond to queries"
-}
-
 variable "debug" {
   type        = string
   description = "IPFS debug env var"
+}
+
+variable "dht_server_mode" {
+  type        = bool
+  description = "True to enable DHT server mode to query and respond to queries"
 }
 
 variable "directory_namespace" {
@@ -182,6 +182,11 @@ variable "blocks_backend" {
   description = "Location to store IPFS blocks. Use 's3' for persistence, or 'default' for advanced use cases."
 }
 
+variable "datastore_backend" {
+  type        = string
+  description = "Location to store IPFS datastore. Use 's3' for persistence, or 'default' for advanced use cases."
+}
+
 variable "keys_backend" {
   type        = string
   description = "Location to store IPFS keys. Use 's3' for persistence, or 'default' for advanced use cases."
@@ -190,9 +195,4 @@ variable "keys_backend" {
 variable "pins_backend" {
   type        = string
   description = "Location to store IPFS pins. Use 's3' for persistence, or 'default' for advanced use cases."
-}
-
-variable "datastore_backend" {
-  type        = string
-  description = "Location to store IPFS datastore. Use 's3' for persistence, or 'default' for advanced use cases."
 }

@@ -188,3 +188,9 @@ variable "ipfs_pins_backend" {
   description = "Location to store IPFS pins. Use 's3' for persistence, or 'default' for advanced use cases."
   default     = "s3"
 }
+
+variable "ipfs_use_ssl" {
+  type        = string
+  description = "True to use ssl for IPFS swarm connections. False by default for go-ipfs compatibility."
+  default     = false
+}
