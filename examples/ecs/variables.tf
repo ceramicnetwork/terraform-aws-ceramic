@@ -84,12 +84,6 @@ variable "ceramic_cpu" {
   default     = 1024 # 1024 = 1 vCPU
 }
 
-variable "ceramic_env" {
-  type        = string
-  description = "Optional. Environment namespace for Ceramic"
-  default     = ""
-}
-
 variable "ceramic_efs_logs_fs_id" {
   type        = string
   description = "ID of EFS volume for Ceramic logs"

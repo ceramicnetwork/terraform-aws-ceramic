@@ -1,3 +1,3 @@
 locals {
-  namespace = "ceramic-${var.ceramic_env}-${var.base_namespace}"
+  namespace = "ceramic-elp-${var.base_namespace}"
 }
