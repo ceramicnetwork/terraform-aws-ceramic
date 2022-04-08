@@ -22,7 +22,7 @@ resource "aws_security_group" "efs" {
 
 module "ceramic_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+  version = "3.0"
 
   name        = "${local.namespace}-ceramic"
   description = "VPC access to Ceramic ports"
@@ -54,7 +54,7 @@ module "ceramic_security_group" {
 
 module "load_balancer_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+  version = "3.0"
 
   name        = "${local.namespace}-load_balancer"
   description = "All access to http/s"

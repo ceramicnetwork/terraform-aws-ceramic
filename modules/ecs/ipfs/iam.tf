@@ -1,6 +1,6 @@
 module "ecs_ipfs_task_group" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-group-with-policies"
-  version = "~> 2.23"
+  version = "2.23"
 
   name = "ecsIpfsTask-${local.namespace}"
 
