@@ -12,7 +12,7 @@ resource "aws_ecs_service" "main" {
       var.efs_security_group_id,
       aws_security_group.alb_external.id,
       aws_security_group.alb_internal.id,
-      module.api_security_group.this_security_group_id
+      module.api_security_group.security_group_id
     ]
     subnets = var.private_subnet_ids
   }

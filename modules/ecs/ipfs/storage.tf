@@ -32,7 +32,7 @@ module "efs_repo_volume" {
   security_groups = [
     var.efs_security_group_id,
     var.vpc_security_group_id,
-    module.api_security_group.this_security_group_id
+    module.api_security_group.security_group_id
   ]
   vpc_id = var.vpc_id
 

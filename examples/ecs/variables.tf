@@ -55,16 +55,6 @@ variable "image_tag" {
   description = "Image tag"
 }
 
-variable "private_subnet_ids" {
-  type        = list(string)
-  description = "List of private subnet ids for the VPC"
-}
-
-variable "public_subnet_ids" {
-  type        = list(string)
-  description = "List of ALB subnet ids"
-}
-
 variable "s3_bucket_name" {
   type        = string
   description = "Name of S3 bucket to use as a backend for Ceramic and IPFS"
@@ -73,11 +63,6 @@ variable "s3_bucket_name" {
 variable "vpc_id" {
   type        = string
   description = "Id of VPC"
-}
-
-variable "vpc_cidr_block" {
-  type        = string
-  description = "Default CIDR block of the VPC"
 }
 
 variable "vpc_security_group_id" {

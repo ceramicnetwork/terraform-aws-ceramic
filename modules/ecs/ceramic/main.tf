@@ -10,7 +10,7 @@ resource "aws_ecs_service" "main" {
     security_groups = [
       var.vpc_security_group_id,
       aws_security_group.efs.id,
-      module.ceramic_security_group.this_security_group_id
+      module.ceramic_security_group.security_group_id
     ]
     subnets = var.private_subnet_ids
   }

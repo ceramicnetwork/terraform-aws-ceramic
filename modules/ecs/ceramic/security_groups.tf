@@ -22,7 +22,7 @@ resource "aws_security_group" "efs" {
 
 module "ceramic_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "3.0"
+  version = "4.9.0"
 
   name        = "${local.namespace}-ceramic"
   description = "VPC access to Ceramic ports"
@@ -43,7 +43,7 @@ module "ceramic_security_group" {
       to_port                  = var.ceramic_port
       protocol                 = "tcp"
       description              = "Ceramic port"
-      source_security_group_id = module.load_balancer_security_group.this_security_group_id
+      source_security_group_id = module.load_balancer_security_group.security_group_id
     }
   ]
   egress_cidr_blocks = ["0.0.0.0/0"]
@@ -54,7 +54,7 @@ module "ceramic_security_group" {
 
 module "load_balancer_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "3.0"
+  version = "4.9.0"
 
   name        = "${local.namespace}-load_balancer"
   description = "All access to http/s"
