@@ -161,3 +161,9 @@ variable "use_s3_blockstore" {
   type        = bool
   description = "True for storing IPFS blocks in S3, false for storing them in an EFS volume"
 }
+
+variable "default_log_level" {
+  type        = string
+  description = "IPFS default log level"
+  default     = "info"
+}

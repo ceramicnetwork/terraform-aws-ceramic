@@ -37,11 +37,7 @@
         "environment": [
             {
                 "name": "IPFS_LOGGING",
-                "value": "${log_level}"
-            },
-            {
-                "name": "IPFS_ANNOUNCE_ADDRESS_LIST",
-                "value": "${announce_address_list}"
+                "value": "${default_log_level}"
             },
             {
                 "name": "IPFS_API_PORT",

@@ -55,13 +55,9 @@ resource "aws_ecs_task_definition" "main" {
       memory            = var.ecs_memory
       region            = var.aws_region
 
-      enable_api        = true
-      enable_gateway    = true
-      enable_pubsub     = var.enable_pubsub
-
-      use_s3_blockstore = var.use_s3_blockstore
-      s3_key_transform  = "next-to-last/2"
-      s3_root_directory = "ipfs/blocks"
+      enable_api     = true
+      enable_gateway = true
+      enable_pubsub  = var.enable_pubsub
 
       api_port              = local.api_port
       gateway_port          = local.gateway_port
@@ -69,15 +65,19 @@ resource "aws_ecs_task_definition" "main" {
       swarm_tcp_port        = local.swarm_tcp_port
       swarm_ws_port         = local.swarm_ws_port
       announce_address_list = local.announce_address_list
-      log_level             = local.log_level
+      default_log_level     = local.default_log_level
 
-      peer_id              = data.aws_ssm_parameter.peer_id.value
-      private_key_arn      = data.aws_ssm_parameter.private_key.arn
-      repo_volume_source   = "${local.namespace}-repo"
+      peer_id            = data.aws_ssm_parameter.peer_id.value
+      private_key_arn    = data.aws_ssm_parameter.private_key.arn
+      repo_volume_source = "${local.namespace}-repo"
+
       s3_bucket_name       = var.s3_bucket_name
       s3_region            = var.aws_region
       s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
       s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
+      use_s3_blockstore    = var.use_s3_blockstore
+      s3_key_transform     = "next-to-last/2"
+      s3_root_directory    = "ipfs/blocks"
     }
   )
 
@@ -98,6 +98,10 @@ resource "aws_ecs_task_definition" "main" {
 
   tags = local.default_tags
 }
+
+/*
+ * Existing AWS resources (must be created beforehand).
+ */
 
 data "aws_ssm_parameter" "peer_id" {
   name = "/${local.namespace}/peer_id"

@@ -35,6 +35,7 @@ module "ceramic_ecs" {
   ipfs_cpu                       = var.ipfs_cpu
   ipfs_domain_name               = var.domain_name
   ipfs_enable_alb_logging        = var.ipfs_enable_alb_logging
+  ipfs_default_log_level         = var.ipfs_default_log_level
   ipfs_memory                    = var.ipfs_memory
   ipfs_task_count                = var.ipfs_task_count
   private_subnet_ids             = data.aws_subnet_ids.private.ids

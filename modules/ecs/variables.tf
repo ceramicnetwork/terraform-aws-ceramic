@@ -151,3 +151,9 @@ variable "ipfs_task_count" {
   description = "Number of IPFS ECS tasks to run in the ECS service"
   default     = 1
 }
+
+variable "ipfs_default_log_level" {
+  type        = string
+  description = "IPFS default log level"
+  default     = "info"
+}

@@ -25,7 +25,7 @@ module "efs_repo_volume" {
   source = "git::https://github.com/cloudposse/terraform-aws-efs.git?ref=0.22.0"
 
   name      = "repo"
-  namespace = "${local.namespace}-repo"
+  namespace = local.namespace
 
   region  = var.aws_region
   subnets = var.private_subnet_ids

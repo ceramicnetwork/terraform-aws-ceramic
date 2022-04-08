@@ -7,8 +7,6 @@ locals {
   gateway_port     = 9011
   healthcheck_port = 8011
   swarm_tcp_port   = 4010
-  # TODO: Choose between 4011 and 4012 based on `use_ssl` once `go-ipfs` supports WSS
-  # swarm_ws_port  = var.use_ssl ? 4012 : 4011
   swarm_ws_port    = 4011
 
   announce_address_list = var.use_ssl ? "/dns4/${local.domain_name_external}/tcp/${local.swarm_ws_port}/ws,/dns4/${local.domain_name_external}/tcp/${local.swarm_tcp_port}" : "/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_ws_port}/ws,/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_tcp_port}"
@@ -68,7 +66,7 @@ locals {
     local.swarm_lb_external
   )
 
-  log_level = "info"
+  default_log_level = var.default_log_level
 
   s3_lifecycle_rules = [
     {

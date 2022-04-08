@@ -5,11 +5,6 @@ variable "aws_region" {
   description = "AWS region. Must match region of vpc_id and public_subnet_ids."
 }
 
-variable "acm_certificate_arn" {
-  type        = string
-  description = "ARN of ACM SSL certificate"
-}
-
 variable "cohort" {
   type        = number
   description = "Cohort number used for namespacing"
@@ -95,11 +90,6 @@ variable "ceramic_env" {
   default     = ""
 }
 
-variable "ceramic_eth_rpc_url" {
-  type        = string
-  description = "Ethereum RPC URL. Must match anchor service ETH network"
-}
-
 variable "ceramic_efs_logs_fs_id" {
   type        = string
   description = "ID of EFS volume for Ceramic logs"
@@ -151,4 +141,10 @@ variable "ipfs_enable_alb_logging" {
   type        = bool
   description = "True to enable ALB logs (stored in a new S3 bucket)"
   default     = false
+}
+
+variable "ipfs_default_log_level" {
+  type        = string
+  description = "IPFS default log level"
+  default     = "info"
 }

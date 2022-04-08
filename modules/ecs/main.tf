@@ -46,6 +46,7 @@ module "ipfs" {
   ecs_log_group_name      = aws_cloudwatch_log_group.ceramic.name
   ecs_memory              = var.ipfs_memory
   enable_alb_logging      = var.ipfs_enable_alb_logging
+  default_log_level       = var.ipfs_default_log_level
   enable_external_api     = false
   enable_internal_api     = true
   enable_external_gateway = false
