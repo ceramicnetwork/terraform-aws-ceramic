@@ -35,8 +35,8 @@ module "ipfs" {
 
   acm_certificate_arn     = var.acm_certificate_arn
   aws_region              = var.aws_region
-  base_namespace          = local.namespace
   base_tags               = var.default_tags
+  base_namespace          = local.namespace
   directory_namespace     = local.namespace
   domain                  = var.ipfs_domain_name
   ecs_cluster_name        = var.ecs_cluster_name
