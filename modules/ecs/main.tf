@@ -35,8 +35,8 @@ module "ipfs" {
 
   acm_certificate_arn     = var.acm_certificate_arn
   aws_region              = var.aws_region
-  base_tags               = var.default_tags
   base_namespace          = local.namespace
+  base_tags               = var.default_tags
   directory_namespace     = local.namespace
   domain                  = var.ipfs_domain_name
   ecs_cluster_name        = var.ecs_cluster_name
@@ -60,7 +60,6 @@ module "ipfs" {
   s3_bucket_arn           = data.aws_s3_bucket.main.arn
   s3_bucket_name          = data.aws_s3_bucket.main.id
   use_s3_blockstore       = true
-  use_ssl                 = true
   vpc_cidr_block          = var.vpc_cidr_block
   vpc_id                  = var.vpc_id
   vpc_security_group_id   = var.vpc_security_group_id

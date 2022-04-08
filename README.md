@@ -2,8 +2,6 @@
 
 Terraform scripts to set up Ceramic infrastructure.
 
-**WORK IN PROGRESS**
-
 ## Usage
 
 There is no root module available for use. Instead use one of the submodules like ECS:
@@ -11,7 +9,7 @@ There is no root module available for use. Instead use one of the submodules lik
 ```
 module "ceramic" {
   source  = "ceramicnetwork/ceramic/aws//modules/ecs"
-  version = "2.0.0"
+  version = "2.3.0"
   # insert variables here
 }
 ```

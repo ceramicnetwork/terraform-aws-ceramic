@@ -152,3 +152,9 @@ variable "ipfs_default_log_level" {
   description = "IPFS default log level"
   default     = "info"
 }
+
+variable "ipfs_use_ssl" {
+  type        = string
+  description = "True to use ssl for IPFS swarm connections. False by default for go-ipfs compatibility."
+  default     = false
+}
