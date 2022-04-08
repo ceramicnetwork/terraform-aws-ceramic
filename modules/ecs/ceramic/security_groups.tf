@@ -24,7 +24,7 @@ module "ceramic_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "4.9.0"
 
-  name        = "${local.namespace}-ceramic"
+  name        = local.namespace
   description = "VPC access to Ceramic ports"
   vpc_id      = var.vpc_id
 
