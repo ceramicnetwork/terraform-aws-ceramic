@@ -67,8 +67,6 @@ resource "aws_ecs_task_definition" "main" {
       announce_address_list = local.announce_address_list
       default_log_level     = local.default_log_level
 
-      peer_id            = data.aws_ssm_parameter.peer_id.value
-      private_key_arn    = data.aws_ssm_parameter.private_key.arn
       repo_volume_source = "${local.namespace}-repo"
 
       s3_bucket_name       = var.s3_bucket_name
@@ -102,14 +100,6 @@ resource "aws_ecs_task_definition" "main" {
 /*
  * Existing AWS resources (must be created beforehand).
  */
-
-data "aws_ssm_parameter" "peer_id" {
-  name = "/${local.namespace}/peer_id"
-}
-
-data "aws_ssm_parameter" "private_key" {
-  name = "/${local.namespace}/private_key"
-}
 
 data "aws_ecs_cluster" "main" {
   cluster_name = var.ecs_cluster_name

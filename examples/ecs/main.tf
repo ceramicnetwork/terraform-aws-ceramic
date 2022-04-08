@@ -20,6 +20,7 @@ module "ceramic_ecs" {
   base_namespace                 = "${var.cohort}-${count.index + 1}"
   ceramic_anchor_service_api_url = var.ceramic_anchor_service_api_url
   ceramic_cors_allowed_origins   = var.ceramic_cors_allowed_origins
+  ceramic_env                    = var.ceramic_env
   ceramic_cpu                    = var.ceramic_cpu
   ceramic_eth_rpc_url            = data.aws_ssm_parameter.eth_rpc_url.value
   ceramic_efs_logs_fs_id         = var.ceramic_efs_logs_fs_id

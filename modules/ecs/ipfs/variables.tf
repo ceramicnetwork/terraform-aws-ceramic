@@ -146,16 +146,6 @@ variable "enable_pubsub" {
   description = "True to enable IPFS PubSub"
 }
 
-variable "dht_server_mode" {
-  type        = bool
-  description = "True to enable DHT server mode to query and respond to queries"
-}
-
-variable "debug" {
-  type        = string
-  description = "IPFS debug env var"
-}
-
 variable "directory_namespace" {
   type        = string
   description = "Directory for logs and state"

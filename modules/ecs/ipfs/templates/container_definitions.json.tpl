@@ -56,10 +56,6 @@
                 "value": "true"
             },
             {
-                "name": "IPFS_PEER_ID",
-                "value": "${peer_id}"
-            },
-            {
                 "name": "IPFS_GATEWAY_PORT",
                 "value": "${gateway_port}"
             },
@@ -98,12 +94,6 @@
             {
                 "name": "IPFS_SWARM_WS_PORT",
                 "value": "${swarm_ws_port}"
-            }
-        ],
-        "secrets": [
-            {
-                "name": "IPFS_PRIVATE_KEY",
-                "valueFrom": "${private_key_arn}"
             }
         ],
         "logConfiguration": {
