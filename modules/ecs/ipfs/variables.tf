@@ -20,11 +20,6 @@ variable "base_tags" {
   description = "Tags to merge with local defaults"
 }
 
-variable "ceramic_network" {
-  type        = string
-  description = "Ceramic network for IPFS pubsub"
-}
-
 variable "domain" {
   type        = string
   description = "Domain for certificate"
@@ -114,6 +109,11 @@ variable "vpc_security_group_id" {
   description = "Id of VPC default security group"
 }
 
+variable "efs_security_group_id" {
+  type        = string
+  description = "Id for EFS security group"
+}
+
 /* Specified */
 
 variable "enable_alb_logging" {
@@ -141,24 +141,9 @@ variable "enable_internal_gateway" {
   description = "True to enable IPFS Gateway on internal ALB"
 }
 
-variable "enable_internal_swarm" {
-  type        = bool
-  description = "True to enable IPFS Swarm on internal ALB. Note: Swarm is always enabled for the external ALB."
-}
-
 variable "enable_pubsub" {
   type        = bool
   description = "True to enable IPFS PubSub"
-}
-
-variable "debug" {
-  type        = string
-  description = "IPFS debug env var"
-}
-
-variable "dht_server_mode" {
-  type        = bool
-  description = "True to enable DHT server mode to query and respond to queries"
 }
 
 variable "directory_namespace" {
@@ -172,27 +157,13 @@ variable "image_tag" {
   description = "Image tag"
 }
 
-variable "root_backend" {
-  type        = string
-  description = "Location to store IPFS repo. Use 's3' for persistence, or 'default' for advanced use cases."
+variable "use_s3_blockstore" {
+  type        = bool
+  description = "True for storing IPFS blocks in S3, false for storing them in an EFS volume"
 }
 
-variable "blocks_backend" {
+variable "default_log_level" {
   type        = string
-  description = "Location to store IPFS blocks. Use 's3' for persistence, or 'default' for advanced use cases."
-}
-
-variable "datastore_backend" {
-  type        = string
-  description = "Location to store IPFS datastore. Use 's3' for persistence, or 'default' for advanced use cases."
-}
-
-variable "keys_backend" {
-  type        = string
-  description = "Location to store IPFS keys. Use 's3' for persistence, or 'default' for advanced use cases."
-}
-
-variable "pins_backend" {
-  type        = string
-  description = "Location to store IPFS pins. Use 's3' for persistence, or 'default' for advanced use cases."
+  description = "IPFS default log level"
+  default     = "info"
 }

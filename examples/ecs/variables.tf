@@ -5,16 +5,6 @@ variable "aws_region" {
   description = "AWS region. Must match region of vpc_id and public_subnet_ids."
 }
 
-variable "acm_certificate_arn" {
-  type        = string
-  description = "ARN of ACM SSL certificate"
-}
-
-variable "base_namespace" {
-  type        = string
-  description = "Base namespace"
-}
-
 variable "cohort" {
   type        = number
   description = "Cohort number used for namespacing"
@@ -60,16 +50,6 @@ variable "image_tag" {
   description = "Image tag"
 }
 
-variable "private_subnet_ids" {
-  type        = list(string)
-  description = "List of private subnet ids for the VPC"
-}
-
-variable "public_subnet_ids" {
-  type        = list(string)
-  description = "List of ALB subnet ids"
-}
-
 variable "s3_bucket_name" {
   type        = string
   description = "Name of S3 bucket to use as a backend for Ceramic and IPFS"
@@ -78,11 +58,6 @@ variable "s3_bucket_name" {
 variable "vpc_id" {
   type        = string
   description = "Id of VPC"
-}
-
-variable "vpc_cidr_block" {
-  type        = string
-  description = "Default CIDR block of the VPC"
 }
 
 variable "vpc_security_group_id" {
@@ -115,11 +90,6 @@ variable "ceramic_env" {
   default     = ""
 }
 
-variable "ceramic_eth_rpc_url" {
-  type        = string
-  description = "Ethereum RPC URL. Must match anchor service ETH network"
-}
-
 variable "ceramic_efs_logs_fs_id" {
   type        = string
   description = "ID of EFS volume for Ceramic logs"
@@ -149,21 +119,10 @@ variable "ceramic_task_count" {
 
 /***** IPFS *****/
 
-variable "ipfs_ceramic_network" {
-  type        = string
-  description = "Ceramic network to pass to IPFS"
-  default     = ""
-}
-
 variable "ipfs_cpu" {
   type        = number
   description = "vCPU units to allocate to the IPFS ECS task"
   default     = 1024 # 1024 = 1 vCPU
-}
-
-variable "ipfs_debug_env_var" {
-  type        = string
-  description = "Value of DEBUG env var"
 }
 
 variable "ipfs_memory" {
@@ -176,4 +135,16 @@ variable "ipfs_task_count" {
   type        = number
   description = "Number of IPFS ECS tasks to run in the ECS service"
   default     = 1
+}
+
+variable "ipfs_enable_alb_logging" {
+  type        = bool
+  description = "True to enable ALB logs (stored in a new S3 bucket)"
+  default     = false
+}
+
+variable "ipfs_default_log_level" {
+  type        = string
+  description = "IPFS default log level"
+  default     = "info"
 }

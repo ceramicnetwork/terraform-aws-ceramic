@@ -157,6 +157,7 @@ variable "s3_bucket_name" {
   type        = string
   description = "Name (aka id) of S3 bucket to use as a backend"
 }
+
 variable "vpc_security_group_id" {
   type        = string
   description = "VPC security group id"

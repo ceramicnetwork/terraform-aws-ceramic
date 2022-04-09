@@ -1,3 +1,3 @@
 locals {
-  namespace = "ceramic-${var.env}-${var.base_namespace}"
+  namespace = "ceramic-${var.ceramic_env}-${var.base_namespace}"
 }

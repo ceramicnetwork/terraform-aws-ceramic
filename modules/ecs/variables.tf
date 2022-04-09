@@ -84,6 +84,11 @@ variable "ceramic_cpu" {
   default     = 1024 # 1024 = 1 vCPU
 }
 
+variable "ceramic_env" {
+  type        = string
+  description = "Optional. Environment namespace for Ceramic"
+}
+
 variable "ceramic_efs_logs_fs_id" {
   type        = string
   description = "ID of EFS volume for Ceramic logs"
@@ -118,22 +123,10 @@ variable "ceramic_task_count" {
 
 /* IPFS */
 
-variable "ipfs_ceramic_network" {
-  type        = string
-  description = "Ceramic network passed to IPFS. Must match `ceramic_network` or be an empty string."
-  default     = ""
-}
-
 variable "ipfs_cpu" {
   type        = number
   description = "vCPU units to allocate to the IPFS ECS task"
   default     = 1024 # 1024 = 1 vCPU
-}
-
-variable "ipfs_debug_env_var" {
-  type        = string
-  description = "Value of DEBUG env var"
-  default     = "*error"
 }
 
 variable "ipfs_domain_name" {
@@ -144,7 +137,7 @@ variable "ipfs_domain_name" {
 variable "ipfs_enable_alb_logging" {
   type        = bool
   description = "True to enable ALB logs (stored in a new S3 bucket)"
-  default     = true
+  default     = false
 }
 
 variable "ipfs_memory" {
@@ -159,38 +152,8 @@ variable "ipfs_task_count" {
   default     = 1
 }
 
-variable "ipfs_root_backend" {
+variable "ipfs_default_log_level" {
   type        = string
-  description = "Location to store IPFS repo. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
-}
-
-variable "ipfs_blocks_backend" {
-  type        = string
-  description = "Location to store IPFS blocks. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
-}
-
-variable "ipfs_datastore_backend" {
-  type        = string
-  description = "Location to store IPFS datastore. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
-}
-
-variable "ipfs_keys_backend" {
-  type        = string
-  description = "Location to store IPFS keys. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
-}
-
-variable "ipfs_pins_backend" {
-  type        = string
-  description = "Location to store IPFS pins. Use 's3' for persistence, or 'default' for advanced use cases."
-  default     = "s3"
-}
-
-variable "ipfs_use_ssl" {
-  type        = string
-  description = "True to use ssl for IPFS swarm connections. False by default for go-ipfs compatibility."
-  default     = false
+  description = "IPFS default log level"
+  default     = "info"
 }

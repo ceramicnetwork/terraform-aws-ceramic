@@ -1,6 +1,6 @@
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.0"
+  version = "5.16.0"
 
   name = local.namespace
 
@@ -8,7 +8,7 @@ module "alb" {
 
   vpc_id          = var.vpc_id
   subnets         = var.public_subnet_ids
-  security_groups = [module.load_balancer_security_group.this_security_group_id]
+  security_groups = [module.load_balancer_security_group.security_group_id]
   idle_timeout    = 3600
 
   access_logs = {

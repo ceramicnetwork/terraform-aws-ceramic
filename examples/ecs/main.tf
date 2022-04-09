@@ -20,6 +20,7 @@ module "ceramic_ecs" {
   base_namespace                 = "${var.cohort}-${count.index + 1}"
   ceramic_anchor_service_api_url = var.ceramic_anchor_service_api_url
   ceramic_cors_allowed_origins   = var.ceramic_cors_allowed_origins
+  ceramic_env                    = var.ceramic_env
   ceramic_cpu                    = var.ceramic_cpu
   ceramic_eth_rpc_url            = data.aws_ssm_parameter.eth_rpc_url.value
   ceramic_efs_logs_fs_id         = var.ceramic_efs_logs_fs_id
@@ -32,9 +33,9 @@ module "ceramic_ecs" {
   default_tags                   = var.default_tags
   image_tag                      = var.image_tag
   ipfs_cpu                       = var.ipfs_cpu
-  ipfs_debug_env_var             = var.ipfs_debug_env_var
   ipfs_domain_name               = var.domain_name
-  ipfs_enable_alb_logging        = true
+  ipfs_enable_alb_logging        = var.ipfs_enable_alb_logging
+  ipfs_default_log_level         = var.ipfs_default_log_level
   ipfs_memory                    = var.ipfs_memory
   ipfs_task_count                = var.ipfs_task_count
   private_subnet_ids             = data.aws_subnet_ids.private.ids
@@ -45,20 +46,24 @@ module "ceramic_ecs" {
   vpc_security_group_id          = var.vpc_security_group_id
 }
 
+/*
+ * Existing AWS resources (must be created beforehand).
+ */
+
 data "aws_acm_certificate" "_3boxlabs_com" {
   domain      = "*.${var.domain_name}"
   most_recent = true
 }
 
 data "aws_ssm_parameter" "eth_rpc_url" {
-  name = "/ceramic-${var.ceramic_env}/${lookup(var.eth_network, var.ceramic_env)}/infura_rpc_endpoint"
+  name = "/ceramic-${var.env}/${lookup(var.eth_network, var.env)}/infura_rpc_endpoint"
 }
 
 data "aws_subnet_ids" "private" {
   vpc_id = var.vpc_id
 
   tags = {
-    Ceramic = var.ceramic_env
+    Ceramic = var.env
     Subnet  = "private"
   }
 }
@@ -67,7 +72,7 @@ data "aws_subnet_ids" "public" {
   vpc_id = var.vpc_id
 
   tags = {
-    Ceramic = var.ceramic_env
+    Ceramic = var.env
     Subnet  = "public"
   }
 }

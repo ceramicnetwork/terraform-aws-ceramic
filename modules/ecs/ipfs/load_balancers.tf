@@ -161,25 +161,9 @@ resource "aws_lb_target_group" "swarm_tcp" {
 /* Swarm Websocket */
 
 resource "aws_lb_listener" "swarm_ws_http" {
-  count = var.use_ssl ? 0 : 1
-
   load_balancer_arn = aws_lb.external.arn
   port              = local.swarm_ws_port
   protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.swarm_ws.arn
-  }
-}
-
-resource "aws_lb_listener" "swarm_ws_https" {
-  count = var.use_ssl ? 1 : 0
-
-  load_balancer_arn = aws_lb.external.arn
-  port              = local.swarm_ws_port
-  protocol          = "HTTPS"
-  certificate_arn   = var.acm_certificate_arn
 
   default_action {
     type             = "forward"
@@ -210,7 +194,7 @@ resource "aws_lb_target_group" "swarm_ws" {
 
 module "alb_internal" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.0"
+  version = "5.16.0"
 
   count = 1
 
@@ -314,6 +298,12 @@ module "alb_internal" {
       protocol           = "HTTP"
       target_group_index = 2
       action_type        = "forward"
+    },
+    {
+      port               = local.swarm_ws_port
+      protocol           = "HTTP"
+      target_group_index = 3
+      action_type        = "forward"
     }
   ]
 
@@ -329,12 +319,6 @@ module "alb_internal" {
       protocol           = "HTTPS"
       certificate_arn    = var.acm_certificate_arn
       target_group_index = 1
-    },
-    {
-      port               = local.swarm_ws_port
-      protocol           = "HTTPS"
-      certificate_arn    = var.acm_certificate_arn
-      target_group_index = 3
     }
   ] : []
 

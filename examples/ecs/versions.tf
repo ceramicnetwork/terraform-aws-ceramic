@@ -3,7 +3,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "3.36.0"
+      version = "3.63.0"
     }
     cloudflare = {
       source  = "cloudflare/cloudflare"
@@ -12,10 +12,6 @@ terraform {
     docker = {
       source  = "kreuzwerker/docker"
       version = "2.10.0"
-    }
-    template = {
-      source  = "hashicorp/template"
-      version = "2.1.2"
     }
   }
 }

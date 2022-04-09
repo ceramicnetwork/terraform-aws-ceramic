@@ -8,9 +8,11 @@ resource "aws_ecs_service" "main" {
 
   network_configuration {
     security_groups = [
+      var.vpc_security_group_id,
+      var.efs_security_group_id,
       aws_security_group.alb_external.id,
       aws_security_group.alb_internal.id,
-      module.api_security_group.this_security_group_id
+      module.api_security_group.security_group_id
     ]
     subnets = var.private_subnet_ids
   }
@@ -28,6 +30,10 @@ resource "aws_ecs_service" "main" {
 
   depends_on = [
     aws_lb.external,
+    module.alb_internal,
+    aws_ecs_task_definition.main,
+    module.api_security_group,
+    aws_security_group.alb_internal,
     aws_security_group.alb_external
   ]
 
@@ -49,10 +55,9 @@ resource "aws_ecs_task_definition" "main" {
       memory            = var.ecs_memory
       region            = var.aws_region
 
-      ceramic_network = var.ceramic_network
-      enable_api      = true
-      enable_gateway  = true
-      enable_pubsub   = var.enable_pubsub
+      enable_api     = true
+      enable_gateway = true
+      enable_pubsub  = var.enable_pubsub
 
       api_port              = local.api_port
       gateway_port          = local.gateway_port
@@ -60,18 +65,17 @@ resource "aws_ecs_task_definition" "main" {
       swarm_tcp_port        = local.swarm_tcp_port
       swarm_ws_port         = local.swarm_ws_port
       announce_address_list = local.announce_address_list
-      dht_server_mode       = var.dht_server_mode
-      debug                 = var.debug
+      default_log_level     = local.default_log_level
+
+      repo_volume_source = "${local.namespace}-repo"
 
       s3_bucket_name       = var.s3_bucket_name
+      s3_region            = var.aws_region
       s3_access_key_id     = module.ecs_ipfs_task_user.this_iam_access_key_id
       s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
-      ipfs_path            = var.directory_namespace != "" ? "${var.directory_namespace}/ipfs" : "ipfs"
-      root_backend         = var.root_backend
-      blocks_backend       = var.blocks_backend
-      keys_backend         = var.keys_backend
-      pins_backend         = var.pins_backend
-      datastore_backend    = var.datastore_backend
+      use_s3_blockstore    = var.use_s3_blockstore
+      s3_key_transform     = "next-to-last/2"
+      s3_root_directory    = "ipfs/blocks"
     }
   )
 
@@ -83,8 +87,19 @@ resource "aws_ecs_task_definition" "main" {
   cpu                      = var.ecs_cpu
   memory                   = var.ecs_memory
 
+  volume {
+    name = "${local.namespace}-repo"
+    efs_volume_configuration {
+      file_system_id = module.efs_repo_volume.id
+    }
+  }
+
   tags = local.default_tags
 }
+
+/*
+ * Existing AWS resources (must be created beforehand).
+ */
 
 data "aws_ecs_cluster" "main" {
   cluster_name = var.ecs_cluster_name
