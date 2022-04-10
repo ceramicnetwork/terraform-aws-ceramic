@@ -1,5 +1,10 @@
 # Changelog
 
+## [2.3.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.2.0...2.3.0) (2022-04-07)
+
+- fix: set ipfs ssl with bool [`22c9aec`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/22c9aec0cd9775cb35b52556f3ed09c42c6e81cd)
+- chore: release v2.3.0 [`0505b16`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/0505b16469d4ab9f6edff5b03556a8a15b605012)
+
 ## [2.2.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.1.1...2.2.0) (2022-04-07)
 
 - Ceramic v2 compatibility [`#12`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/12)
