@@ -14,6 +14,17 @@ module "ceramic" {
 }
 ```
 
+## Pre-conditions
+
+Make sure that the following AWS resources exist prior to the application of this Terraform module:
+- VPC with 2 subnets in 2 AZs, each subnet tagged with `Ceramic` and the name of your environment, e.g. `dev`.
+- S3 bucket for Ceramic/IPFS data store
+- ECS cluster for Ceramic/IPFS services
+- SSM parameter for your Infura RPC endpoint
+- EFS volume for Ceramic logs
+
+Also make sure that you add the appropriate CNAME entries to your DNS nameserver for the IPFS endpoints generated through the application of this module.
+
 ## Development
 
 Start by installing [pre-commit](https://pre-commit.com/)
@@ -21,17 +32,6 @@ Start by installing [pre-commit](https://pre-commit.com/)
 ```shell
 pre-commit install
 ```
-
-## Pre-conditions
-
-Make sure that the following AWS resources exist prior to the application of this Terraform module:
-- VPC with 2 subnets in 2 AZs, each subnet tagged with `Ceramic` and the name of your environment, e.g. `dev`. 
-- S3 bucket for Ceramic/IPFS data store
-- ECS cluster for Ceramic/IPFS services
-- SSM parameter for your Infura RPC endpoint
-- EFS volume for Ceramic logs
-
-Also make sure that you add the appropriate CNAME entries to your DNS nameserver for the IPFS endpoints generated through the application of this module.
 
 ### Known Issues
 
