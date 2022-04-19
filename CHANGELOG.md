@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.3.0...3.0.0) (2022-04-10)
+
+- feat: use `go-ipfs` instead of `js-ipfs` [`#13`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/13)
+- Update README.md [`34873f9`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/34873f9294128b53c4f8558e226e46e139e7f22d)
+- chore: release v3.0.0 [`42bc30c`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/42bc30c60c0ef113f6a45218b44e6136fa603b06)
+- Update README.md [`079efb8`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/079efb8126a0b51ef35e3c1543c612cfca57ebbc)
+
 ## [2.3.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.2.0...2.3.0) (2022-04-07)
 
 - fix: set ipfs ssl with bool [`22c9aec`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/22c9aec0cd9775cb35b52556f3ed09c42c6e81cd)
