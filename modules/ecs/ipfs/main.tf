@@ -75,7 +75,7 @@ resource "aws_ecs_task_definition" "main" {
       s3_secret_access_key = module.ecs_ipfs_task_user.this_iam_access_key_secret
       use_s3_blockstore    = var.use_s3_blockstore
       s3_key_transform     = "next-to-last/2"
-      s3_root_directory    = "ipfs/blocks"
+      s3_root_directory    = var.directory_namespace != "" ? "${var.directory_namespace}/ipfs/blocks" : "ipfs/blocks"
     }
   )
 
