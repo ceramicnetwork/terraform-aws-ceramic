@@ -65,6 +65,7 @@ module "ipfs" {
   vpc_id                  = var.vpc_id
   vpc_security_group_id   = var.vpc_security_group_id
   efs_security_group_id   = module.ceramic.efs_security_group_id
+  existing_peer           = var.existing_ipfs_peer
 }
 
 resource "aws_cloudwatch_log_group" "ceramic" {

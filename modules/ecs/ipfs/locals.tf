@@ -9,6 +9,8 @@ locals {
   swarm_tcp_port   = 4010
   swarm_ws_port    = 4011
 
+  task_definition = var.existing_peer ? aws_ecs_task_definition.td_existing_peer : aws_ecs_task_definition.td
+
   announce_address_list = var.use_ssl ? "/dns4/${local.domain_name_external}/tcp/${local.swarm_ws_port}/ws,/dns4/${local.domain_name_external}/tcp/${local.swarm_tcp_port}" : "/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_ws_port}/ws,/dns4/${aws_lb.external.dns_name}/tcp/${local.swarm_tcp_port}"
   domain_name_external  = "go-ipfs-${var.base_namespace}-external.${var.domain}"
   domain_name_internal  = "go-ipfs-${var.base_namespace}-internal.${var.domain}"

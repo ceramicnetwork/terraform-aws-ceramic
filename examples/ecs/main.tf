@@ -44,6 +44,7 @@ module "ceramic_ecs" {
   vpc_cidr_block                 = data.aws_vpc.main.cidr_block
   vpc_id                         = var.vpc_id
   vpc_security_group_id          = var.vpc_security_group_id
+  existing_ipfs_peer             = var.existing_ipfs_peers
 }
 
 /*
