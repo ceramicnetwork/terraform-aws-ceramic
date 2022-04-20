@@ -4,6 +4,9 @@
         "image": "${image}",
         "cpu": ${cpu},
         "memory": ${memory},
+        "linuxParameters": {
+            "initProcessEnabled": true
+        },
         "ulimits": [
             {
                 "name": "nofile",
@@ -40,6 +43,10 @@
                 "value": "${default_log_level}"
             },
             {
+                "name": "IPFS_ANNOUNCE_ADDRESS_LIST",
+                "value": "${announce_address_list}"
+            },
+            {
                 "name": "IPFS_API_PORT",
                 "value": "${api_port}"
             },
@@ -54,6 +61,10 @@
             {
                 "name": "IPFS_ENABLE_HEALTHCHECK",
                 "value": "true"
+            },
+            {
+                "name": "IPFS_ENABLE_S3",
+                "value": "${use_s3_blockstore}"
             },
             {
                 "name": "IPFS_GATEWAY_PORT",

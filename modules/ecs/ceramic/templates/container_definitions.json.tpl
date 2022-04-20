@@ -4,6 +4,9 @@
         "image": "${ceramic_image}",
         "cpu": ${cpu},
         "memory": ${memory},
+        "linuxParameters": {
+            "initProcessEnabled": true
+        },
         "ulimits": [
             {
                 "name": "nofile",

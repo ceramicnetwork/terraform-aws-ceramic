@@ -32,6 +32,13 @@ resource "aws_iam_policy" "main" {
   })
 }
 
+resource "aws_iam_policy" "ecs_exec_policy" {
+  name = "ECSExecPermissions-${local.namespace}"
+
+  policy = file("${path.module}/templates/ecs_exec_policy.json")
+}
+
+
 module "ecs_ipfs_task_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
   version = "2.22.0"
@@ -47,7 +54,8 @@ module "ecs_ipfs_task_role" {
 
   custom_role_policy_arns = [
     "arn:aws:iam::aws:policy/AmazonElasticFileSystemClientFullAccess",
-    aws_iam_policy.main.arn
+    aws_iam_policy.main.arn,
+    aws_iam_policy.ecs_exec_policy.arn
   ]
 
   tags = local.default_tags

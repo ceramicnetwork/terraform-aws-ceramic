@@ -34,6 +34,12 @@ resource "aws_iam_policy" "s3_ceramic_node_state_store" {
   })
 }
 
+resource "aws_iam_policy" "ecs_exec_policy" {
+  name = "ECSExecPermissions-${local.namespace}"
+
+  policy = file("${path.module}/templates/ecs_exec_policy.json")
+}
+
 module "ecs_efs_task_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
   version = "2.22.0"
@@ -48,7 +54,8 @@ module "ecs_efs_task_role" {
   role_requires_mfa = false
 
   custom_role_policy_arns = [
-    "arn:aws:iam::aws:policy/AmazonElasticFileSystemClientFullAccess"
+    "arn:aws:iam::aws:policy/AmazonElasticFileSystemClientFullAccess",
+    aws_iam_policy.ecs_exec_policy.arn
   ]
 
   tags = local.default_tags
