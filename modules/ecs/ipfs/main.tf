@@ -2,7 +2,7 @@ resource "aws_ecs_service" "main" {
   platform_version       = "1.4.0"
   name                   = var.ecs_service_name
   cluster                = var.ecs_cluster_name
-  task_definition        = var.use_existing_peer_identity ? aws_ecs_task_definition.existing_peer.arn : aws_ecs_task_definition.main.arn
+  task_definition        = var.use_existing_peer_identity ? aws_ecs_task_definition.existing_peer[0].arn : aws_ecs_task_definition.main.arn
   desired_count          = var.ecs_count
   launch_type            = "FARGATE"
   enable_execute_command = true
@@ -99,6 +99,7 @@ resource "aws_ecs_task_definition" "main" {
 }
 
 resource "aws_ecs_task_definition" "existing_peer" {
+  count = var.use_existing_peer_identity ? 1 : 0
   family = local.namespace
   container_definitions = templatefile(
   "${path.module}/templates/container_definitions_existing_peer.json.tpl",
