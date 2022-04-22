@@ -9,7 +9,7 @@ There is no root module available for use. Instead use one of the submodules lik
 ```
 module "ceramic" {
   source  = "ceramicnetwork/ceramic/aws//modules/ecs"
-  version = "2.3.0"
+  version = "3.1.0"
   # insert variables here
 }
 ```
