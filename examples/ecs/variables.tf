@@ -148,3 +148,9 @@ variable "ipfs_default_log_level" {
   description = "IPFS default log level"
   default     = "info"
 }
+
+variable "use_existing_ipfs_peer_identities" {
+  type        = string
+  description = "Use existing IPFS peer identities"
+  default     = false
+}

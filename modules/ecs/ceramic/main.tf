@@ -1,10 +1,11 @@
 resource "aws_ecs_service" "main" {
-  platform_version = "1.4.0"
-  name             = var.ecs_service_name
-  cluster          = var.ecs_cluster_name
-  task_definition  = aws_ecs_task_definition.main.arn
-  desired_count    = var.ecs_count
-  launch_type      = "FARGATE"
+  platform_version       = "1.4.0"
+  name                   = var.ecs_service_name
+  cluster                = var.ecs_cluster_name
+  task_definition        = aws_ecs_task_definition.main.arn
+  desired_count          = var.ecs_count
+  launch_type            = "FARGATE"
+  enable_execute_command = true
 
   network_configuration {
     security_groups = [
