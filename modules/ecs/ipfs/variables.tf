@@ -168,8 +168,8 @@ variable "default_log_level" {
   default     = "info"
 }
 
-variable "existing_peer" {
+variable "use_existing_peer_identity" {
   type        = string
-  description = "Restore existing IPFS peer identity"
+  description = "Use existing IPFS peer identity"
   default     = false
 }

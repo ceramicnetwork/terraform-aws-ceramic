@@ -2,7 +2,7 @@ resource "aws_ecs_service" "main" {
   platform_version       = "1.4.0"
   name                   = var.ecs_service_name
   cluster                = var.ecs_cluster_name
-  task_definition        = var.existing_peer ? aws_ecs_task_definition.td_existing_peer.arn : aws_ecs_task_definition.td.arn
+  task_definition        = var.use_existing_peer_identity ? aws_ecs_task_definition.existing_peer.arn : aws_ecs_task_definition.main.arn
   desired_count          = var.ecs_count
   launch_type            = "FARGATE"
   enable_execute_command = true
@@ -43,7 +43,7 @@ resource "aws_ecs_service" "main" {
   }
 }
 
-resource "aws_ecs_task_definition" "td" {
+resource "aws_ecs_task_definition" "main" {
   family = local.namespace
   container_definitions = templatefile(
     "${path.module}/templates/container_definitions.json.tpl",
@@ -98,7 +98,7 @@ resource "aws_ecs_task_definition" "td" {
   tags = local.default_tags
 }
 
-resource "aws_ecs_task_definition" "td_existing_peer" {
+resource "aws_ecs_task_definition" "existing_peer" {
   family = local.namespace
   container_definitions = templatefile(
   "${path.module}/templates/container_definitions_existing_peer.json.tpl",
@@ -165,11 +165,11 @@ data "aws_ecs_cluster" "main" {
 }
 
 data "aws_ssm_parameter" "peer_id" {
-  count = var.existing_peer ? 1 : 0
+  count = var.use_existing_peer_identity ? 1 : 0
   name = "/${local.namespace}/peer_id"
 }
 
 data "aws_ssm_parameter" "private_key" {
-  count = var.existing_peer ? 1 : 0
+  count = var.use_existing_peer_identity ? 1 : 0
   name = "/${local.namespace}/private_key"
 }

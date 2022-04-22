@@ -149,8 +149,8 @@ variable "ipfs_default_log_level" {
   default     = "info"
 }
 
-variable "existing_ipfs_peers" {
+variable "use_existing_ipfs_peer_identities" {
   type        = string
-  description = "Restore existing IPFS peer identities"
+  description = "Use existing IPFS peer identities"
   default     = false
 }
