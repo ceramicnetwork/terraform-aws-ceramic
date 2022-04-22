@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.1.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/3.0.0...3.1.0) (2022-04-19)
+
+- chore: release v3.1.0 [`60f1306`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/60f13061f827b9291edb439276ff9efe1cfd99e9)
+- chore: update ipfs s3 root directory [`6c63585`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/6c6358534547bd00bb63927d78c15d1510d4327b)
+
 ## [3.0.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/2.3.0...3.0.0) (2022-04-10)
 
 - feat: use `go-ipfs` instead of `js-ipfs` [`#13`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/13)
