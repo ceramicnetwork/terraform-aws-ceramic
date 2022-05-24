@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.3.1](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/3.3.0...3.3.1) (2022-05-24)
+
+- feat(ecs): increase log group retention and prevent destroy [`f7e4459`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/f7e4459a789c7ebc76bb82722d1398a9e4d45140)
+- fix(ecs-ipfs): add cloudwatch log group for datasync [`0596753`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/05967537aaa037bded5efb9d42480b54367f8d8b)
+- chore: release v3.3.1 [`c83a6df`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/c83a6df9d93d559ba59716192846049c16501cdf)
+
 ## [3.3.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/3.2.0...3.3.0) (2022-05-24)
 
 - feat(ipfs): backup repo to s3 via datasync [`#16`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/16)
