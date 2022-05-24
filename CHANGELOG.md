@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.2.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/3.1.0...3.2.0) (2022-04-22)
+
+- docs: update readme for pre-conditions [`#14`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/14)
+- feat: make ssm peer id and private key optional [`#15`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/15)
+- feat: ecs exec [`4ce0f36`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/4ce0f36fc9ac369e8d472c774bf9f56ab61ab5b4)
+- fix: add `count` to `existing_peer` task definition [`fe6548f`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/fe6548ffcbca6df98603781bf5aa3d1d9cfd58c6)
+- chore: release v3.2.0 [`e29ed5e`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/e29ed5e4b29a07ae42e638e26b3dc1312ecb3d88)
+
 ## [3.1.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/3.0.0...3.1.0) (2022-04-19)
 
 - chore: release v3.1.0 [`60f1306`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/60f13061f827b9291edb439276ff9efe1cfd99e9)
