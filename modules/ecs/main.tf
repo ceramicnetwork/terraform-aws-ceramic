@@ -70,12 +70,6 @@ module "ipfs" {
   use_existing_peer_identity = var.use_existing_ipfs_peer_identity
 }
 
-resource "aws_cloudwatch_log_group" "ceramic" {
-  name              = "/ecs/${local.namespace}"
-  retention_in_days = 400
-  tags              = var.default_tags
-}
-
 data "aws_s3_bucket" "main" {
   bucket = var.s3_bucket_name
 }
