@@ -22,6 +22,7 @@ Make sure that the following AWS resources exist prior to the application of thi
 - ECS cluster for Ceramic/IPFS services
 - SSM parameter for your Infura RPC endpoint
 - EFS volume for Ceramic logs
+- ARN of S3 bucket to use as a backup for the IPFS repo (optional)
 
 Also make sure that you add the appropriate CNAME entries to your DNS nameserver for the IPFS endpoints generated through the application of this module.
 
