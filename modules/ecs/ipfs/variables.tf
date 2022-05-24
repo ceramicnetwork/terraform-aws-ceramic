@@ -116,6 +116,12 @@ variable "efs_security_group_id" {
 
 /* Specified */
 
+variable "default_log_level" {
+  type        = string
+  description = "IPFS default log level"
+  default     = "info"
+}
+
 variable "enable_alb_logging" {
   type        = bool
   description = "True to enable ALB logs (stored in a new S3 bucket)"
@@ -146,6 +152,11 @@ variable "enable_pubsub" {
   description = "True to enable IPFS PubSub"
 }
 
+variable "enable_repo_backup_to_s3" {
+  type        = bool
+  description = "True to backup IPFS repo to S3"
+}
+
 variable "directory_namespace" {
   type        = string
   description = "Directory for logs and state"
@@ -157,19 +168,18 @@ variable "image_tag" {
   description = "Image tag"
 }
 
-variable "use_s3_blockstore" {
-  type        = bool
-  description = "True for storing IPFS blocks in S3, false for storing them in an EFS volume"
-}
-
-variable "default_log_level" {
+variable "s3_repo_backup_bucket_arn" {
   type        = string
-  description = "IPFS default log level"
-  default     = "info"
+  description = "ARN of S3 bucket to use for IPFS repo backup"
 }
 
 variable "use_existing_peer_identity" {
   type        = string
   description = "Use existing IPFS peer identity"
   default     = false
+}
+
+variable "use_s3_blockstore" {
+  type        = bool
+  description = "True for storing IPFS blocks in S3, false for storing them in an EFS volume"
 }

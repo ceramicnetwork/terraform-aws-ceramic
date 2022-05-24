@@ -52,6 +52,7 @@ module "ipfs" {
   enable_external_gateway    = false
   enable_internal_gateway    = false
   enable_pubsub              = true
+  enable_repo_backup_to_s3   = var.ipfs_enable_repo_backup_to_s3
   env                        = var.env
   image_tag                  = var.image_tag
   namespace                  = "${local.namespace}-ipfs-nd"
@@ -59,6 +60,7 @@ module "ipfs" {
   public_subnet_ids          = var.public_subnet_ids
   s3_bucket_arn              = data.aws_s3_bucket.main.arn
   s3_bucket_name             = data.aws_s3_bucket.main.id
+  s3_repo_backup_bucket_arn  = var.ipfs_s3_repo_backup_bucket_arn
   use_ssl                    = true
   use_s3_blockstore          = true
   vpc_cidr_block             = var.vpc_cidr_block

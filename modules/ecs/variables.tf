@@ -129,6 +129,12 @@ variable "ipfs_cpu" {
   default     = 1024 # 1024 = 1 vCPU
 }
 
+variable "ipfs_default_log_level" {
+  type        = string
+  description = "IPFS default log level"
+  default     = "info"
+}
+
 variable "ipfs_domain_name" {
   type        = string
   description = "Domain name, including TLD"
@@ -137,6 +143,12 @@ variable "ipfs_domain_name" {
 variable "ipfs_enable_alb_logging" {
   type        = bool
   description = "True to enable ALB logs (stored in a new S3 bucket)"
+  default     = false
+}
+
+variable "ipfs_enable_repo_backup_to_s3" {
+  type        = bool
+  description = "True to backup IPFS repo to S3"
   default     = false
 }
 
@@ -152,10 +164,10 @@ variable "ipfs_task_count" {
   default     = 1
 }
 
-variable "ipfs_default_log_level" {
+variable "ipfs_s3_repo_backup_bucket_arn" {
   type        = string
-  description = "IPFS default log level"
-  default     = "info"
+  description = "ARN of S3 bucket to use as a backup for the IPFS repo"
+  default     = ""
 }
 
 variable "use_existing_ipfs_peer_identity" {

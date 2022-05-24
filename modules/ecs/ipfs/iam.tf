@@ -81,3 +81,32 @@ module "ecs_task_execution_role" {
 
   tags = local.default_tags
 }
+
+module "s3_data_sync_role" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+  version = "~> 3.0"
+
+  trusted_role_services = [
+    "datasync.amazonaws.com"
+  ]
+
+  create_role = var.enable_repo_backup_to_s3
+
+  role_name         = "S3DataSyncRole-${local.namespace}"
+  role_requires_mfa = false
+
+  custom_role_policy_arns = [
+    aws_iam_policy.s3_ipfs_repo_data_sync[0].arn
+  ]
+
+  tags = local.default_tags
+}
+
+resource "aws_iam_policy" "s3_ipfs_repo_data_sync" {
+  count = var.enable_repo_backup_to_s3 ? 1 : 0
+  name  = "S3DataSyncPolicy-${local.namespace}"
+
+  policy = templatefile("${path.module}/templates/s3_data_sync_policy.json.tpl", {
+    resource = var.s3_repo_backup_bucket_arn
+  })
+}
