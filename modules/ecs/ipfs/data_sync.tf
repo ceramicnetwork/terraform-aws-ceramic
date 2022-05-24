@@ -5,7 +5,7 @@ resource "aws_datasync_task" "main" {
   destination_location_arn = aws_datasync_location_s3.s3_ipfs_repo[0].arn
 
   name                     = "${local.namespace}-repo"
-  cloudwatch_log_group_arn = aws_cloudwatch_log_group.data_sync.arn # Must be enabled in AWS
+  cloudwatch_log_group_arn = aws_cloudwatch_log_group.data_sync[0].arn # Must be enabled in AWS
   options {
     verify_mode = "NONE"
     log_level   = "BASIC"
