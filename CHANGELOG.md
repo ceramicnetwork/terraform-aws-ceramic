@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.3.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/3.2.0...3.3.0) (2022-05-24)
+
+- feat(ipfs): backup repo to s3 via datasync [`#16`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/16)
+- chore: release v3.3.0 [`52d0eb8`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/52d0eb81bc3c89183acf04c29a5e07d63c379ce3)
+- docs: bump minor version [`d6938d5`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/d6938d5c70c516edbfad734b9bcc8aa651bd137e)
+- fix: update version in README.md [`f57a469`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/f57a469fe49e183484e7fc6d3c0f227decfad996)
+- docs: add precondition for IPFS repo [`6f86059`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/6f86059a9ca2dde56bb987380604b6e70ad02fbf)
+
 ## [3.2.0](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/3.1.0...3.2.0) (2022-04-22)
 
 - docs: update readme for pre-conditions [`#14`](https://github.com/ceramicnetwork/terraform-aws-ceramic/pull/14)
