@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.3.2](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/3.3.1...3.3.2) (2022-05-24)
+
+- chore: release v3.3.2 [`04e705c`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/04e705cdbfe04933e845639ea7883c5ddd0f349b)
+- fix(ecs-ipfs): get default tags from locals [`dbd5509`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/dbd5509a3ca7b560675e720dcf1fcf336d4e201d)
+
 ## [3.3.1](https://github.com/ceramicnetwork/terraform-aws-ceramic/compare/3.3.0...3.3.1) (2022-05-24)
 
 - feat(ecs): increase log group retention and prevent destroy [`f7e4459`](https://github.com/ceramicnetwork/terraform-aws-ceramic/commit/f7e4459a789c7ebc76bb82722d1398a9e4d45140)
