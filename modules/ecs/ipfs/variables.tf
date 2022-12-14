@@ -37,7 +37,7 @@ variable "ecs_cluster_name" {
 
 variable "ecs_cpu" {
   type        = number
-  description = "Fargate vCPU threads allocated to the Ceramic gateway instance"
+  description = "Fargate vCPU threads allocated to the IPFS instance"
 }
 
 variable "ecs_log_group_name" {
@@ -51,7 +51,8 @@ variable "ecs_log_prefix" {
 
 variable "ecs_memory" {
   type        = number
-  description = "Fargate memory allocated to the Ceramic gateway instance"
+  description = "Fargate memory allocated to the IPFS instance"
+  default     = 8192 # 8192 MiB = 8 GB
 }
 
 variable "ecs_service_name" {

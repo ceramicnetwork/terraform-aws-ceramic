@@ -75,7 +75,7 @@ variable "ecs_cpu" {
 variable "ecs_memory" {
   type        = number
   description = "Memory to allocate to the Ceramic daemon ECS task"
-  default     = 2048 # 2048 MiB = 2 GB
+  default     = 8192 # 8192 MiB = 8 GB
 }
 
 variable "ecs_service_name" {
@@ -138,6 +138,12 @@ variable "namespace" {
   description = "Namespace for Ceramic resources"
 }
 
+variable "node_options" {
+  type        = string
+  description = "NodeJS options"
+  default     = "--max-old-space-size=7500"
+}
+
 variable "private_subnet_ids" {
   type        = list(string)
   description = "List of private subnet ids for the VPC"
@@ -156,6 +162,12 @@ variable "s3_bucket_arn" {
 variable "s3_bucket_name" {
   type        = string
   description = "Name (aka id) of S3 bucket to use as a backend"
+}
+
+variable "pubsub_qps_limit" {
+  type = string
+  description = "Ceramic pubsub qps limit env value"
+  default = "50"
 }
 
 variable "vpc_security_group_id" {

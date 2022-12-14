@@ -44,9 +44,17 @@
         ],
         "environment": [
             {
+                "name": "CERAMIC_PUBSUB_QPS_LIMIT",
+                "value": "${pubsub_qps_limit}"
+            }
+            {
                 "name": "NODE_ENV",
                 "value": "production"
             },
+            {
+                "name": "NODE_OPTIONS",
+                "value": "${node_options}"
+            },            
             {
                 "name": "AWS_ACCESS_KEY_ID",
                 "value": "${s3_access_key_id}"
