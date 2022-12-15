@@ -50,6 +50,8 @@ resource "aws_ecs_task_definition" "main" {
     log_stream_prefix          = var.ecs_log_prefix
     logs_volume_source         = var.efs_logs_fs_name
     memory                     = var.ecs_memory
+    node_options               = var.node_options
+    pubsub_qps_limit           = var.pubsub_qps_limit
     region                     = var.aws_region
     s3_state_store_bucket_name = var.s3_bucket_name
     s3_access_key_id           = module.s3_ceramic_state_store_task_user.this_iam_access_key_id
