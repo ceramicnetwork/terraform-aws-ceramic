@@ -1,6 +1,6 @@
-# terraform-aws-ceramic
+# **DEPRECATED** terraform-aws-ceramic
 
-Terraform scripts to set up Ceramic infrastructure.
+Please see the [ceramic-infra-scripts](https://github.com/3box/ceramic-infra-scripts) repo for alternative deployment options.
 
 ## Usage
 
